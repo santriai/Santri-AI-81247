@@ -1,0 +1,313 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // --- FUNGSI BANTUAN (HELPER FUNCTIONS) ---
+    
+    // Cek apakah user sudah login
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Cek apakah user mengakses datanya sendiri
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Cek apakah user adalah Admin
+    // Admin diidentifikasi jika emailnya terdaftar atau field 'role' di user bernilai 'admin'
+    function isAdmin() {
+      return isAuthenticated() && (
+        ('email' in request.auth.token && request.auth.token.email in ['admin@santrimodern.com', 'devsantriai@gmail.com', 'rumahupdate@gmail.com', 'alwasilahid@gmail.com']) || 
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.get('role', '') == 'admin')
+      );
+    }
+
+    // --- ATURAN KOLEKSI (COLLECTION RULES) ---
+
+    // 1. KOLEKSI USERS
+    // Berisi profil, poin, dan level
+    match /users/{userId} {
+      // Siapapun bisa membaca profil (diperlukan untuk fitur Leaderboard)
+      allow read: if true;
+      
+      // User bisa membuat profilnya sendiri saat pertama kali daftar
+      allow create: if isAuthenticated() && request.auth.uid == userId;
+      
+      // User bisa update datanya sendiri, Admin bisa update status (ban)
+      allow update: if isOwner(userId) || isAdmin();
+      
+      // Hanya Admin yang bisa menghapus user
+      allow delete: if isAdmin();
+
+      // -- SUB-KOLEKSI PRIBADI (bookmarks, santri_notes, tahfidz, settings, tasbih_logs, worship_logs, khatam, menstrual_logs, dll) --
+      match /santri_notes/{noteId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      match /received_nudges/{senderId} {
+        allow read: if isOwner(userId);
+        allow create, update: if isAuthenticated();
+        allow delete: if isOwner(userId);
+      }
+
+      // Sub-koleksi lainnya
+      match /{document=**} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+
+    // 2. KONTEN PUBLIK (Quizzes, Rewards, Mutiara, Broadcasts)
+    // Semua user bisa baca, tapi hanya Admin yang bisa tulis/edit/hapus
+    match /quizzes/{quizId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    match /rewards/{rewardId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    match /mutiara/{mutiaraId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    match /broadcasts/{broadcastId} {
+      allow read: if true;
+      allow create: if isAuthenticated();
+      allow update, delete: if isAdmin();
+    }
+
+    // 3. TRANSAKSI (Redemptions)
+    // Permintaan tukar poin
+    match /redemptions/{redemptionId} {
+      // User bisa baca miliknya sendiri, Admin bisa baca semua
+      allow read: if isAuthenticated() && (resource.data.get('userId', '') == request.auth.uid || isAdmin());
+      
+      // User bisa membuat permintaan (create) asal userId-nya sesuai
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      
+      // Hanya Admin yang bisa update (untuk Approve/Reject) dan hapus
+      allow update, delete: if isAdmin();
+    }
+
+    // 4. REFERRAL SYSTEM
+    match /referral_requests/{requestId} {
+      // Bisa dibaca oleh yang mengundang, yang diundang, atau admin
+      allow read: if isAuthenticated() && (
+        resource.data.get('referrerId', '') == request.auth.uid || 
+        resource.data.get('newUserId', '') == request.auth.uid || 
+        isAdmin()
+      );
+      // Pembuatan otomatis saat register
+      allow create: if isAuthenticated();
+      
+      // Update status hanya oleh Admin
+      allow update, delete: if isAdmin();
+    }
+    
+    // 5. AI Cache (Untuk efisiensi API - Publik Baca, Tulis Authenticated)
+    match /ai_cache/{document=**} {
+      allow read: if true;
+      allow create: if isAuthenticated(); // Sedikit diperketat agar tidak di-spam bot
+    }
+
+    // 6. FITUR SILATURAHMI (POSTS & COMMENTS)
+    match /posts/{postId} {
+      allow read: if true;
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated();
+      allow delete: if isAuthenticated() && (
+        resource.data.get('userId', '') == request.auth.uid || 
+        ('userId' in resource.data && resource.data.userId == request.auth.uid) ||
+        isAdmin()
+      );
+
+      match /comments/{commentId} {
+        allow read: if true;
+        allow create: if isAuthenticated();
+        allow update: if isAuthenticated() && (
+          resource.data.get('userId', '') == request.auth.uid || 
+          ('userId' in resource.data && resource.data.userId == request.auth.uid) ||
+          isAdmin()
+        );
+        allow delete: if isAuthenticated() && (
+          resource.data.get('userId', '') == request.auth.uid || 
+          ('userId' in resource.data && resource.data.userId == request.auth.uid) ||
+          isAdmin()
+        );
+      }
+
+      match /gifts/{giftId} {
+        allow read: if true;
+        allow create: if isAuthenticated();
+      }
+    }
+
+    // 7. FITUR MINTA DOA (PRAYER REQUESTS & COMMENTS)
+    match /prayer_requests/{requestId} {
+      allow read: if true;
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated();
+      allow delete: if isAuthenticated() && (
+        resource.data.get('userId', '') == request.auth.uid || 
+        ('userId' in resource.data && resource.data.userId == request.auth.uid) ||
+        isAdmin()
+      );
+
+      match /comments/{commentId} {
+        allow read: if true;
+        allow create: if isAuthenticated();
+        allow update: if isAuthenticated() && (
+          resource.data.get('userId', '') == request.auth.uid || 
+          ('userId' in resource.data && resource.data.userId == request.auth.uid) ||
+          isAdmin()
+        );
+        allow delete: if isAuthenticated() && (
+          resource.data.get('userId', '') == request.auth.uid || 
+          ('userId' in resource.data && resource.data.userId == request.auth.uid) ||
+          isAdmin()
+        );
+      }
+    }
+
+    // 8. HARTA MASJID (MOSQUES)
+    match /mosques/{mosqueId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && request.resource.data.ownerId == request.auth.uid;
+      allow update: if isAuthenticated() && (
+        resource.data.get('ownerId', '') == request.auth.uid || 
+        ('ownerId' in resource.data && resource.data.ownerId == request.auth.uid) ||
+        isAdmin()
+      );
+      allow delete: if isAuthenticated() && (
+        resource.data.get('ownerId', '') == request.auth.uid || 
+        ('ownerId' in resource.data && resource.data.ownerId == request.auth.uid) ||
+        isAdmin()
+      );
+    }
+
+    // 9. LAPORAN POSTINGAN (POST REPORTS)
+    match /post_reports/{reportId} {
+      allow create: if isAuthenticated();
+      allow read, update, delete: if isAdmin();
+    }
+
+    // 10. SUPPORT CHATS
+    match /support_chats/{userId} {
+      allow read, write: if isOwner(userId) || isAdmin();
+
+      match /messages/{messageId} {
+        allow read, write: if isOwner(userId) || isAdmin();
+      }
+    }
+
+    // 11. STRIPE / POINT TRANSACTIONS
+    match /transactions/{txId} {
+      allow read: if isAuthenticated() && (
+        resource.data.get('userId', '') == request.auth.uid || 
+        ('userId' in resource.data && resource.data.userId == request.auth.uid) ||
+        isAdmin()
+      );
+      allow create: if isAuthenticated();
+      allow update, delete: if isAdmin();
+    }
+
+    // 12. APP CONFIG & DONATIONS
+    match /app_config/{configId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /donations/{donationId} {
+      allow read: if true;
+      allow create: if true;
+      allow update: if true;
+      allow delete: if isAdmin();
+    }
+
+    match /campaign_stats/{campaignId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // 13. FITUR IKUTI (FOLLOW SYSTEM)
+    match /follows/{followId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && request.resource.data.followerId == request.auth.uid;
+      allow delete: if isAuthenticated() && (
+        resource.data.get('followerId', '') == request.auth.uid || 
+        ('followerId' in resource.data && resource.data.followerId == request.auth.uid)
+      );
+    }
+
+    // 14. FITUR BAHTSUL MASAIL
+    match /bahtsul_masail/{topicId} {
+      allow read: if true;
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated();
+      allow delete: if isAuthenticated() && (
+        resource.data.get('userId', '') == request.auth.uid || 
+        ('userId' in resource.data && resource.data.userId == request.auth.uid) ||
+        isAdmin()
+      );
+
+      match /comments/{commentId} {
+        allow read: if true;
+        allow create: if isAuthenticated();
+        allow update: if isAuthenticated();
+        allow delete: if isAuthenticated() && (
+          resource.data.get('userId', '') == request.auth.uid || 
+          ('userId' in resource.data && resource.data.userId == request.auth.uid) ||
+          get(/databases/$(database)/documents/bahtsul_masail/$(topicId)).data.get('userId', '') == request.auth.uid ||
+          isAdmin()
+        );
+      }
+    }
+
+    // 15. NOTIFIKASI
+    match /notifications/{notificationId} {
+      allow read, update, delete: if isAuthenticated() && (
+        resource.data.get('userId', '') == request.auth.uid || 
+        ('userId' in resource.data && resource.data.userId == request.auth.uid)
+      );
+      allow create: if isAuthenticated();
+    }
+
+    // 16. TOKO SANTRI MARKETPLACE
+    match /marketplace_products/{productId} {
+      allow read: if true;
+      allow create: if isAuthenticated();
+      allow update, delete: if isAuthenticated() && (
+        resource.data.get('sellerId', '') == request.auth.uid ||
+        ('sellerId' in resource.data && resource.data.sellerId == request.auth.uid) ||
+        resource.data.get('userId', '') == request.auth.uid ||
+        ('userId' in resource.data && resource.data.userId == request.auth.uid) ||
+        isAdmin()
+      );
+    }
+
+    // 17. LAPORAN PRODUK MARKETPLACE
+    match /marketplace_reports/{reportId} {
+      allow create: if isAuthenticated();
+      allow read, update, delete: if isAuthenticated() && (
+        resource.data.get('reporterId', '') == request.auth.uid ||
+        isAdmin()
+      );
+    }
+
+    // 18. MULTIPLAYER QUIZ ROOMS
+    match /quiz_rooms/{roomId} {
+      allow read, create, update, delete: if true;
+    }
+
+    // 19. STATISTIK ABSENSI BERJAMAAH
+    match /daily_attendance_stats/{statsId} {
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}

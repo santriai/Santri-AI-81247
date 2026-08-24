@@ -1,0 +1,12 @@
+{
+  "name": "Santri AI -81247",
+  "description": "A specialized translator for classical Islamic texts (Kitab Kuning) offering both Makna Gandul and Modern Indonesian translations. Features offline history and cloud sync via Github.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

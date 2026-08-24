@@ -1,0 +1,431 @@
+{
+  "entities": {
+    "users": {
+        "title": "User Profile",
+        "description": "Public profile and santri stats",
+        "type": "object",
+        "properties": {
+          "displayName": { "type": "string" },
+          "email": { "type": "string" },
+          "photoURL": { "type": "string" },
+          "points": { "type": "number" },
+          "wasilah": { "type": "number" },
+          "level": { "type": "string" },
+          "role": { "type": "string" },
+          "status": { "type": "string" },
+          "isPremium": { "type": "boolean" },
+          "premiumUntil": { "type": "string", "format": "date-time" },
+          "subscriptionType": { "type": "string", "enum": ["monthly", "yearly", "lifetime"] },
+          "referralCode": { "type": "string" },
+           "referredBy": { "type": "string" },
+          "referredByName": { "type": "string" },
+          "lastNudgeDate": { "type": "string" },
+          "nudgedUserIds": { "type": "array" },
+          "dailyNudgeCount": { "type": "number" },
+          "lastCheckIn": { "type": "string" },
+          "loginStreak": { "type": "number" },
+          "maxLoginStreak": { "type": "number" }
+        }
+    },
+    "transactions": {
+      "title": "Payment Transaction",
+      "description": "Top-up and subscription records",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "amount": { "type": "number" },
+        "currency": { "type": "string" },
+        "type": { "type": "string", "enum": ["topup", "subscription"] },
+        "status": { "type": "string", "enum": ["pending", "success", "failed"] },
+        "item": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "posts": {
+      "title": "Community Post",
+      "description": "Status or Q&A post from users",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userPhoto": { "type": "string" },
+        "userRole": { "type": "string" },
+        "content": { "type": "string" },
+        "type": { "type": "string", "enum": ["status", "tanya"] },
+        "likes": { "type": "array" },
+        "commentCount": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "comments": {
+      "title": "Post Comment",
+      "description": "Reply to a community post",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userPhoto": { "type": "string" },
+        "content": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "prayer_requests": {
+      "title": "Prayer Request",
+      "description": "Request for community prayers with rewards",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userPhoto": { "type": "string" },
+        "category": { "type": "string", "enum": ["death", "circumcision", "calamity", "marriage", "offspring", "birth", "partner", "new_home", "thanksgiving", "other"] },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "aiPrayerContent": { "type": "string" },
+        "targetPrayers": { "type": "number" },
+        "currentPrayers": { "type": "number" },
+        "rewardAmount": { "type": "number" },
+        "costAmount": { "type": "number" },
+        "likes": { "type": "array" },
+        "commentCount": { "type": "number" },
+        "prayers": { "type": "array" },
+        "status": { "type": "string", "enum": ["active", "completed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "worship_logs": {
+      "title": "Daily Worship Log",
+      "description": "User journal for tracked mandatory and sunnah worship",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "date": { "type": "string", "description": "Format YYYY-MM-DD" },
+        "completed": { 
+          "type": "object", 
+          "description": "Map of worship IDs to boolean/completion state"
+        },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "mosques": {
+      "title": "Mosque Profile",
+      "description": "Management data for a mosque/majlis",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "address": { "type": "string" },
+        "ownerId": { "type": "string" },
+        "imamJumat": { "type": "string" },
+        "muroqi": { "type": "string" },
+        "muadzin": { "type": "string" },
+        "marbot": { "type": "string" },
+        "imamTarawih": { "type": "string" },
+        "dkmMembers": { "type": "array" },
+        "schedules": { "type": "array" },
+        "finances": { "type": "array" },
+        "assets": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "support_chats": {
+      "title": "Support Chat Thread",
+      "description": "Active support/admin chat thread with a user",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userPhoto": { "type": "string" },
+        "lastMessage": { "type": "string" },
+        "lastMessageTime": { "type": "string", "format": "date-time" },
+        "lastSenderId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "support_messages": {
+      "title": "Support Message",
+      "description": "Individual chat message in support thread",
+      "type": "object",
+      "properties": {
+        "senderId": { "type": "string" },
+        "senderName": { "type": "string" },
+        "content": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      }
+    },
+    "post_reports": {
+      "title": "Post Report",
+      "description": "User reports on violating community posts",
+      "type": "object",
+      "properties": {
+        "postId": { "type": "string" },
+        "postContent": { "type": "string" },
+        "postUserId": { "type": "string" },
+        "postUserName": { "type": "string" },
+        "reportedById": { "type": "string" },
+        "reportedByName": { "type": "string" },
+        "reason": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["Pending", "Actioned", "Ignored"] }
+      }
+    },
+    "app_config": {
+      "title": "Application Config",
+      "description": "Global application configuration settings controlled by admin (update config, ad popup config)",
+      "type": "object",
+      "properties": {
+        "showUpdatePopup": { "type": "boolean" },
+        "updateTitle": { "type": "string" },
+        "updateMessage": { "type": "string" },
+        "playStoreUrl": { "type": "string" },
+        "isOptional": { "type": "boolean" },
+        "showAdPopup": { "type": "boolean" },
+        "adTitle": { "type": "string" },
+        "adMessage": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "actionText": { "type": "string" },
+        "actionUrl": { "type": "string" },
+        "badgeTag": { "type": "string" },
+        "isDismissible": { "type": "boolean" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "bahtsul_masail": {
+      "title": "Bahtsul Masail Topic",
+      "description": "Scholarly discussion topic initiated by a user with AI three-approach fatwa and user-to-user debate",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userPhoto": { "type": "string" },
+        "title": { "type": "string" },
+        "question": { "type": "string" },
+        "likes": { "type": "array" },
+        "commentCount": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "aiResponse": {
+          "type": "object",
+          "properties": {
+            "qauli": { "type": "string" },
+            "ilhaq": { "type": "string" },
+            "manhaji": { "type": "string" },
+            "conclusion": { "type": "string" },
+            "references": { "type": "array" }
+          }
+        }
+      }
+    },
+    "bahtsul_masail_comments": {
+      "title": "Bahtsul Masail Comment",
+      "description": "Comment or argument in a Bahtsul Masail scholarly debate thread from a user or AI",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userPhoto": { "type": "string" },
+        "content": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "isAi": { "type": "boolean" },
+        "aiApproach": { "type": "string", "enum": ["qauli", "ilhaq", "manhaji", "umum"] }
+      }
+    },
+    "marketplace_products": {
+      "title": "Marketplace Product",
+      "description": "Products listed for sale in Toko Santri Marketplace",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "price": { "type": "number" },
+        "category": { "type": "string" },
+        "stock": { "type": "number" },
+        "rating": { "type": "number" },
+        "soldCount": { "type": "number" },
+        "location": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "imageUrls": { "type": "array", "items": { "type": "string" } },
+        "badge": { "type": "string" },
+        "freeShipping": { "type": "boolean" },
+        "cashback": { "type": "boolean" },
+        "sellerId": { "type": "string" },
+        "sellerName": { "type": "string" },
+        "sellerAvatarUrl": { "type": "string" },
+        "description": { "type": "string" },
+        "variations": { "type": "array", "items": { "type": "string" } },
+        "whatsappNumber": { "type": "string" },
+        "shopeeUrl": { "type": "string" },
+        "tokopediaUrl": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "marketplace_reports": {
+      "title": "Marketplace Product Report",
+      "description": "User reports on marketplace products for admin review",
+      "type": "object",
+      "properties": {
+        "productId": { "type": "string" },
+        "productName": { "type": "string" },
+        "productPrice": { "type": "number" },
+        "productImage": { "type": "string" },
+        "sellerName": { "type": "string" },
+        "sellerId": { "type": "string" },
+        "reporterId": { "type": "string" },
+        "reporterName": { "type": "string" },
+        "reason": { "type": "string" },
+        "note": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "resolved", "dismissed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "santri_notes": {
+      "title": "Santri Note",
+      "description": "Personal note taken by santri user for studies, verses, and prayers",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "arabContent": { "type": "string" },
+        "category": { "type": "string" },
+        "color": { "type": "string" },
+        "isPinned": { "type": "boolean" },
+        "createdAt": { "type": "number" },
+        "updatedAt": { "type": "number" },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "received_nudges": {
+      "title": "Received Nudge",
+      "description": "A nudge sent by another user to prompt check-in",
+      "type": "object",
+      "properties": {
+        "fromId": { "type": "string" },
+        "fromName": { "type": "string" },
+        "fromPhoto": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "daily_attendance_stats": {
+      "title": "Daily Attendance Stats",
+      "description": "Counter for collective daily check-ins",
+      "type": "object",
+      "properties": {
+        "count": { "type": "number" }
+      }
+    },
+    "donations": {
+      "title": "Donation Record",
+      "description": "Infaq and donation records with donor prayers",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "productId": { "type": "string" },
+        "label": { "type": "string" },
+        "amount": { "type": "string" },
+        "value": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "message": { "type": "string" },
+        "campaignId": { "type": "string" },
+        "campaignTitle": { "type": "string" },
+        "likes": { "type": "number" },
+        "status": { "type": "string", "enum": ["Pending", "Completed", "Failed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "campaign_stats": {
+      "title": "Campaign Statistics",
+      "description": "Real-time cumulative collected amounts and donor counts for infaq campaigns",
+      "type": "object",
+      "properties": {
+        "campaignId": { "type": "string" },
+        "currentAmount": { "type": "number" },
+        "donorsCount": { "type": "number" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "users",
+      "description": "User profiles"
+    },
+    "users/{userId}/worship_logs/{date}": {
+      "schema": "worship_logs",
+      "description": "Daily worship tracking log"
+    },
+    "transactions/{transactionId}": {
+      "schema": "transactions",
+      "description": "Payment and top-up records"
+    },
+    "posts/{postId}": {
+      "schema": "posts",
+      "description": "Main community feed posts"
+    },
+    "posts/{postId}/comments/{commentId}": {
+      "schema": "comments",
+      "description": "Comments on posts"
+    },
+    "prayer_requests/{requestId}": {
+      "schema": "prayer_requests",
+      "description": "Prayer requests with incentives"
+    },
+    "prayer_requests/{requestId}/comments/{commentId}": {
+      "schema": "comments",
+      "description": "Comments on prayer requests"
+    },
+    "mosques/{mosqueId}": {
+      "schema": "mosques",
+      "description": "Mosque management data"
+    },
+    "support_chats/{userId}": {
+      "schema": "support_chats",
+      "description": "Admin chat threads with individual users"
+    },
+    "support_chats/{userId}/messages/{messageId}": {
+      "schema": "support_messages",
+      "description": "Individual messages inside an admin chat thread"
+    },
+    "post_reports/{reportId}": {
+      "schema": "post_reports",
+      "description": "User reported posts details and status"
+    },
+    "app_config/{configId}": {
+      "schema": "app_config",
+      "description": "App configuration parameters (e.g., update_config)"
+    },
+    "bahtsul_masail/{masailId}": {
+      "schema": "bahtsul_masail",
+      "description": "Scholarly debate topics"
+    },
+    "bahtsul_masail/{masailId}/comments/{commentId}": {
+      "schema": "bahtsul_masail_comments",
+      "description": "Comments or AI counterarguments inside debate thread"
+    },
+    "marketplace_products/{productId}": {
+      "schema": "marketplace_products",
+      "description": "Products posted in Toko Santri AI marketplace"
+    },
+    "marketplace_reports/{reportId}": {
+      "schema": "marketplace_reports",
+      "description": "User reports for marketplace products"
+    },
+    "users/{userId}/santri_notes/{noteId}": {
+      "schema": "santri_notes",
+      "description": "User personal notes"
+    },
+    "users/{userId}/received_nudges/{senderId}": {
+      "schema": "received_nudges",
+      "description": "Nudges received by users from other users to encourage check-in"
+    },
+    "daily_attendance_stats/{statsId}": {
+      "schema": "daily_attendance_stats",
+      "description": "Daily attendance statistics for real-time collective check-in goals"
+    },
+    "donations/{donationId}": {
+      "schema": "donations",
+      "description": "Infaq and donation records with donor prayers"
+    },
+    "campaign_stats/{campaignId}": {
+      "schema": "campaign_stats",
+      "description": "Real-time cumulative stats for dakwah infaq campaigns"
+    }
+  }
+}

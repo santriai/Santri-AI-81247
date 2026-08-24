@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>Santri AI</title>
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#008000" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              santri: {
+                green: '#008000',
+                gold: '#D4AF37',
+                'gold-light': '#F4C430',
+                'green-dark': '#006400',
+              }
+            },
+            animation: {
+              'search-move': 'search-move 2s infinite ease-in-out',
+              'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+              'marquee': 'marquee 25s linear infinite',
+            },
+            keyframes: {
+              marquee: {
+                '0%': { transform: 'translateX(0%)' },
+                '100%': { transform: 'translateX(-50%)' },
+              },
+              'search-move': {
+                '0%': { transform: 'translate(-10px, -10px) rotate(0deg)' },
+                '25%': { transform: 'translate(10px, -10px) rotate(10deg)' },
+                '50%': { transform: 'translate(10px, 10px) rotate(0deg)' },
+                '75%': { transform: 'translate(-10px, 10px) rotate(-10deg)' },
+                '100%': { transform: 'translate(-10px, -10px) rotate(0deg)' },
+              },
+              'fadeInUp': {
+                'from': { opacity: 0, transform: 'translateY(10px)' },
+                'to': { opacity: 1, transform: 'translateY(0)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <!-- html2canvas for Image Sharing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Scheherazade+New:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+    <style>
+      :root {
+        --sat: env(safe-area-inset-top);
+        --sab: env(safe-area-inset-bottom);
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        -webkit-tap-highlight-color: transparent;
+        overscroll-behavior-y: none;
+        overscroll-behavior-x: none;
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+        padding-top: var(--sat);
+        padding-bottom: var(--sab);
+        background-color: #f8fafc;
+      }
+      
+      .dark body {
+        background-color: #020617;
+      }
+      
+      input, textarea, .selectable, .prose, .font-arabic {
+        -webkit-user-select: text;
+        user-select: text;
+      }
+
+      .font-arabic {
+        font-family: 'Amiri', serif;
+      }
+
+      .font-style-amiri .font-arabic {
+        font-family: 'Amiri', serif;
+        line-height: 2.2;
+      }
+      .font-style-scheherazade .font-arabic {
+        font-family: 'Scheherazade New', serif;
+        line-height: 2.0;
+      }
+      .font-style-noto .font-arabic {
+        font-family: 'Noto Naskh Arabic', serif;
+        line-height: 2.4;
+      }
+
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      /* Beautiful custom scrollbar for sidebar */
+      .custom-sidebar-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-sidebar-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-sidebar-scrollbar::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 128, 0, 0.25);
+        border-radius: 9999px;
+      }
+      .custom-sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(0, 128, 0, 0.45);
+      }
+      .custom-sidebar-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(0, 128, 0, 0.25) transparent;
+      }
+      .safe-area-bottom {
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+      
+      .plyr {
+        border-radius: 1rem;
+        overflow: hidden;
+        height: 100%;
+        --plyr-color-main: #008000;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "react-dom/client": "https://aistudiocdn.com/react-dom@^19.2.0/client",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6",
+    "uuid": "https://aistudiocdn.com/uuid@^13.0.0",
+    "firebase/": "https://aistudiocdn.com/firebase@^12.6.0/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+</body>
+</html>

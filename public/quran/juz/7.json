@@ -1,0 +1,1346 @@
+{
+  "code": 200,
+  "data": [
+    {
+      "id": 751,
+      "surahNumber": 5,
+      "number": 82,
+      "arab": "۞ لَتَجِدَنَّ أَشَدَّ ٱلنَّاسِ عَدَٰوَةًۭ لِّلَّذِينَ ءَامَنُوا۟ ٱلْيَهُودَ وَٱلَّذِينَ أَشْرَكُوا۟ ۖ وَلَتَجِدَنَّ أَقْرَبَهُم مَّوَدَّةًۭ لِّلَّذِينَ ءَامَنُوا۟ ٱلَّذِينَ قَالُوٓا۟ إِنَّا نَصَٰرَىٰ ۚ ذَٰلِكَ بِأَنَّ مِنْهُمْ قِسِّيسِينَ وَرُهْبَانًۭا وَأَنَّهُمْ لَا يَسْتَكْبِرُونَ",
+      "latin": "",
+      "text": "Sesungguhnya kamu dapati orang-orang yang paling keras permusuhannya terhadap orang-orang yang beriman ialah orang-orang Yahudi dan orang-orang musyrik. Dan sesungguhnya kamu dapati yang paling dekat persahabatannya dengan orang-orang yang beriman ialah orang-orang yang berkata: \"Sesungguhnya kami ini orang Nasrani\". Yang demikian itu disebabkan karena di antara mereka itu (orang-orang Nasrani) terdapat pendeta-pendeta dan rahib-rahib, (juga) karena sesungguhnya mereka tidak menymbongkan diri.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/751.mp3"
+    },
+    {
+      "id": 752,
+      "surahNumber": 5,
+      "number": 83,
+      "arab": "وَإِذَا سَمِعُوا۟ مَآ أُنزِلَ إِلَى ٱلرَّسُولِ تَرَىٰٓ أَعْيُنَهُمْ تَفِيضُ مِنَ ٱلدَّمْعِ مِمَّا عَرَفُوا۟ مِنَ ٱلْحَقِّ ۖ يَقُولُونَ رَبَّنَآ ءَامَنَّا فَٱكْتُبْنَا مَعَ ٱلشَّٰهِدِينَ",
+      "latin": "",
+      "text": "Dan apabila mereka mendengarkan apa yang diturunkan kepada Rasul (Muhammad), kamu lihat mata mereka mencucurkan air mata disebabkan kebenaran (Al Quran) yang telah mereka ketahui (dari kitab-kitab mereka sendiri); seraya berkata: \"Ya Tuhan kami, kami telah beriman, maka catatlah kami bersama orang-orang yang menjadi saksi (atas kebenaran Al Quran dan kenabian Muhammad s. a. w.).",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/752.mp3"
+    },
+    {
+      "id": 753,
+      "surahNumber": 5,
+      "number": 84,
+      "arab": "وَمَا لَنَا لَا نُؤْمِنُ بِٱللَّهِ وَمَا جَآءَنَا مِنَ ٱلْحَقِّ وَنَطْمَعُ أَن يُدْخِلَنَا رَبُّنَا مَعَ ٱلْقَوْمِ ٱلصَّٰلِحِينَ",
+      "latin": "",
+      "text": "Mengapa kami tidak akan beriman kepada Allah dan kepada kebenaran yang datang kepada kami, padahal kami sangat ingin agar Tuhan kami memasukkan kami ke dalam golongan orang-orang yang saleh?\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/753.mp3"
+    },
+    {
+      "id": 754,
+      "surahNumber": 5,
+      "number": 85,
+      "arab": "فَأَثَٰبَهُمُ ٱللَّهُ بِمَا قَالُوا۟ جَنَّٰتٍۢ تَجْرِى مِن تَحْتِهَا ٱلْأَنْهَٰرُ خَٰلِدِينَ فِيهَا ۚ وَذَٰلِكَ جَزَآءُ ٱلْمُحْسِنِينَ",
+      "latin": "",
+      "text": "Maka Allah memberi mereka pahala terhadap perkataan yang mereka ucapkan, (yaitu) surga yang mengalir sungai-sungai di dalamnya, sedang mereka kekal di dalamnya. Dan itulah balasan (bagi) orang-orang yang berbuat kebaikan (yang ikhlas keimanannya).",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/754.mp3"
+    },
+    {
+      "id": 755,
+      "surahNumber": 5,
+      "number": 86,
+      "arab": "وَٱلَّذِينَ كَفَرُوا۟ وَكَذَّبُوا۟ بِـَٔايَٰتِنَآ أُو۟لَٰٓئِكَ أَصْحَٰبُ ٱلْجَحِيمِ",
+      "latin": "",
+      "text": "Dan orang-orang kafir serta mendustakan ayat-ayat Kami, mereka itulah penghuni neraka.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/755.mp3"
+    },
+    {
+      "id": 756,
+      "surahNumber": 5,
+      "number": 87,
+      "arab": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ لَا تُحَرِّمُوا۟ طَيِّبَٰتِ مَآ أَحَلَّ ٱللَّهُ لَكُمْ وَلَا تَعْتَدُوٓا۟ ۚ إِنَّ ٱللَّهَ لَا يُحِبُّ ٱلْمُعْتَدِينَ",
+      "latin": "",
+      "text": "Hai orang-orang yang beriman, janganlah kamu haramkan apa-apa yang baik yang telah Allah halalkan bagi kamu, dan janganlah kamu melampaui batas. Sesungguhnya Allah tidak menyukai orang-orang yang melampaui batas.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/756.mp3"
+    },
+    {
+      "id": 757,
+      "surahNumber": 5,
+      "number": 88,
+      "arab": "وَكُلُوا۟ مِمَّا رَزَقَكُمُ ٱللَّهُ حَلَٰلًۭا طَيِّبًۭا ۚ وَٱتَّقُوا۟ ٱللَّهَ ٱلَّذِىٓ أَنتُم بِهِۦ مُؤْمِنُونَ",
+      "latin": "",
+      "text": "Dan makanlah makanan yang halal lagi baik dari apa yang Allah telah rezekikan kepadamu, dan bertakwalah kepada Allah yang kamu beriman kepada-Nya.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/757.mp3"
+    },
+    {
+      "id": 758,
+      "surahNumber": 5,
+      "number": 89,
+      "arab": "لَا يُؤَاخِذُكُمُ ٱللَّهُ بِٱللَّغْوِ فِىٓ أَيْمَٰنِكُمْ وَلَٰكِن يُؤَاخِذُكُم بِمَا عَقَّدتُّمُ ٱلْأَيْمَٰنَ ۖ فَكَفَّٰرَتُهُۥٓ إِطْعَامُ عَشَرَةِ مَسَٰكِينَ مِنْ أَوْسَطِ مَا تُطْعِمُونَ أَهْلِيكُمْ أَوْ كِسْوَتُهُمْ أَوْ تَحْرِيرُ رَقَبَةٍۢ ۖ فَمَن لَّمْ يَجِدْ فَصِيَامُ ثَلَٰثَةِ أَيَّامٍۢ ۚ ذَٰلِكَ كَفَّٰرَةُ أَيْمَٰنِكُمْ إِذَا حَلَفْتُمْ ۚ وَٱحْفَظُوٓا۟ أَيْمَٰنَكُمْ ۚ كَذَٰلِكَ يُبَيِّنُ ٱللَّهُ لَكُمْ ءَايَٰتِهِۦ لَعَلَّكُمْ تَشْكُرُونَ",
+      "latin": "",
+      "text": "Allah tidak menghukum kamu disebabkan sumpah-sumpahmu yang tidak dimaksud (untuk bersumpah), tetapi Dia menghukum kamu disebabkan sumpah-sumpah yang kamu sengaja, maka kaffarat (melanggar) sumpah itu, ialah memberi makan sepuluh orang miskin, yaitu dari makanan yang biasa kamu berikan kepada keluargamu, atau memberi pakaian kepada mereka atau memerdekakan seorang budak. Barang siapa tidak sanggup melakukan yang demikian, maka kaffaratnya puasa selama tiga hari. Yang demikian itu adalah kaffarat sumpah-sumpahmu bila kamu bersumpah (dan kamu langgar). Dan jagalah sumpahmu. Demikianlah Allah menerangkan kepadamu hukum-hukum-Nya agar kamu bersyukur (kepada-Nya).",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/758.mp3"
+    },
+    {
+      "id": 759,
+      "surahNumber": 5,
+      "number": 90,
+      "arab": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓا۟ إِنَّمَا ٱلْخَمْرُ وَٱلْمَيْسِرُ وَٱلْأَنصَابُ وَٱلْأَزْلَٰمُ رِجْسٌۭ مِّنْ عَمَلِ ٱلشَّيْطَٰنِ فَٱجْتَنِبُوهُ لَعَلَّكُمْ تُفْلِحُونَ",
+      "latin": "",
+      "text": "Hai orang-orang yang beriman, sesungguhnya (meminum) khamar, berjudi, (berkorban untuk) berhala, mengundi nasib dengan panah, adalah termasuk perbuatan syaitan. Maka jauhilah perbuatan-perbuatan itu agar kamu mendapat keberuntungan.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/759.mp3"
+    },
+    {
+      "id": 760,
+      "surahNumber": 5,
+      "number": 91,
+      "arab": "إِنَّمَا يُرِيدُ ٱلشَّيْطَٰنُ أَن يُوقِعَ بَيْنَكُمُ ٱلْعَدَٰوَةَ وَٱلْبَغْضَآءَ فِى ٱلْخَمْرِ وَٱلْمَيْسِرِ وَيَصُدَّكُمْ عَن ذِكْرِ ٱللَّهِ وَعَنِ ٱلصَّلَوٰةِ ۖ فَهَلْ أَنتُم مُّنتَهُونَ",
+      "latin": "",
+      "text": "Sesungguhnya syaitan itu bermaksud hendak menimbulkan permusuhan dan kebencian di antara kamu lantaran (meminum) khamar dan berjudi itu, dan menghalangi kamu dari mengingat Allah dan sembahyang; maka berhentilah kamu (dari mengerjakan pekerjaan itu).",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/760.mp3"
+    },
+    {
+      "id": 761,
+      "surahNumber": 5,
+      "number": 92,
+      "arab": "وَأَطِيعُوا۟ ٱللَّهَ وَأَطِيعُوا۟ ٱلرَّسُولَ وَٱحْذَرُوا۟ ۚ فَإِن تَوَلَّيْتُمْ فَٱعْلَمُوٓا۟ أَنَّمَا عَلَىٰ رَسُولِنَا ٱلْبَلَٰغُ ٱلْمُبِينُ",
+      "latin": "",
+      "text": "Dan taatlah kamu kepada Allah dan taatlah kamu kepada Rasul-(Nya) dan berhati-hatilah. Jika kamu berpaling, maka ketahuilah bahwa sesungguhnya kewajiban Rasul Kami, hanyalah menyampaikan (amanat Allah) dengan terang.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/761.mp3"
+    },
+    {
+      "id": 762,
+      "surahNumber": 5,
+      "number": 93,
+      "arab": "لَيْسَ عَلَى ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ جُنَاحٌۭ فِيمَا طَعِمُوٓا۟ إِذَا مَا ٱتَّقَوا۟ وَّءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ ثُمَّ ٱتَّقَوا۟ وَّءَامَنُوا۟ ثُمَّ ٱتَّقَوا۟ وَّأَحْسَنُوا۟ ۗ وَٱللَّهُ يُحِبُّ ٱلْمُحْسِنِينَ",
+      "latin": "",
+      "text": "Tidak ada dosa bagi orang-orang yang beriman dan mengerjakan amalan yang saleh karena memakan makanan yang telah mereka makan dahulu, apabila mereka bertakwa serta beriman, dan mengerjakan amalan-amalan yang saleh, kemudian mereka tetap bertakwa dan beriman, kemudian mereka (tetap juga) bertakwa dan berbuat kebajikan. Dan Allah menyukai orang-orang yang berbuat kebajikan.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/762.mp3"
+    },
+    {
+      "id": 763,
+      "surahNumber": 5,
+      "number": 94,
+      "arab": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ لَيَبْلُوَنَّكُمُ ٱللَّهُ بِشَىْءٍۢ مِّنَ ٱلصَّيْدِ تَنَالُهُۥٓ أَيْدِيكُمْ وَرِمَاحُكُمْ لِيَعْلَمَ ٱللَّهُ مَن يَخَافُهُۥ بِٱلْغَيْبِ ۚ فَمَنِ ٱعْتَدَىٰ بَعْدَ ذَٰلِكَ فَلَهُۥ عَذَابٌ أَلِيمٌۭ",
+      "latin": "",
+      "text": "Hai orang-orang yang beriman, sesungguhnya Allah akan menguji kamu dengan sesuatu dari binatang buruan yang mudah didapat oleh tangan dan tombakmu supaya Allah mengetahui orang yang takut kepada-Nya, biarpun ia tidak dapat melihat-Nya. Barang siapa yang melanggar batas sesudah itu, maka baginya azab yang pedih.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/763.mp3"
+    },
+    {
+      "id": 764,
+      "surahNumber": 5,
+      "number": 95,
+      "arab": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ لَا تَقْتُلُوا۟ ٱلصَّيْدَ وَأَنتُمْ حُرُمٌۭ ۚ وَمَن قَتَلَهُۥ مِنكُم مُّتَعَمِّدًۭا فَجَزَآءٌۭ مِّثْلُ مَا قَتَلَ مِنَ ٱلنَّعَمِ يَحْكُمُ بِهِۦ ذَوَا عَدْلٍۢ مِّنكُمْ هَدْيًۢا بَٰلِغَ ٱلْكَعْبَةِ أَوْ كَفَّٰرَةٌۭ طَعَامُ مَسَٰكِينَ أَوْ عَدْلُ ذَٰلِكَ صِيَامًۭا لِّيَذُوقَ وَبَالَ أَمْرِهِۦ ۗ عَفَا ٱللَّهُ عَمَّا سَلَفَ ۚ وَمَنْ عَادَ فَيَنتَقِمُ ٱللَّهُ مِنْهُ ۗ وَٱللَّهُ عَزِيزٌۭ ذُو ٱنتِقَامٍ",
+      "latin": "",
+      "text": "Hai orang-orang yang beriman, janganlah kamu membunuh binatang buruan, ketika kamu sedang ihram. Barangsiapa di antara kamu membunuhnya dengan sengaja, maka dendanya ialah mengganti dengan binatang ternak seimbang dengan buruan yang dibunuhnya, menurut putusan dua orang yang adil di antara kamu sebagai had-yad yang dibawa sampai ke Ka'bah atau (dendanya) membayar kaffarat dengan memberi makan orang-orang miskin atau berpuasa seimbang dengan makanan yang dikeluarkan itu, supaya dia merasakan akibat buruk dari perbuatannya. Allah telah memaafkan apa yang telah lalu. Dan barangsiapa yang kembali mengerjakannya, niscaya Allah akan menyiksanya. Allah Maha Kuasa lagi mempunyai (kekuasaan untuk) menyiksa.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/764.mp3"
+    },
+    {
+      "id": 765,
+      "surahNumber": 5,
+      "number": 96,
+      "arab": "أُحِلَّ لَكُمْ صَيْدُ ٱلْبَحْرِ وَطَعَامُهُۥ مَتَٰعًۭا لَّكُمْ وَلِلسَّيَّارَةِ ۖ وَحُرِّمَ عَلَيْكُمْ صَيْدُ ٱلْبَرِّ مَا دُمْتُمْ حُرُمًۭا ۗ وَٱتَّقُوا۟ ٱللَّهَ ٱلَّذِىٓ إِلَيْهِ تُحْشَرُونَ",
+      "latin": "",
+      "text": "Dihalalkan bagimu binatang buruan laut dan makanan (yang berasal) dari laut sebagai makanan yang lezat bagimu, dan bagi orang-orang yang dalam perjalanan; dan diharamkan atasmu (menangkap) binatang buruan darat, selama kamu dalam ihram. Dan bertakwalah kepada Allah Yang kepada-Nya-lah kamu akan dikumpulkan.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/765.mp3"
+    },
+    {
+      "id": 766,
+      "surahNumber": 5,
+      "number": 97,
+      "arab": "۞ جَعَلَ ٱللَّهُ ٱلْكَعْبَةَ ٱلْبَيْتَ ٱلْحَرَامَ قِيَٰمًۭا لِّلنَّاسِ وَٱلشَّهْرَ ٱلْحَرَامَ وَٱلْهَدْىَ وَٱلْقَلَٰٓئِدَ ۚ ذَٰلِكَ لِتَعْلَمُوٓا۟ أَنَّ ٱللَّهَ يَعْلَمُ مَا فِى ٱلسَّمَٰوَٰتِ وَمَا فِى ٱلْأَرْضِ وَأَنَّ ٱللَّهَ بِكُلِّ شَىْءٍ عَلِيمٌ",
+      "latin": "",
+      "text": "Allah telah menjadikan Ka'bah, rumah suci itu sebagai pusat (peribadatan dan urusan dunia) bagi manusia, dan (demikian pula) bulan Haram, had-ya, qalaid. (Allah menjadikan yang) demikian itu agar kamu tahu, bahwa sesungguhnya Allah mengetahui apa yang ada di langit dan apa yang ada di bumi dan bahwa sesungguhnya Allah Maha Mengetahui segala sesuatu.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/766.mp3"
+    },
+    {
+      "id": 767,
+      "surahNumber": 5,
+      "number": 98,
+      "arab": "ٱعْلَمُوٓا۟ أَنَّ ٱللَّهَ شَدِيدُ ٱلْعِقَابِ وَأَنَّ ٱللَّهَ غَفُورٌۭ رَّحِيمٌۭ",
+      "latin": "",
+      "text": "Ketahuilah, bahwa sesungguhnya Allah amat berat siksa-Nya dan bahwa sesungguhnya Allah Maha Pengampun lagi Maha Penyayang.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/767.mp3"
+    },
+    {
+      "id": 768,
+      "surahNumber": 5,
+      "number": 99,
+      "arab": "مَّا عَلَى ٱلرَّسُولِ إِلَّا ٱلْبَلَٰغُ ۗ وَٱللَّهُ يَعْلَمُ مَا تُبْدُونَ وَمَا تَكْتُمُونَ",
+      "latin": "",
+      "text": "Kewajiban Rasul tidak lain hanyalah menyampaikan, dan Allah mengetahui apa yang kamu lahirkan dan apa yang kamu sembunyikan.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/768.mp3"
+    },
+    {
+      "id": 769,
+      "surahNumber": 5,
+      "number": 100,
+      "arab": "قُل لَّا يَسْتَوِى ٱلْخَبِيثُ وَٱلطَّيِّبُ وَلَوْ أَعْجَبَكَ كَثْرَةُ ٱلْخَبِيثِ ۚ فَٱتَّقُوا۟ ٱللَّهَ يَٰٓأُو۟لِى ٱلْأَلْبَٰبِ لَعَلَّكُمْ تُفْلِحُونَ",
+      "latin": "",
+      "text": "Katakanlah: \"Tidak sama yang buruk dengan yang baik, meskipun banyaknya yang buruk itu menarik hatimu, maka bertakwalah kepada Allah hai orang-orang berakal, agar kamu mendapat keberuntungan\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/769.mp3"
+    },
+    {
+      "id": 770,
+      "surahNumber": 5,
+      "number": 101,
+      "arab": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ لَا تَسْـَٔلُوا۟ عَنْ أَشْيَآءَ إِن تُبْدَ لَكُمْ تَسُؤْكُمْ وَإِن تَسْـَٔلُوا۟ عَنْهَا حِينَ يُنَزَّلُ ٱلْقُرْءَانُ تُبْدَ لَكُمْ عَفَا ٱللَّهُ عَنْهَا ۗ وَٱللَّهُ غَفُورٌ حَلِيمٌۭ",
+      "latin": "",
+      "text": "Hai orang-orang yang beriman, janganlah kamu menanyakan (kepada Nabimu) hal-hal yang jika diterangkan kepadamu akan menyusahkan kamu dan jika kamu menanyakan di waktu Al Quran itu diturunkan, niscaya akan diterangkan kepadamu, Allah memaafkan (kamu) tentang hal-hal itu. Allah Maha Pengampun lagi Maha Penyantun.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/770.mp3"
+    },
+    {
+      "id": 771,
+      "surahNumber": 5,
+      "number": 102,
+      "arab": "قَدْ سَأَلَهَا قَوْمٌۭ مِّن قَبْلِكُمْ ثُمَّ أَصْبَحُوا۟ بِهَا كَٰفِرِينَ",
+      "latin": "",
+      "text": "Sesungguhnya telah ada segolongsn manusia sebelum kamu menanyakan hal-hal yang serupa itu (kepada Nabi mereka), kemudian mereka tidak percaya kepadanya.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/771.mp3"
+    },
+    {
+      "id": 772,
+      "surahNumber": 5,
+      "number": 103,
+      "arab": "مَا جَعَلَ ٱللَّهُ مِنۢ بَحِيرَةٍۢ وَلَا سَآئِبَةٍۢ وَلَا وَصِيلَةٍۢ وَلَا حَامٍۢ ۙ وَلَٰكِنَّ ٱلَّذِينَ كَفَرُوا۟ يَفْتَرُونَ عَلَى ٱللَّهِ ٱلْكَذِبَ ۖ وَأَكْثَرُهُمْ لَا يَعْقِلُونَ",
+      "latin": "",
+      "text": "Allah sekali-kali tidak pernah mensyari'atkan adanya bahiirah, saaibah, washiilah dan haam. Akan tetapi orang-orang kafir membuat-buat kedustaan terhadap Allah, dan kebanyakan mereka tidak mengerti.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/772.mp3"
+    },
+    {
+      "id": 773,
+      "surahNumber": 5,
+      "number": 104,
+      "arab": "وَإِذَا قِيلَ لَهُمْ تَعَالَوْا۟ إِلَىٰ مَآ أَنزَلَ ٱللَّهُ وَإِلَى ٱلرَّسُولِ قَالُوا۟ حَسْبُنَا مَا وَجَدْنَا عَلَيْهِ ءَابَآءَنَآ ۚ أَوَلَوْ كَانَ ءَابَآؤُهُمْ لَا يَعْلَمُونَ شَيْـًۭٔا وَلَا يَهْتَدُونَ",
+      "latin": "",
+      "text": "Apabila dikatakan kepada mereka: \"Marilah mengikuti apa yang diturunkan Allah dan mengikuti Rasul\". Mereka menjawab: \"Cukuplah untuk kami apa yang kami dapati bapak-bapak kami mengerjakannya\". Dan apakah mereka itu akan mengikuti nenek moyang mereka walaupun nenek moyang mereka itu tidak mengetahui apa-apa dan tidak (pula) mendapat petunjuk?.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/773.mp3"
+    },
+    {
+      "id": 774,
+      "surahNumber": 5,
+      "number": 105,
+      "arab": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ عَلَيْكُمْ أَنفُسَكُمْ ۖ لَا يَضُرُّكُم مَّن ضَلَّ إِذَا ٱهْتَدَيْتُمْ ۚ إِلَى ٱللَّهِ مَرْجِعُكُمْ جَمِيعًۭا فَيُنَبِّئُكُم بِمَا كُنتُمْ تَعْمَلُونَ",
+      "latin": "",
+      "text": "Hai orang-orang yang beriman, jagalah dirimu; tiadalah orang yang sesat itu akan memberi mudharat kepadamu apabila kamu telah mendapat petunjuk. Hanya kepada Allah kamu kembali semuanya, maka Dia akan menerangkan kepadamu apa yang telah kamu kerjakan.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/774.mp3"
+    },
+    {
+      "id": 775,
+      "surahNumber": 5,
+      "number": 106,
+      "arab": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ شَهَٰدَةُ بَيْنِكُمْ إِذَا حَضَرَ أَحَدَكُمُ ٱلْمَوْتُ حِينَ ٱلْوَصِيَّةِ ٱثْنَانِ ذَوَا عَدْلٍۢ مِّنكُمْ أَوْ ءَاخَرَانِ مِنْ غَيْرِكُمْ إِنْ أَنتُمْ ضَرَبْتُمْ فِى ٱلْأَرْضِ فَأَصَٰبَتْكُم مُّصِيبَةُ ٱلْمَوْتِ ۚ تَحْبِسُونَهُمَا مِنۢ بَعْدِ ٱلصَّلَوٰةِ فَيُقْسِمَانِ بِٱللَّهِ إِنِ ٱرْتَبْتُمْ لَا نَشْتَرِى بِهِۦ ثَمَنًۭا وَلَوْ كَانَ ذَا قُرْبَىٰ ۙ وَلَا نَكْتُمُ شَهَٰدَةَ ٱللَّهِ إِنَّآ إِذًۭا لَّمِنَ ٱلْءَاثِمِينَ",
+      "latin": "",
+      "text": "Hai orang-orang yang beriman, apabila salah seorang kamu menghadapi kematian, sedang dia akan berwasiat, maka hendaklah (wasiat itu) disaksikan oleh dua orang yang adil di antara kamu, atau dua orang yang berlainan agama dengan kamu, jika kamu dalam perjalanan dimuka bumi lalu kamu ditimpa bahaya kematian. Kamu tahan kedua saksi itu sesudah sembahyang (untuk bersumpah), lalu mereka keduanya bersumpah dengan nama Allah, jika kamu ragu-ragu: \"(Demi Allah) kami tidak akan membeli dengan sumpah ini harga yang sedikit (untuk kepentingan seseorang), walaupun dia karib kerabat, dan tidak (pula) kami menyembunyikan persaksian Allah; sesungguhnya kami kalau demikian tentulah termasuk orang-orang yang berdosa\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/775.mp3"
+    },
+    {
+      "id": 776,
+      "surahNumber": 5,
+      "number": 107,
+      "arab": "فَإِنْ عُثِرَ عَلَىٰٓ أَنَّهُمَا ٱسْتَحَقَّآ إِثْمًۭا فَـَٔاخَرَانِ يَقُومَانِ مَقَامَهُمَا مِنَ ٱلَّذِينَ ٱسْتَحَقَّ عَلَيْهِمُ ٱلْأَوْلَيَٰنِ فَيُقْسِمَانِ بِٱللَّهِ لَشَهَٰدَتُنَآ أَحَقُّ مِن شَهَٰدَتِهِمَا وَمَا ٱعْتَدَيْنَآ إِنَّآ إِذًۭا لَّمِنَ ٱلظَّٰلِمِينَ",
+      "latin": "",
+      "text": "Jika diketahui bahwa kedua (saksi itu) membuat dosa, maka dua orang yang lain di antara ahli waris yang berhak yang lebih dekat kepada orang yang meninggal (memajukan tuntutan) untuk menggantikannya, lalu keduanya bersumpah dengan nama Allah: \"Sesungguhnya persaksian kami labih layak diterima daripada persaksian kedua saksi itu, dan kami tidak melanggar batas, sesungguhnya kami kalau demikian tentulah termasuk orang yang menganiaya diri sendiri\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/776.mp3"
+    },
+    {
+      "id": 777,
+      "surahNumber": 5,
+      "number": 108,
+      "arab": "ذَٰلِكَ أَدْنَىٰٓ أَن يَأْتُوا۟ بِٱلشَّهَٰدَةِ عَلَىٰ وَجْهِهَآ أَوْ يَخَافُوٓا۟ أَن تُرَدَّ أَيْمَٰنٌۢ بَعْدَ أَيْمَٰنِهِمْ ۗ وَٱتَّقُوا۟ ٱللَّهَ وَٱسْمَعُوا۟ ۗ وَٱللَّهُ لَا يَهْدِى ٱلْقَوْمَ ٱلْفَٰسِقِينَ",
+      "latin": "",
+      "text": "Itu lebih dekat untuk (menjadikan para saksi) mengemukakan persaksiannya menurut apa yang sebenarnya, dan (lebih dekat untuk menjadikan mereka) merasa takut akan dikembalikan sumpahnya (kepada ahli waris) sesudah mereka bersumpah. Dan bertakwalah kepada Allah dan dengarkanlah (perintah-Nya). Allah tidak memberi petunjuk kepada orang-orang yang fasik.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/777.mp3"
+    },
+    {
+      "id": 778,
+      "surahNumber": 5,
+      "number": 109,
+      "arab": "۞ يَوْمَ يَجْمَعُ ٱللَّهُ ٱلرُّسُلَ فَيَقُولُ مَاذَآ أُجِبْتُمْ ۖ قَالُوا۟ لَا عِلْمَ لَنَآ ۖ إِنَّكَ أَنتَ عَلَّٰمُ ٱلْغُيُوبِ",
+      "latin": "",
+      "text": "(Ingatlah), hari di waktu Allah mengumpulkan para rasul lalu Allah bertanya (kepada mereka): \"Apa jawaban kaummu terhadap (seruan)mu?\". Para rasul menjawab: \"Tidak ada pengetahuan kami (tentang itu); sesungguhnya Engkau-lah yang mengetahui perkara yang ghaib\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/778.mp3"
+    },
+    {
+      "id": 779,
+      "surahNumber": 5,
+      "number": 110,
+      "arab": "إِذْ قَالَ ٱللَّهُ يَٰعِيسَى ٱبْنَ مَرْيَمَ ٱذْكُرْ نِعْمَتِى عَلَيْكَ وَعَلَىٰ وَٰلِدَتِكَ إِذْ أَيَّدتُّكَ بِرُوحِ ٱلْقُدُسِ تُكَلِّمُ ٱلنَّاسَ فِى ٱلْمَهْدِ وَكَهْلًۭا ۖ وَإِذْ عَلَّمْتُكَ ٱلْكِتَٰبَ وَٱلْحِكْمَةَ وَٱلتَّوْرَىٰةَ وَٱلْإِنجِيلَ ۖ وَإِذْ تَخْلُقُ مِنَ ٱلطِّينِ كَهَيْـَٔةِ ٱلطَّيْرِ بِإِذْنِى فَتَنفُخُ فِيهَا فَتَكُونُ طَيْرًۢا بِإِذْنِى ۖ وَتُبْرِئُ ٱلْأَكْمَهَ وَٱلْأَبْرَصَ بِإِذْنِى ۖ وَإِذْ تُخْرِجُ ٱلْمَوْتَىٰ بِإِذْنِى ۖ وَإِذْ كَفَفْتُ بَنِىٓ إِسْرَٰٓءِيلَ عَنكَ إِذْ جِئْتَهُم بِٱلْبَيِّنَٰتِ فَقَالَ ٱلَّذِينَ كَفَرُوا۟ مِنْهُمْ إِنْ هَٰذَآ إِلَّا سِحْرٌۭ مُّبِينٌۭ",
+      "latin": "",
+      "text": "(Ingatlah), ketika Allah mengatakan: \"Hai Isa putra Maryam, ingatlah nikmat-Ku kepadamu dan kepada ibumu di waktu Aku menguatkan kamu dengan ruhul qudus. Kamu dapat berbicara dengan manusia di waktu masih dalam buaian dan sesudah dewasa; dan (ingatlah) di waktu Aku mengajar kamu menulis, hikmah, Taurat dan Injil, dan (ingatlah pula) diwaktu kamu membentuk dari tanah (suatu bentuk) yang berupa burung dengan ijin-Ku, kemudian kamu meniup kepadanya, lalu bentuk itu menjadi burung (yang sebenarnya) dengan seizin-Ku. Dan (ingatlah) di waktu kamu menyembuhkan orang yang buta sejak dalam kandungan ibu dan orang yang berpenyakit sopak dengan seizin-Ku, dan (ingatlah) di waktu kamu mengeluarkan orang mati dari kubur (menjadi hidup) dengan seizin-Ku, dan (ingatlah) di waktu Aku menghalangi Bani Israil (dari keinginan mereka membunuh kamu) di kala kamu mengemukakan kepada mereka keterangan-keterangan yang nyata, lalu orang-orang kafir diantara mereka berkata: \"Ini tidak lain melainkan sihir yang nyata\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/779.mp3"
+    },
+    {
+      "id": 780,
+      "surahNumber": 5,
+      "number": 111,
+      "arab": "وَإِذْ أَوْحَيْتُ إِلَى ٱلْحَوَارِيِّۦنَ أَنْ ءَامِنُوا۟ بِى وَبِرَسُولِى قَالُوٓا۟ ءَامَنَّا وَٱشْهَدْ بِأَنَّنَا مُسْلِمُونَ",
+      "latin": "",
+      "text": "Dan (ingatlah), ketika Aku ilhamkan kepada pengikut Isa yang setia: \"Berimanlah kamu kepada-Ku dan kepada rasul-Ku\". Mereka menjawab: Kami telah beriman dan saksikanlah (wahai rasul) bahwa sesungguhnya kami adalah orang-orang yang patuh (kepada seruanmu)\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/780.mp3"
+    },
+    {
+      "id": 781,
+      "surahNumber": 5,
+      "number": 112,
+      "arab": "إِذْ قَالَ ٱلْحَوَارِيُّونَ يَٰعِيسَى ٱبْنَ مَرْيَمَ هَلْ يَسْتَطِيعُ رَبُّكَ أَن يُنَزِّلَ عَلَيْنَا مَآئِدَةًۭ مِّنَ ٱلسَّمَآءِ ۖ قَالَ ٱتَّقُوا۟ ٱللَّهَ إِن كُنتُم مُّؤْمِنِينَ",
+      "latin": "",
+      "text": "(Ingatlah), ketika pengikut-pengikut Isa berkata: \"Hai Isa putera Maryam, sanggupkah Tuhanmu menurunkan hidangan dari langit kepada kami?\". Isa menjawab: \"Bertakwalah kepada Allah jika kamu betul-betul orang yang beriman\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/781.mp3"
+    },
+    {
+      "id": 782,
+      "surahNumber": 5,
+      "number": 113,
+      "arab": "قَالُوا۟ نُرِيدُ أَن نَّأْكُلَ مِنْهَا وَتَطْمَئِنَّ قُلُوبُنَا وَنَعْلَمَ أَن قَدْ صَدَقْتَنَا وَنَكُونَ عَلَيْهَا مِنَ ٱلشَّٰهِدِينَ",
+      "latin": "",
+      "text": "Mereka berkata: \"Kami ingin memakan hidangan itu dan supaya tenteram hati kami dan supaya kami yakin bahwa kamu telah berkata benar kepada kami, dan kami menjadi orang-orang yang menyaksikan hidangan itu\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/782.mp3"
+    },
+    {
+      "id": 783,
+      "surahNumber": 5,
+      "number": 114,
+      "arab": "قَالَ عِيسَى ٱبْنُ مَرْيَمَ ٱللَّهُمَّ رَبَّنَآ أَنزِلْ عَلَيْنَا مَآئِدَةًۭ مِّنَ ٱلسَّمَآءِ تَكُونُ لَنَا عِيدًۭا لِّأَوَّلِنَا وَءَاخِرِنَا وَءَايَةًۭ مِّنكَ ۖ وَٱرْزُقْنَا وَأَنتَ خَيْرُ ٱلرَّٰزِقِينَ",
+      "latin": "",
+      "text": "Isa putera Maryam berdoa: \"Ya Tuhan kami turunkanlah kiranya kepada kami suatu hidangan dari langit (yang hari turunnya) akan menjadi hari raya bagi kami yaitu orang-orang yang bersama kami dan yang datang sesudah kami, dan menjadi tanda bagi kekuasaan Engkau; beri rzekilah kami, dan Engkaulah pemberi rezeki Yang Paling Utama\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/783.mp3"
+    },
+    {
+      "id": 784,
+      "surahNumber": 5,
+      "number": 115,
+      "arab": "قَالَ ٱللَّهُ إِنِّى مُنَزِّلُهَا عَلَيْكُمْ ۖ فَمَن يَكْفُرْ بَعْدُ مِنكُمْ فَإِنِّىٓ أُعَذِّبُهُۥ عَذَابًۭا لَّآ أُعَذِّبُهُۥٓ أَحَدًۭا مِّنَ ٱلْعَٰلَمِينَ",
+      "latin": "",
+      "text": "Allah berfirman: \"Sesungguhnya Aku akan menurunkan hidangan itu kepadamu, barangsiapa yang kafir di antaramu sesudah (turun hidangan itu), maka sesungguhnya Aku akan menyiksanya dengan siksaan yang tidak pernah Aku timpakan kepada seorangpun di antara umat manusia\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/784.mp3"
+    },
+    {
+      "id": 785,
+      "surahNumber": 5,
+      "number": 116,
+      "arab": "وَإِذْ قَالَ ٱللَّهُ يَٰعِيسَى ٱبْنَ مَرْيَمَ ءَأَنتَ قُلْتَ لِلنَّاسِ ٱتَّخِذُونِى وَأُمِّىَ إِلَٰهَيْنِ مِن دُونِ ٱللَّهِ ۖ قَالَ سُبْحَٰنَكَ مَا يَكُونُ لِىٓ أَنْ أَقُولَ مَا لَيْسَ لِى بِحَقٍّ ۚ إِن كُنتُ قُلْتُهُۥ فَقَدْ عَلِمْتَهُۥ ۚ تَعْلَمُ مَا فِى نَفْسِى وَلَآ أَعْلَمُ مَا فِى نَفْسِكَ ۚ إِنَّكَ أَنتَ عَلَّٰمُ ٱلْغُيُوبِ",
+      "latin": "",
+      "text": "Dan (ingatlah) ketika Allah berfirman: \"Hai Isa putera Maryam, adakah kamu mengatakan kepada manusia: \"Jadikanlah aku dan ibuku dua orang tuhan selain Allah?\". Isa menjawab: \"Maha Suci Engkau, tidaklah patut bagiku mengatakan apa yang bukan hakku (mengatakannya). Jika aku pernah mengatakan maka tentulah Engkau mengetahui apa yang ada pada diriku dan aku tidak mengetahui apa yang ada pada diri Engkau. Sesungguhnya Engkau Maha Mengetahui perkara yang ghaib-ghaib\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/785.mp3"
+    },
+    {
+      "id": 786,
+      "surahNumber": 5,
+      "number": 117,
+      "arab": "مَا قُلْتُ لَهُمْ إِلَّا مَآ أَمَرْتَنِى بِهِۦٓ أَنِ ٱعْبُدُوا۟ ٱللَّهَ رَبِّى وَرَبَّكُمْ ۚ وَكُنتُ عَلَيْهِمْ شَهِيدًۭا مَّا دُمْتُ فِيهِمْ ۖ فَلَمَّا تَوَفَّيْتَنِى كُنتَ أَنتَ ٱلرَّقِيبَ عَلَيْهِمْ ۚ وَأَنتَ عَلَىٰ كُلِّ شَىْءٍۢ شَهِيدٌ",
+      "latin": "",
+      "text": "Aku tidak pernah mengatakan kepada mereka kecuali apa yang Engkau perintahkan kepadaku (mengatakan)nya yaitu: \"Sembahlah Allah, Tuhanku dan Tuhanmu\", dan adalah aku menjadi saksi terhadap mereka, selama aku berada di antara mereka. Maka setelah Engkau wafatkan aku, Engkau-lah yang mengawasi mereka. Dan Engkau adalah Maha Menyaksikan atas segala sesuatu.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/786.mp3"
+    },
+    {
+      "id": 787,
+      "surahNumber": 5,
+      "number": 118,
+      "arab": "إِن تُعَذِّبْهُمْ فَإِنَّهُمْ عِبَادُكَ ۖ وَإِن تَغْفِرْ لَهُمْ فَإِنَّكَ أَنتَ ٱلْعَزِيزُ ٱلْحَكِيمُ",
+      "latin": "",
+      "text": "Jika Engkau menyiksa mereka, maka sesungguhnya mereka adalah hamba-hamba Engkau, dan jika Engkau mengampuni mereka, maka sesungguhnya Engkaulah Yang Maha Perkasa lagi Maha Bijaksana.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/787.mp3"
+    },
+    {
+      "id": 788,
+      "surahNumber": 5,
+      "number": 119,
+      "arab": "قَالَ ٱللَّهُ هَٰذَا يَوْمُ يَنفَعُ ٱلصَّٰدِقِينَ صِدْقُهُمْ ۚ لَهُمْ جَنَّٰتٌۭ تَجْرِى مِن تَحْتِهَا ٱلْأَنْهَٰرُ خَٰلِدِينَ فِيهَآ أَبَدًۭا ۚ رَّضِىَ ٱللَّهُ عَنْهُمْ وَرَضُوا۟ عَنْهُ ۚ ذَٰلِكَ ٱلْفَوْزُ ٱلْعَظِيمُ",
+      "latin": "",
+      "text": "Allah berfirman: \"Ini adalah suatu hari yang bermanfaat bagi orang-orang yang benar kebenaran mereka. Bagi mereka surga yang dibawahnya mengalir sungai-sungai; mereka kekal di dalamnya selama-lamanya; Allah ridha terhadap-Nya. Itulah keberuntungan yang paling besar\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/788.mp3"
+    },
+    {
+      "id": 789,
+      "surahNumber": 5,
+      "number": 120,
+      "arab": "لِلَّهِ مُلْكُ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ وَمَا فِيهِنَّ ۚ وَهُوَ عَلَىٰ كُلِّ شَىْءٍۢ قَدِيرٌۢ",
+      "latin": "",
+      "text": "Kepunyaan Allah-lah kerajaan langit dan bumi dan apa yang ada di dalamnya; dan Dia Maha Kuasa atas segala sesuatu.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/789.mp3"
+    },
+    {
+      "id": 790,
+      "surahNumber": 6,
+      "number": 1,
+      "arab": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ ٱلْحَمْدُ لِلَّهِ ٱلَّذِى خَلَقَ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضَ وَجَعَلَ ٱلظُّلُمَٰتِ وَٱلنُّورَ ۖ ثُمَّ ٱلَّذِينَ كَفَرُوا۟ بِرَبِّهِمْ يَعْدِلُونَ",
+      "latin": "",
+      "text": "Segala puji bagi Allah Yang telah menciptakan langit dan bumi dan mengadakan gelap dan terang, namun orang-orang yang kafir mempersekutukan (sesuatu) dengan Tuhan mereka.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/790.mp3"
+    },
+    {
+      "id": 791,
+      "surahNumber": 6,
+      "number": 2,
+      "arab": "هُوَ ٱلَّذِى خَلَقَكُم مِّن طِينٍۢ ثُمَّ قَضَىٰٓ أَجَلًۭا ۖ وَأَجَلٌۭ مُّسَمًّى عِندَهُۥ ۖ ثُمَّ أَنتُمْ تَمْتَرُونَ",
+      "latin": "",
+      "text": "Dialah Yang menciptakan kamu dari tanah, sesudah itu ditentukannya ajal (kematianmu), dan ada lagi suatu ajal yang ada pada sisi-Nya (yang Dia sendirilah mengetahuinya), kemudian kamu masih ragu-ragu (tentang berbangkit itu).",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/791.mp3"
+    },
+    {
+      "id": 792,
+      "surahNumber": 6,
+      "number": 3,
+      "arab": "وَهُوَ ٱللَّهُ فِى ٱلسَّمَٰوَٰتِ وَفِى ٱلْأَرْضِ ۖ يَعْلَمُ سِرَّكُمْ وَجَهْرَكُمْ وَيَعْلَمُ مَا تَكْسِبُونَ",
+      "latin": "",
+      "text": "Dan Dialah Allah (yang disembah), baik di langit maupun di bumi; Dia mengetahui apa yang kamu rahasiakan dan apa yang kamu lahirkan dan mengetahui (pula) apa yang kamu usahakan.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/792.mp3"
+    },
+    {
+      "id": 793,
+      "surahNumber": 6,
+      "number": 4,
+      "arab": "وَمَا تَأْتِيهِم مِّنْ ءَايَةٍۢ مِّنْ ءَايَٰتِ رَبِّهِمْ إِلَّا كَانُوا۟ عَنْهَا مُعْرِضِينَ",
+      "latin": "",
+      "text": "Dan tidak ada suatu ayatpun dari ayat-ayat Tuhan sampai kepada mereka, melainkan mereka selalu berpaling dari padanya (mendustakannya).",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/793.mp3"
+    },
+    {
+      "id": 794,
+      "surahNumber": 6,
+      "number": 5,
+      "arab": "فَقَدْ كَذَّبُوا۟ بِٱلْحَقِّ لَمَّا جَآءَهُمْ ۖ فَسَوْفَ يَأْتِيهِمْ أَنۢبَٰٓؤُا۟ مَا كَانُوا۟ بِهِۦ يَسْتَهْزِءُونَ",
+      "latin": "",
+      "text": "Sesungguhnya mereka telah mendustakan yang haq (Al-Quran) tatkala sampai kepada mereka, maka kelak akan sampai kepada mereka (kenyataan dari) berita-berita yang selalu mereka perolok-olokkan.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/794.mp3"
+    },
+    {
+      "id": 795,
+      "surahNumber": 6,
+      "number": 6,
+      "arab": "أَلَمْ يَرَوْا۟ كَمْ أَهْلَكْنَا مِن قَبْلِهِم مِّن قَرْنٍۢ مَّكَّنَّٰهُمْ فِى ٱلْأَرْضِ مَا لَمْ نُمَكِّن لَّكُمْ وَأَرْسَلْنَا ٱلسَّمَآءَ عَلَيْهِم مِّدْرَارًۭا وَجَعَلْنَا ٱلْأَنْهَٰرَ تَجْرِى مِن تَحْتِهِمْ فَأَهْلَكْنَٰهُم بِذُنُوبِهِمْ وَأَنشَأْنَا مِنۢ بَعْدِهِمْ قَرْنًا ءَاخَرِينَ",
+      "latin": "",
+      "text": "Apakah mereka tidak memperhatikan berapa banyak generasi yang telah Kami binasakan sebelum mereka, padahal (generasi itu) telah Kami teguhkan kedudukan mereka di muka bumi, yaitu keteguhan yang belum pernah Kami berikan kepadamu, dan Kami curahkan hujan yang lebat atas mereka dan Kami jadikan sungai-sungai mengalir di bawah mereka, kemudian Kami binasakan mereka karena dosa mereka sendiri, dan Kami ciptakan sesudah mereka generasi yang lain.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/795.mp3"
+    },
+    {
+      "id": 796,
+      "surahNumber": 6,
+      "number": 7,
+      "arab": "وَلَوْ نَزَّلْنَا عَلَيْكَ كِتَٰبًۭا فِى قِرْطَاسٍۢ فَلَمَسُوهُ بِأَيْدِيهِمْ لَقَالَ ٱلَّذِينَ كَفَرُوٓا۟ إِنْ هَٰذَآ إِلَّا سِحْرٌۭ مُّبِينٌۭ",
+      "latin": "",
+      "text": "Dan kalau Kami turunkan kepadamu tulisan di atas kertas, lalu mereka dapat menyentuhnya dengan tangan mereka sendiri, tentulah orang-orang kafir itu berkata: \"Ini tidak lain hanyalah sihir yang nyata\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/796.mp3"
+    },
+    {
+      "id": 797,
+      "surahNumber": 6,
+      "number": 8,
+      "arab": "وَقَالُوا۟ لَوْلَآ أُنزِلَ عَلَيْهِ مَلَكٌۭ ۖ وَلَوْ أَنزَلْنَا مَلَكًۭا لَّقُضِىَ ٱلْأَمْرُ ثُمَّ لَا يُنظَرُونَ",
+      "latin": "",
+      "text": "Dan mereka berkata: \"Mengapa tidak diturunkan kepadanya (Muhammad) malaikat?\" dan kalau Kami turunkan (kepadanya) malaikat, tentulah selesai urusan itu, kemudian mereka tidak diberi tangguh (sedikitpun).",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/797.mp3"
+    },
+    {
+      "id": 798,
+      "surahNumber": 6,
+      "number": 9,
+      "arab": "وَلَوْ جَعَلْنَٰهُ مَلَكًۭا لَّجَعَلْنَٰهُ رَجُلًۭا وَلَلَبَسْنَا عَلَيْهِم مَّا يَلْبِسُونَ",
+      "latin": "",
+      "text": "Dan kalau Kami jadikan rasul itu malaikat, tentulah Kami jadikan dia seorang laki-laki dan (kalau Kami jadikan ia seorang laki-laki), tentulah Kami meragu-ragukan atas mereka apa yang mereka ragu-ragukan atas diri mereka sendiri.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/798.mp3"
+    },
+    {
+      "id": 799,
+      "surahNumber": 6,
+      "number": 10,
+      "arab": "وَلَقَدِ ٱسْتُهْزِئَ بِرُسُلٍۢ مِّن قَبْلِكَ فَحَاقَ بِٱلَّذِينَ سَخِرُوا۟ مِنْهُم مَّا كَانُوا۟ بِهِۦ يَسْتَهْزِءُونَ",
+      "latin": "",
+      "text": "Dan sungguh telah diperolok-olokkan beberapa rasul sebelum kamu, maka turunlah kepada orang-orang yang mencemoohkan di antara mereka balasan (azab) olok-olokan mereka.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/799.mp3"
+    },
+    {
+      "id": 800,
+      "surahNumber": 6,
+      "number": 11,
+      "arab": "قُلْ سِيرُوا۟ فِى ٱلْأَرْضِ ثُمَّ ٱنظُرُوا۟ كَيْفَ كَانَ عَٰقِبَةُ ٱلْمُكَذِّبِينَ",
+      "latin": "",
+      "text": "Katakanlah: \"Berjalanlah di muka bumi, kemudian perhatikanlah bagaimana kesudahan orang-orang yang mendustakan itu\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/800.mp3"
+    },
+    {
+      "id": 801,
+      "surahNumber": 6,
+      "number": 12,
+      "arab": "قُل لِّمَن مَّا فِى ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ ۖ قُل لِّلَّهِ ۚ كَتَبَ عَلَىٰ نَفْسِهِ ٱلرَّحْمَةَ ۚ لَيَجْمَعَنَّكُمْ إِلَىٰ يَوْمِ ٱلْقِيَٰمَةِ لَا رَيْبَ فِيهِ ۚ ٱلَّذِينَ خَسِرُوٓا۟ أَنفُسَهُمْ فَهُمْ لَا يُؤْمِنُونَ",
+      "latin": "",
+      "text": "Katakanlah: \"Kepunyaan siapakah apa yang ada di langit dan di bumi\". Katakanlah: \"Kepunyaan Allah\". Dia telah menetapkan atas Diri-Nya kasih sayang. Dia sungguh akan menghimpun kamu pada hari kiamat yang tidak ada keraguan padanya. Orang-orang yang meragukan dirinya mereka itu tidak beriman.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/801.mp3"
+    },
+    {
+      "id": 802,
+      "surahNumber": 6,
+      "number": 13,
+      "arab": "۞ وَلَهُۥ مَا سَكَنَ فِى ٱلَّيْلِ وَٱلنَّهَارِ ۚ وَهُوَ ٱلسَّمِيعُ ٱلْعَلِيمُ",
+      "latin": "",
+      "text": "Dan kepunyaan Allah-lah segala yang ada pada malam dan siang. Dan Dialah Yang Maha Mendengar lagi Maha Mengetahui.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/802.mp3"
+    },
+    {
+      "id": 803,
+      "surahNumber": 6,
+      "number": 14,
+      "arab": "قُلْ أَغَيْرَ ٱللَّهِ أَتَّخِذُ وَلِيًّۭا فَاطِرِ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ وَهُوَ يُطْعِمُ وَلَا يُطْعَمُ ۗ قُلْ إِنِّىٓ أُمِرْتُ أَنْ أَكُونَ أَوَّلَ مَنْ أَسْلَمَ ۖ وَلَا تَكُونَنَّ مِنَ ٱلْمُشْرِكِينَ",
+      "latin": "",
+      "text": "Katakanlah: \"Apakah akan aku jadikan pelindung selain dari Allah yang menjadikan langit dan bumi, padahal Dia memberi makan dan tidak memberi makan?\" Katakanlah: \"Sesungguhnya aku diperintah supaya aku menjadi orang yang pertama kali menyerah diri (kepada Allah), dan jangan sekali-kali kamu masuk golongan orang musyrik\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/803.mp3"
+    },
+    {
+      "id": 804,
+      "surahNumber": 6,
+      "number": 15,
+      "arab": "قُلْ إِنِّىٓ أَخَافُ إِنْ عَصَيْتُ رَبِّى عَذَابَ يَوْمٍ عَظِيمٍۢ",
+      "latin": "",
+      "text": "Katakanlah: \"Sesungguhnya aku takut akan azab hari yang besar (hari kiamat), jika aku mendurhakai Tuhanku\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/804.mp3"
+    },
+    {
+      "id": 805,
+      "surahNumber": 6,
+      "number": 16,
+      "arab": "مَّن يُصْرَفْ عَنْهُ يَوْمَئِذٍۢ فَقَدْ رَحِمَهُۥ ۚ وَذَٰلِكَ ٱلْفَوْزُ ٱلْمُبِينُ",
+      "latin": "",
+      "text": "Barang siapa yang dijauhkan azab dari padanya pada hari itu, maka sungguh Allah telah memberikan rahmat kepadanya. Dan itulah keberuntungan yang nyata.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/805.mp3"
+    },
+    {
+      "id": 806,
+      "surahNumber": 6,
+      "number": 17,
+      "arab": "وَإِن يَمْسَسْكَ ٱللَّهُ بِضُرٍّۢ فَلَا كَاشِفَ لَهُۥٓ إِلَّا هُوَ ۖ وَإِن يَمْسَسْكَ بِخَيْرٍۢ فَهُوَ عَلَىٰ كُلِّ شَىْءٍۢ قَدِيرٌۭ",
+      "latin": "",
+      "text": "Dan jika Allah menimpakan sesuatu kemudharatan kepadamu, maka tidak ada yang menghilangkannya melainkan Dia sendiri. Dan jika Dia mendatangkan kebaikan kepadamu, maka Dia Maha Kuasa atas tiap-tiap sesuatu.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/806.mp3"
+    },
+    {
+      "id": 807,
+      "surahNumber": 6,
+      "number": 18,
+      "arab": "وَهُوَ ٱلْقَاهِرُ فَوْقَ عِبَادِهِۦ ۚ وَهُوَ ٱلْحَكِيمُ ٱلْخَبِيرُ",
+      "latin": "",
+      "text": "Dan Dialah yang berkuasa atas sekalian hamba-hamba-Nya. Dan Dialah Yang Maha Bijaksana lagi Maha Mengetahui.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/807.mp3"
+    },
+    {
+      "id": 808,
+      "surahNumber": 6,
+      "number": 19,
+      "arab": "قُلْ أَىُّ شَىْءٍ أَكْبَرُ شَهَٰدَةًۭ ۖ قُلِ ٱللَّهُ ۖ شَهِيدٌۢ بَيْنِى وَبَيْنَكُمْ ۚ وَأُوحِىَ إِلَىَّ هَٰذَا ٱلْقُرْءَانُ لِأُنذِرَكُم بِهِۦ وَمَنۢ بَلَغَ ۚ أَئِنَّكُمْ لَتَشْهَدُونَ أَنَّ مَعَ ٱللَّهِ ءَالِهَةً أُخْرَىٰ ۚ قُل لَّآ أَشْهَدُ ۚ قُلْ إِنَّمَا هُوَ إِلَٰهٌۭ وَٰحِدٌۭ وَإِنَّنِى بَرِىٓءٌۭ مِّمَّا تُشْرِكُونَ",
+      "latin": "",
+      "text": "Katakanlah: \"Siapakah yang lebih kuat persaksiannya?\" Katakanlah: \"Allah\". Dia menjadi saksi antara aku dan kamu. Dan Al Quran ini diwahyukan kepadaku supaya dengan dia aku memberi peringatan kepadamu dan kepada orang-orang yang sampai Al-Quran (kepadanya). Apakah sesungguhnya kamu mengakui bahwa ada tuhan-tuhan lain di samping Allah?\" Katakanlah: \"Aku tidak mengakui\". Katakanlah: \"Sesungguhnya Dia adalah Tuhan Yang Maha Esa dan sesungguhnya aku berlepas diri dari apa yang kamu persekutukan (dengan Allah)\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/808.mp3"
+    },
+    {
+      "id": 809,
+      "surahNumber": 6,
+      "number": 20,
+      "arab": "ٱلَّذِينَ ءَاتَيْنَٰهُمُ ٱلْكِتَٰبَ يَعْرِفُونَهُۥ كَمَا يَعْرِفُونَ أَبْنَآءَهُمُ ۘ ٱلَّذِينَ خَسِرُوٓا۟ أَنفُسَهُمْ فَهُمْ لَا يُؤْمِنُونَ",
+      "latin": "",
+      "text": "Orang-orang yang telah Kami berikan kitab kepadanya, mereka mengenalnya (Muhammad) seperti mereka mengenal anak-anaknya sendiri. Orang-orang yang merugikan dirinya, mereka itu tidak beriman (kepada Allah).",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/809.mp3"
+    },
+    {
+      "id": 810,
+      "surahNumber": 6,
+      "number": 21,
+      "arab": "وَمَنْ أَظْلَمُ مِمَّنِ ٱفْتَرَىٰ عَلَى ٱللَّهِ كَذِبًا أَوْ كَذَّبَ بِـَٔايَٰتِهِۦٓ ۗ إِنَّهُۥ لَا يُفْلِحُ ٱلظَّٰلِمُونَ",
+      "latin": "",
+      "text": "Dan siapakah yang lebih aniaya daripada orang yang membuat-buat suatu kedustaan terhadap Allah, atau mendustakan ayat-ayat-Nya? Sesungguhnya orang-orang yang aniaya itu tidak mendapat keberuntungan.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/810.mp3"
+    },
+    {
+      "id": 811,
+      "surahNumber": 6,
+      "number": 22,
+      "arab": "وَيَوْمَ نَحْشُرُهُمْ جَمِيعًۭا ثُمَّ نَقُولُ لِلَّذِينَ أَشْرَكُوٓا۟ أَيْنَ شُرَكَآؤُكُمُ ٱلَّذِينَ كُنتُمْ تَزْعُمُونَ",
+      "latin": "",
+      "text": "Dan (ingatlah), hari yang di waktu itu Kami menghimpun mereka semuanya kemudian Kami berkata kepada orang-orang musyrik: \"Di manakah sembahan-sembahan kamu yang dulu kamu katakan (sekutu-sekutu) Kami?\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/811.mp3"
+    },
+    {
+      "id": 812,
+      "surahNumber": 6,
+      "number": 23,
+      "arab": "ثُمَّ لَمْ تَكُن فِتْنَتُهُمْ إِلَّآ أَن قَالُوا۟ وَٱللَّهِ رَبِّنَا مَا كُنَّا مُشْرِكِينَ",
+      "latin": "",
+      "text": "Kemudian tiadalah fitnah mereka, kecuali mengatakan: \"Demi Allah, Tuhan kami, tiadalah kami mempersekutukan Allah\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/812.mp3"
+    },
+    {
+      "id": 813,
+      "surahNumber": 6,
+      "number": 24,
+      "arab": "ٱنظُرْ كَيْفَ كَذَبُوا۟ عَلَىٰٓ أَنفُسِهِمْ ۚ وَضَلَّ عَنْهُم مَّا كَانُوا۟ يَفْتَرُونَ",
+      "latin": "",
+      "text": "Lihatlah bagaimana mereka telah berdusta kepada diri mereka sendiri dan hilanglah daripada mereka sembahan-sembahan yang dahulu mereka ada-adakan.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/813.mp3"
+    },
+    {
+      "id": 814,
+      "surahNumber": 6,
+      "number": 25,
+      "arab": "وَمِنْهُم مَّن يَسْتَمِعُ إِلَيْكَ ۖ وَجَعَلْنَا عَلَىٰ قُلُوبِهِمْ أَكِنَّةً أَن يَفْقَهُوهُ وَفِىٓ ءَاذَانِهِمْ وَقْرًۭا ۚ وَإِن يَرَوْا۟ كُلَّ ءَايَةٍۢ لَّا يُؤْمِنُوا۟ بِهَا ۚ حَتَّىٰٓ إِذَا جَآءُوكَ يُجَٰدِلُونَكَ يَقُولُ ٱلَّذِينَ كَفَرُوٓا۟ إِنْ هَٰذَآ إِلَّآ أَسَٰطِيرُ ٱلْأَوَّلِينَ",
+      "latin": "",
+      "text": "Dan di antara mereka ada orang yang mendengarkani (bacaan)mu, padahal Kami telah meletakkan tutupan di atas hati mereka (sehingga mereka tidak) memahaminya dan (Kami letakkan) sumbatan di telinganya. Dan jikapun mereka melihat segala tanda (kebenaran), mereka tetap tidak mau beriman kepadanya. Sehingga apabila mereka datang kepadamu untuk membantahmu, orang-orang kafir itu berkata: \"Al-Quran ini tidak lain hanyalah dongengan orang-orang dahulu\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/814.mp3"
+    },
+    {
+      "id": 815,
+      "surahNumber": 6,
+      "number": 26,
+      "arab": "وَهُمْ يَنْهَوْنَ عَنْهُ وَيَنْـَٔوْنَ عَنْهُ ۖ وَإِن يُهْلِكُونَ إِلَّآ أَنفُسَهُمْ وَمَا يَشْعُرُونَ",
+      "latin": "",
+      "text": "Dan mereka melarang (orang lain) mendengarkan Al-Quran dan mereka sendiri menjauhkan diri daripadanya, dan mereka hanyalah membinasakan diri mereka sendiri, sedang mereka tidak menyadari.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/815.mp3"
+    },
+    {
+      "id": 816,
+      "surahNumber": 6,
+      "number": 27,
+      "arab": "وَلَوْ تَرَىٰٓ إِذْ وُقِفُوا۟ عَلَى ٱلنَّارِ فَقَالُوا۟ يَٰلَيْتَنَا نُرَدُّ وَلَا نُكَذِّبَ بِـَٔايَٰتِ رَبِّنَا وَنَكُونَ مِنَ ٱلْمُؤْمِنِينَ",
+      "latin": "",
+      "text": "Dan jika kamu (Muhammad) melihat ketika mereka dihadapkan ke neraka, lalu mereka berkata: \"Kiranya kami dikembalikan (ke dunia) dan tidak mendustakan ayat-ayat Tuhan kami, serta menjadi orang-orang yang beriman\", (tentulah kamu melihat suatu peristiwa yang mengharukan).",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/816.mp3"
+    },
+    {
+      "id": 817,
+      "surahNumber": 6,
+      "number": 28,
+      "arab": "بَلْ بَدَا لَهُم مَّا كَانُوا۟ يُخْفُونَ مِن قَبْلُ ۖ وَلَوْ رُدُّوا۟ لَعَادُوا۟ لِمَا نُهُوا۟ عَنْهُ وَإِنَّهُمْ لَكَٰذِبُونَ",
+      "latin": "",
+      "text": "Tetapi (sebenarnya) telah nyata bagi mereka kejahatan yang mereka dahulu selalu menyembunyikannya. Sekiranya mereka dikembalikan ke dunia, tentulah mereka kembali kepada apa yang mereka telah dilarang mengerjakannya. Dan sesungguhnya mereka itu adalah pendusta belaka.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/817.mp3"
+    },
+    {
+      "id": 818,
+      "surahNumber": 6,
+      "number": 29,
+      "arab": "وَقَالُوٓا۟ إِنْ هِىَ إِلَّا حَيَاتُنَا ٱلدُّنْيَا وَمَا نَحْنُ بِمَبْعُوثِينَ",
+      "latin": "",
+      "text": "Dan tentu mereka akan mengatakan (pula): \"Hidup hanyalah kehidupan kita di dunia ini saja, dan kita sekali-sekali tidak akan dibangkitkan\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/818.mp3"
+    },
+    {
+      "id": 819,
+      "surahNumber": 6,
+      "number": 30,
+      "arab": "وَلَوْ تَرَىٰٓ إِذْ وُقِفُوا۟ عَلَىٰ رَبِّهِمْ ۚ قَالَ أَلَيْسَ هَٰذَا بِٱلْحَقِّ ۚ قَالُوا۟ بَلَىٰ وَرَبِّنَا ۚ قَالَ فَذُوقُوا۟ ٱلْعَذَابَ بِمَا كُنتُمْ تَكْفُرُونَ",
+      "latin": "",
+      "text": "Dan seandainya kamu melihat ketika mereka dihadapkan kepada Tuhannya (tentulah kamu melihat peristiwa yang mengharukan). Berfirman Allah: \"Bukankah (kebangkitan ini benar?\" Mereka menjawab: \"Sungguh benar, demi Tuhan kami\". Berfirman Allah: \"Karena itu rasakanlah azab ini, disebabkan kamu mengingkari(nya)\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/819.mp3"
+    },
+    {
+      "id": 820,
+      "surahNumber": 6,
+      "number": 31,
+      "arab": "قَدْ خَسِرَ ٱلَّذِينَ كَذَّبُوا۟ بِلِقَآءِ ٱللَّهِ ۖ حَتَّىٰٓ إِذَا جَآءَتْهُمُ ٱلسَّاعَةُ بَغْتَةًۭ قَالُوا۟ يَٰحَسْرَتَنَا عَلَىٰ مَا فَرَّطْنَا فِيهَا وَهُمْ يَحْمِلُونَ أَوْزَارَهُمْ عَلَىٰ ظُهُورِهِمْ ۚ أَلَا سَآءَ مَا يَزِرُونَ",
+      "latin": "",
+      "text": "Sungguh telah rugilah orang-orang yang mendustakan pertemuan mereka dengan Tuhan; sehingga apabila kiamat datang kepada mereka dengan tiba-tiba, mereka berkata: \"Alangkah besarnya penyesalan kami, terhadap kelalaian kami tentang kiamat itu!\", sambil mereka memikul dosa-dosa di atas punggungnya. Ingatlah, amat buruklah apa yang mereka pikul itu.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/820.mp3"
+    },
+    {
+      "id": 821,
+      "surahNumber": 6,
+      "number": 32,
+      "arab": "وَمَا ٱلْحَيَوٰةُ ٱلدُّنْيَآ إِلَّا لَعِبٌۭ وَلَهْوٌۭ ۖ وَلَلدَّارُ ٱلْءَاخِرَةُ خَيْرٌۭ لِّلَّذِينَ يَتَّقُونَ ۗ أَفَلَا تَعْقِلُونَ",
+      "latin": "",
+      "text": "Dan tiadalah kehidupan dunia ini, selain dari main-main dan senda gurau belaka. Dan sungguh kampung akhirat itu lebih baik bagi orang-orang yang bertakwa. Maka tidakkah kamu memahaminya?",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/821.mp3"
+    },
+    {
+      "id": 822,
+      "surahNumber": 6,
+      "number": 33,
+      "arab": "قَدْ نَعْلَمُ إِنَّهُۥ لَيَحْزُنُكَ ٱلَّذِى يَقُولُونَ ۖ فَإِنَّهُمْ لَا يُكَذِّبُونَكَ وَلَٰكِنَّ ٱلظَّٰلِمِينَ بِـَٔايَٰتِ ٱللَّهِ يَجْحَدُونَ",
+      "latin": "",
+      "text": "Sesungguhnya Kami mengetahui bahwasanya apa yang mereka katakan itu menyedihkan hatimu, (janganlah kamu bersedih hati), karena mereka sebenarnya bukan mendustakan kamu, akan tetapi orang-orang yang zalim itu mengingkari ayat-ayat Allah.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/822.mp3"
+    },
+    {
+      "id": 823,
+      "surahNumber": 6,
+      "number": 34,
+      "arab": "وَلَقَدْ كُذِّبَتْ رُسُلٌۭ مِّن قَبْلِكَ فَصَبَرُوا۟ عَلَىٰ مَا كُذِّبُوا۟ وَأُوذُوا۟ حَتَّىٰٓ أَتَىٰهُمْ نَصْرُنَا ۚ وَلَا مُبَدِّلَ لِكَلِمَٰتِ ٱللَّهِ ۚ وَلَقَدْ جَآءَكَ مِن نَّبَإِى۟ ٱلْمُرْسَلِينَ",
+      "latin": "",
+      "text": "Dan sesungguhnya telah didustakan (pula) rasul-rasul sebelum kamu, akan tetapi mereka sabar terhadap pendustaan dan penganiayaan (yang dilakukan) terhadap mereka, sampai datang pertolongan Allah kepada mereka. Tak ada seorangpun yang dapat merubah kalimat-kalimat (janji-janji) Allah. Dan sesungguhnya telah datang kepadamu sebahagian dari berita rasul-rasul itu.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/823.mp3"
+    },
+    {
+      "id": 824,
+      "surahNumber": 6,
+      "number": 35,
+      "arab": "وَإِن كَانَ كَبُرَ عَلَيْكَ إِعْرَاضُهُمْ فَإِنِ ٱسْتَطَعْتَ أَن تَبْتَغِىَ نَفَقًۭا فِى ٱلْأَرْضِ أَوْ سُلَّمًۭا فِى ٱلسَّمَآءِ فَتَأْتِيَهُم بِـَٔايَةٍۢ ۚ وَلَوْ شَآءَ ٱللَّهُ لَجَمَعَهُمْ عَلَى ٱلْهُدَىٰ ۚ فَلَا تَكُونَنَّ مِنَ ٱلْجَٰهِلِينَ",
+      "latin": "",
+      "text": "Dan jika perpalingan mereka (darimu) terasa amat berat bagimu, maka jika kamu dapat membuat lobang di bumi atau tangga ke langit lalu kamu dapat mendatangkan mukjizat kepada mereka (maka buatlah). Kalau Allah menghendaki, tentu saja Allah menjadikan mereka semua dalam petunjuk sebab itu janganlah sekali-kali kamu termasuk orang-orang yang jahil",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/824.mp3"
+    },
+    {
+      "id": 825,
+      "surahNumber": 6,
+      "number": 36,
+      "arab": "۞ إِنَّمَا يَسْتَجِيبُ ٱلَّذِينَ يَسْمَعُونَ ۘ وَٱلْمَوْتَىٰ يَبْعَثُهُمُ ٱللَّهُ ثُمَّ إِلَيْهِ يُرْجَعُونَ",
+      "latin": "",
+      "text": "Hanya mereka yang mendengar sajalah yang mematuhi (seruan Allah), dan orang-orang yang mati (hatinya), akan dibangkitkan oleh Allah, kemudian kepada-Nya-lah mereka dikembalikan.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/825.mp3"
+    },
+    {
+      "id": 826,
+      "surahNumber": 6,
+      "number": 37,
+      "arab": "وَقَالُوا۟ لَوْلَا نُزِّلَ عَلَيْهِ ءَايَةٌۭ مِّن رَّبِّهِۦ ۚ قُلْ إِنَّ ٱللَّهَ قَادِرٌ عَلَىٰٓ أَن يُنَزِّلَ ءَايَةًۭ وَلَٰكِنَّ أَكْثَرَهُمْ لَا يَعْلَمُونَ",
+      "latin": "",
+      "text": "Dan mereka (orang-orang musyrik Mekah) berkata: \"Mengapa tidak diturunkan kepadanya (Muhammad) suatu mukjizat dari Tuhannya?\" Katakanlah: \"Sesungguhnya Allah kuasa menurunkan suatu mukjizat, tetapi kebanyakan mereka tidak mengetahui\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/826.mp3"
+    },
+    {
+      "id": 827,
+      "surahNumber": 6,
+      "number": 38,
+      "arab": "وَمَا مِن دَآبَّةٍۢ فِى ٱلْأَرْضِ وَلَا طَٰٓئِرٍۢ يَطِيرُ بِجَنَاحَيْهِ إِلَّآ أُمَمٌ أَمْثَالُكُم ۚ مَّا فَرَّطْنَا فِى ٱلْكِتَٰبِ مِن شَىْءٍۢ ۚ ثُمَّ إِلَىٰ رَبِّهِمْ يُحْشَرُونَ",
+      "latin": "",
+      "text": "Dan tiadalah binatang-binatang yang ada di bumi dan burung-burung yang terbang dengan kedua sayapnya, melainkan umat (juga) seperti kamu. Tiadalah Kami alpakan sesuatupun dalam Al-Kitab, kemudian kepada Tuhanlah mereka dihimpunkan.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/827.mp3"
+    },
+    {
+      "id": 828,
+      "surahNumber": 6,
+      "number": 39,
+      "arab": "وَٱلَّذِينَ كَذَّبُوا۟ بِـَٔايَٰتِنَا صُمٌّۭ وَبُكْمٌۭ فِى ٱلظُّلُمَٰتِ ۗ مَن يَشَإِ ٱللَّهُ يُضْلِلْهُ وَمَن يَشَأْ يَجْعَلْهُ عَلَىٰ صِرَٰطٍۢ مُّسْتَقِيمٍۢ",
+      "latin": "",
+      "text": "Dan orang-orang yang mendustakan ayat-ayat Kami adalah pekak, bisu dan berada dalam gelap gulita. Barangsiapa yang dikehendaki Allah (kesesatannya), niscaya disesatkan-Nya. Dan barangsiapa yang dikehendaki Allah (untuk diberi-Nya petunjuk), niscaya Dia menjadikan-Nya berada di atas jalan yang lurus.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/828.mp3"
+    },
+    {
+      "id": 829,
+      "surahNumber": 6,
+      "number": 40,
+      "arab": "قُلْ أَرَءَيْتَكُمْ إِنْ أَتَىٰكُمْ عَذَابُ ٱللَّهِ أَوْ أَتَتْكُمُ ٱلسَّاعَةُ أَغَيْرَ ٱللَّهِ تَدْعُونَ إِن كُنتُمْ صَٰدِقِينَ",
+      "latin": "",
+      "text": "Katakanlah: \"Terangkanlah kepadaku jika datang siksaan Allah kepadamu, atau datang kepadamu hari kiamat, apakah kamu menyeru (tuhan) selain Allah; jika kamu orang-orang yang benar!\"",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/829.mp3"
+    },
+    {
+      "id": 830,
+      "surahNumber": 6,
+      "number": 41,
+      "arab": "بَلْ إِيَّاهُ تَدْعُونَ فَيَكْشِفُ مَا تَدْعُونَ إِلَيْهِ إِن شَآءَ وَتَنسَوْنَ مَا تُشْرِكُونَ",
+      "latin": "",
+      "text": "(Tidak), tetapi hanya Dialah yang kamu seru, maka Dia menghilangkan bahaya yang karenanya kamu berdoa kepada-Nya, jika Dia menghendaki, dan kamu tinggalkan sembahan-sembahan yang kamu sekutukan (dengan Allah).",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/830.mp3"
+    },
+    {
+      "id": 831,
+      "surahNumber": 6,
+      "number": 42,
+      "arab": "وَلَقَدْ أَرْسَلْنَآ إِلَىٰٓ أُمَمٍۢ مِّن قَبْلِكَ فَأَخَذْنَٰهُم بِٱلْبَأْسَآءِ وَٱلضَّرَّآءِ لَعَلَّهُمْ يَتَضَرَّعُونَ",
+      "latin": "",
+      "text": "Dan sesungguhnya Kami telah mengutus (rasul-rasul) kepada umat-umat yang sebelum kamu, kemudian Kami siksa mereka dengan (menimpakan) kesengsaraan dan kemelaratan, supaya mereka memohon (kepada Allah) dengan tunduk merendahkan diri.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/831.mp3"
+    },
+    {
+      "id": 832,
+      "surahNumber": 6,
+      "number": 43,
+      "arab": "فَلَوْلَآ إِذْ جَآءَهُم بَأْسُنَا تَضَرَّعُوا۟ وَلَٰكِن قَسَتْ قُلُوبُهُمْ وَزَيَّنَ لَهُمُ ٱلشَّيْطَٰنُ مَا كَانُوا۟ يَعْمَلُونَ",
+      "latin": "",
+      "text": "Maka mengapa mereka tidak memohon (kepada Allah) dengan tunduk merendahkan diri ketika datang siksaan Kami kepada mereka, bahkan hati mereka telah menjadi keras, dan syaitanpun menampakkan kepada mereka kebagusan apa yang selalu mereka kerjakan.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/832.mp3"
+    },
+    {
+      "id": 833,
+      "surahNumber": 6,
+      "number": 44,
+      "arab": "فَلَمَّا نَسُوا۟ مَا ذُكِّرُوا۟ بِهِۦ فَتَحْنَا عَلَيْهِمْ أَبْوَٰبَ كُلِّ شَىْءٍ حَتَّىٰٓ إِذَا فَرِحُوا۟ بِمَآ أُوتُوٓا۟ أَخَذْنَٰهُم بَغْتَةًۭ فَإِذَا هُم مُّبْلِسُونَ",
+      "latin": "",
+      "text": "Maka tatkala mereka melupakan peringatan yang telah diberikan kepada mereka, Kamipun membukakan semua pintu-pintu kesenangan untuk mereka; sehingga apabila mereka bergembira dengan apa yang telah diberikan kepada mereka, Kami siksa mereka dengan sekonyong-konyong, maka ketika itu mereka terdiam berputus asa.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/833.mp3"
+    },
+    {
+      "id": 834,
+      "surahNumber": 6,
+      "number": 45,
+      "arab": "فَقُطِعَ دَابِرُ ٱلْقَوْمِ ٱلَّذِينَ ظَلَمُوا۟ ۚ وَٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ",
+      "latin": "",
+      "text": "Maka orang-orang yang zalim itu dimusnahkan sampai ke akar-akarnya. Segala puji bagi Allah, Tuhan semesta alam.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/834.mp3"
+    },
+    {
+      "id": 835,
+      "surahNumber": 6,
+      "number": 46,
+      "arab": "قُلْ أَرَءَيْتُمْ إِنْ أَخَذَ ٱللَّهُ سَمْعَكُمْ وَأَبْصَٰرَكُمْ وَخَتَمَ عَلَىٰ قُلُوبِكُم مَّنْ إِلَٰهٌ غَيْرُ ٱللَّهِ يَأْتِيكُم بِهِ ۗ ٱنظُرْ كَيْفَ نُصَرِّفُ ٱلْءَايَٰتِ ثُمَّ هُمْ يَصْدِفُونَ",
+      "latin": "",
+      "text": "Katakanlah: \"Terangkanlah kepadaku jika Allah mencabut pendengaran dan penglihatan serta menutup hatimu, siapakah tuhan selain Allah yang kuasa mengembalikannya kepadamu?\" Perhatikanlah bagaimana Kami berkali-kali memperlihatkan tanda-tanda kebesaran (Kami), kemudian mereka tetap berpaling (juga).",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/835.mp3"
+    },
+    {
+      "id": 836,
+      "surahNumber": 6,
+      "number": 47,
+      "arab": "قُلْ أَرَءَيْتَكُمْ إِنْ أَتَىٰكُمْ عَذَابُ ٱللَّهِ بَغْتَةً أَوْ جَهْرَةً هَلْ يُهْلَكُ إِلَّا ٱلْقَوْمُ ٱلظَّٰلِمُونَ",
+      "latin": "",
+      "text": "Katakanlah: \"Terangkanlah kepadaku jika datang siksaan Allah kepadamu dengan sekonyong-konyong, atau terang-terangan, maka adakah yang dibinasakan (Allah) selain dari orang yang zalim?\"",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/836.mp3"
+    },
+    {
+      "id": 837,
+      "surahNumber": 6,
+      "number": 48,
+      "arab": "وَمَا نُرْسِلُ ٱلْمُرْسَلِينَ إِلَّا مُبَشِّرِينَ وَمُنذِرِينَ ۖ فَمَنْ ءَامَنَ وَأَصْلَحَ فَلَا خَوْفٌ عَلَيْهِمْ وَلَا هُمْ يَحْزَنُونَ",
+      "latin": "",
+      "text": "Dan tidaklah Kami mengutus para rasul itu melainkan untuk memberikan kabar gembira dan memberi peringatan. Barangsiapa yang beriman dan mengadakan perbaikan, maka tak ada kekhawatiran terhadap mereka dan tidak pula mereka bersedih hati.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/837.mp3"
+    },
+    {
+      "id": 838,
+      "surahNumber": 6,
+      "number": 49,
+      "arab": "وَٱلَّذِينَ كَذَّبُوا۟ بِـَٔايَٰتِنَا يَمَسُّهُمُ ٱلْعَذَابُ بِمَا كَانُوا۟ يَفْسُقُونَ",
+      "latin": "",
+      "text": "Dan orang-orang yang mendustakan ayat-ayat Kami, mereka akan ditimpa siksa disebabkan mereka selalu berbuat fasik.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/838.mp3"
+    },
+    {
+      "id": 839,
+      "surahNumber": 6,
+      "number": 50,
+      "arab": "قُل لَّآ أَقُولُ لَكُمْ عِندِى خَزَآئِنُ ٱللَّهِ وَلَآ أَعْلَمُ ٱلْغَيْبَ وَلَآ أَقُولُ لَكُمْ إِنِّى مَلَكٌ ۖ إِنْ أَتَّبِعُ إِلَّا مَا يُوحَىٰٓ إِلَىَّ ۚ قُلْ هَلْ يَسْتَوِى ٱلْأَعْمَىٰ وَٱلْبَصِيرُ ۚ أَفَلَا تَتَفَكَّرُونَ",
+      "latin": "",
+      "text": "Katakanlah: Aku tidak mengatakan kepadamu, bahwa perbendaharaan Allah ada padaku, dan tidak (pula) aku mengetahui yang ghaib dan tidak (pula) aku mengatakan kepadamu bahwa aku seorang malaikat. Aku tidak mengikuti kecuali apa yang diwahyukan kepadaku. Katakanlah: \"Apakah sama orang yang buta dengan yang melihat?\" Maka apakah kamu tidak memikirkan(nya)?\"",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/839.mp3"
+    },
+    {
+      "id": 840,
+      "surahNumber": 6,
+      "number": 51,
+      "arab": "وَأَنذِرْ بِهِ ٱلَّذِينَ يَخَافُونَ أَن يُحْشَرُوٓا۟ إِلَىٰ رَبِّهِمْ ۙ لَيْسَ لَهُم مِّن دُونِهِۦ وَلِىٌّۭ وَلَا شَفِيعٌۭ لَّعَلَّهُمْ يَتَّقُونَ",
+      "latin": "",
+      "text": "Dan berilah peringatan dengan apa yang diwahyukan itu kepada orang-orang yang takut akan dihimpunkan kepada Tuhannya (pada hari kiamat), sedang bagi mereka tidak ada seorang pelindung dan pemberi syafa'atpun selain daripada Allah, agar mereka bertakwa.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/840.mp3"
+    },
+    {
+      "id": 841,
+      "surahNumber": 6,
+      "number": 52,
+      "arab": "وَلَا تَطْرُدِ ٱلَّذِينَ يَدْعُونَ رَبَّهُم بِٱلْغَدَوٰةِ وَٱلْعَشِىِّ يُرِيدُونَ وَجْهَهُۥ ۖ مَا عَلَيْكَ مِنْ حِسَابِهِم مِّن شَىْءٍۢ وَمَا مِنْ حِسَابِكَ عَلَيْهِم مِّن شَىْءٍۢ فَتَطْرُدَهُمْ فَتَكُونَ مِنَ ٱلظَّٰلِمِينَ",
+      "latin": "",
+      "text": "Dan janganlah kamu mengusir orang-orang yang menyeru Tuhannya di pagi dan petang hari, sedang mereka menghendaki keridhaan-Nya. Kamu tidak memikul tanggung jawab sedikitpun terhadap perbuatan mereka dan merekapun tidak memikul tanggung jawab sedikitpun terhadap perbuatanmu, yang menyebabkan kamu (berhak) mengusir mereka, (sehingga kamu termasuk orang-orang yang zalim).",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/841.mp3"
+    },
+    {
+      "id": 842,
+      "surahNumber": 6,
+      "number": 53,
+      "arab": "وَكَذَٰلِكَ فَتَنَّا بَعْضَهُم بِبَعْضٍۢ لِّيَقُولُوٓا۟ أَهَٰٓؤُلَآءِ مَنَّ ٱللَّهُ عَلَيْهِم مِّنۢ بَيْنِنَآ ۗ أَلَيْسَ ٱللَّهُ بِأَعْلَمَ بِٱلشَّٰكِرِينَ",
+      "latin": "",
+      "text": "Dan demikianlah telah Kami uji sebahagian mereka (orang-orang kaya) dengan sebahagian mereka (orang-orang miskin), supaya (orang-orang yang kaya itu) berkata: \"Orang-orang semacam inikah di antara kita yang diberi anugerah Allah kepada mereka?\" (Allah berfirman): \"Tidakkah Allah lebih mengetahui tentang orang-orang yang bersyukur (kepada-Nya)?\"",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/842.mp3"
+    },
+    {
+      "id": 843,
+      "surahNumber": 6,
+      "number": 54,
+      "arab": "وَإِذَا جَآءَكَ ٱلَّذِينَ يُؤْمِنُونَ بِـَٔايَٰتِنَا فَقُلْ سَلَٰمٌ عَلَيْكُمْ ۖ كَتَبَ رَبُّكُمْ عَلَىٰ نَفْسِهِ ٱلرَّحْمَةَ ۖ أَنَّهُۥ مَنْ عَمِلَ مِنكُمْ سُوٓءًۢا بِجَهَٰلَةٍۢ ثُمَّ تَابَ مِنۢ بَعْدِهِۦ وَأَصْلَحَ فَأَنَّهُۥ غَفُورٌۭ رَّحِيمٌۭ",
+      "latin": "",
+      "text": "Apabila orang-orang yang beriman kepada ayat-ayat Kami itu datang kepadamu, maka katakanlah: \"Salaamun alaikum. Tuhanmu telah menetapkan atas diri-Nya kasih sayang, (yaitu) bahwasanya barang siapa yang berbuat kejahatan di antara kamu lantaran kejahilan, kemudian ia bertaubat setelah mengerjakannya dan mengadakan perbaikan, maka sesungguhnya Allah Maha Pengampun lagi Maha Penyayang.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/843.mp3"
+    },
+    {
+      "id": 844,
+      "surahNumber": 6,
+      "number": 55,
+      "arab": "وَكَذَٰلِكَ نُفَصِّلُ ٱلْءَايَٰتِ وَلِتَسْتَبِينَ سَبِيلُ ٱلْمُجْرِمِينَ",
+      "latin": "",
+      "text": "Dan demikianlah Kami terangkan ayat-ayat Al-Quran (supaya jelas jalan orang-orang yang saleh, dan supaya jelas (pula) jalan orang-orang yang berdosa.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/844.mp3"
+    },
+    {
+      "id": 845,
+      "surahNumber": 6,
+      "number": 56,
+      "arab": "قُلْ إِنِّى نُهِيتُ أَنْ أَعْبُدَ ٱلَّذِينَ تَدْعُونَ مِن دُونِ ٱللَّهِ ۚ قُل لَّآ أَتَّبِعُ أَهْوَآءَكُمْ ۙ قَدْ ضَلَلْتُ إِذًۭا وَمَآ أَنَا۠ مِنَ ٱلْمُهْتَدِينَ",
+      "latin": "",
+      "text": "Katakanlah: \"Sesungguhnya aku dilarang menyembah tuhan-tuhan yang kamu sembah selain Allah\". Katakanlah: \"Aku tidak akan mengikuti hawa nafsumu, sungguh tersesatlah aku jika berbuat demikian dan tidaklah (pula) aku termasuk orang-orang yang mendapat petunjuk\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/845.mp3"
+    },
+    {
+      "id": 846,
+      "surahNumber": 6,
+      "number": 57,
+      "arab": "قُلْ إِنِّى عَلَىٰ بَيِّنَةٍۢ مِّن رَّبِّى وَكَذَّبْتُم بِهِۦ ۚ مَا عِندِى مَا تَسْتَعْجِلُونَ بِهِۦٓ ۚ إِنِ ٱلْحُكْمُ إِلَّا لِلَّهِ ۖ يَقُصُّ ٱلْحَقَّ ۖ وَهُوَ خَيْرُ ٱلْفَٰصِلِينَ",
+      "latin": "",
+      "text": "Katakanlah: \"Sesungguhnya aku berada di atas hujjah yang nyata (Al Quran) dari Tuhanku, sedang kamu mendustakannya. Tidak ada padaku apa (azab) yang kamu minta supaya disegerakan kedatangannya. Menetapkan hukum itu hanyalah hak Allah. Dia menerangkan yang sebenarnya dan Dia Pemberi keputusan yang paling baik\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/846.mp3"
+    },
+    {
+      "id": 847,
+      "surahNumber": 6,
+      "number": 58,
+      "arab": "قُل لَّوْ أَنَّ عِندِى مَا تَسْتَعْجِلُونَ بِهِۦ لَقُضِىَ ٱلْأَمْرُ بَيْنِى وَبَيْنَكُمْ ۗ وَٱللَّهُ أَعْلَمُ بِٱلظَّٰلِمِينَ",
+      "latin": "",
+      "text": "Katakanlah: \"Kalau sekiranya ada padaku apa (azab) yang kamu minta supaya disegerakan, tentu telah diselesaikan Allah urusan yang ada antara aku dan kamu. Dan Allah lebih mengetahui tentang orang-orang yang zalim.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/847.mp3"
+    },
+    {
+      "id": 848,
+      "surahNumber": 6,
+      "number": 59,
+      "arab": "۞ وَعِندَهُۥ مَفَاتِحُ ٱلْغَيْبِ لَا يَعْلَمُهَآ إِلَّا هُوَ ۚ وَيَعْلَمُ مَا فِى ٱلْبَرِّ وَٱلْبَحْرِ ۚ وَمَا تَسْقُطُ مِن وَرَقَةٍ إِلَّا يَعْلَمُهَا وَلَا حَبَّةٍۢ فِى ظُلُمَٰتِ ٱلْأَرْضِ وَلَا رَطْبٍۢ وَلَا يَابِسٍ إِلَّا فِى كِتَٰبٍۢ مُّبِينٍۢ",
+      "latin": "",
+      "text": "Dan pada sisi Allah-lah kunci-kunci semua yang ghaib; tidak ada yang mengetahuinya kecuali Dia sendiri, dan Dia mengetahui apa yang di daratan dan di lautan, dan tiada sehelai daun pun yang gugur melainkan Dia mengetahuinya (pula), dan tidak jatuh sebutir biji-pun dalam kegelapan bumi, dan tidak sesuatu yang basah atau yang kering, melainkan tertulis dalam kitab yang nyata (Lauh Mahfudz)\"",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/848.mp3"
+    },
+    {
+      "id": 849,
+      "surahNumber": 6,
+      "number": 60,
+      "arab": "وَهُوَ ٱلَّذِى يَتَوَفَّىٰكُم بِٱلَّيْلِ وَيَعْلَمُ مَا جَرَحْتُم بِٱلنَّهَارِ ثُمَّ يَبْعَثُكُمْ فِيهِ لِيُقْضَىٰٓ أَجَلٌۭ مُّسَمًّۭى ۖ ثُمَّ إِلَيْهِ مَرْجِعُكُمْ ثُمَّ يُنَبِّئُكُم بِمَا كُنتُمْ تَعْمَلُونَ",
+      "latin": "",
+      "text": "Dan Dialah yang menidurkan kamu di malam hari dan Dia mengetahui apa yang kamu kerjakan di siang hari, kemudian Dia membangunkan kamu pada siang hari untuk disempurnakan umur(mu) yang telah ditentukan, kemudian kepada Allah-lah kamu kembali, lalu Dia memberitahukan kepadamu apa yang dahulu kamu kerjakan.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/849.mp3"
+    },
+    {
+      "id": 850,
+      "surahNumber": 6,
+      "number": 61,
+      "arab": "وَهُوَ ٱلْقَاهِرُ فَوْقَ عِبَادِهِۦ ۖ وَيُرْسِلُ عَلَيْكُمْ حَفَظَةً حَتَّىٰٓ إِذَا جَآءَ أَحَدَكُمُ ٱلْمَوْتُ تَوَفَّتْهُ رُسُلُنَا وَهُمْ لَا يُفَرِّطُونَ",
+      "latin": "",
+      "text": "Dan Dialah yang mempunyai kekuasaan tertinggi di atas semua hamba-Nya, dan diutus-Nya kepadamu malaikat-malaikat penjaga, sehingga apabila datang kematian kepada salah seorang di antara kamu, ia diwafatkan oleh malaikat-malaikat Kami, dan malaikat-malaikat Kami itu tidak melalaikan kewajibannya.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/850.mp3"
+    },
+    {
+      "id": 851,
+      "surahNumber": 6,
+      "number": 62,
+      "arab": "ثُمَّ رُدُّوٓا۟ إِلَى ٱللَّهِ مَوْلَىٰهُمُ ٱلْحَقِّ ۚ أَلَا لَهُ ٱلْحُكْمُ وَهُوَ أَسْرَعُ ٱلْحَٰسِبِينَ",
+      "latin": "",
+      "text": "Kemudian mereka (hamba Allah) dikembalikan kepada Allah, Penguasa mereka yang sebenarnya. Ketahuilah bahwa segala hukum (pada hari itu) kepunyaan-Nya. Dan Dialah Pembuat Perhitungan yang paling cepat.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/851.mp3"
+    },
+    {
+      "id": 852,
+      "surahNumber": 6,
+      "number": 63,
+      "arab": "قُلْ مَن يُنَجِّيكُم مِّن ظُلُمَٰتِ ٱلْبَرِّ وَٱلْبَحْرِ تَدْعُونَهُۥ تَضَرُّعًۭا وَخُفْيَةًۭ لَّئِنْ أَنجَىٰنَا مِنْ هَٰذِهِۦ لَنَكُونَنَّ مِنَ ٱلشَّٰكِرِينَ",
+      "latin": "",
+      "text": "Katakanlah: \"Siapakah yang dapat menyelamatkan kamu dari bencana di darat dan di laut, yang kamu berdoa kepada-Nya dengan rendah diri dengan suara yang lembut (dengan mengatakan: \"Sesungguhnya jika Dia menyelamatkan kami dari (bencana) ini, tentulah kami menjadi orang-orang yang bersyukur\"\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/852.mp3"
+    },
+    {
+      "id": 853,
+      "surahNumber": 6,
+      "number": 64,
+      "arab": "قُلِ ٱللَّهُ يُنَجِّيكُم مِّنْهَا وَمِن كُلِّ كَرْبٍۢ ثُمَّ أَنتُمْ تُشْرِكُونَ",
+      "latin": "",
+      "text": "Katakanlah: \"Allah menyelamatkan kamu dari bencana itu dan dari segala macam kesusahan, kemudian kamu kembali mempersekutukan-Nya\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/853.mp3"
+    },
+    {
+      "id": 854,
+      "surahNumber": 6,
+      "number": 65,
+      "arab": "قُلْ هُوَ ٱلْقَادِرُ عَلَىٰٓ أَن يَبْعَثَ عَلَيْكُمْ عَذَابًۭا مِّن فَوْقِكُمْ أَوْ مِن تَحْتِ أَرْجُلِكُمْ أَوْ يَلْبِسَكُمْ شِيَعًۭا وَيُذِيقَ بَعْضَكُم بَأْسَ بَعْضٍ ۗ ٱنظُرْ كَيْفَ نُصَرِّفُ ٱلْءَايَٰتِ لَعَلَّهُمْ يَفْقَهُونَ",
+      "latin": "",
+      "text": "Katakanlah: \"Dialah yang berkuasa untuk mengirimkan azab kepadamu, dari atas kamu atau dari bawah kakimu atau Dia mencampurkan kamu dalam golongan-golongan (yang saling bertentangan) dan merasakan kepada sebahagian kamu keganasan sebahagian yang lain. Perhatikanlah, betapa Kami mendatangkan tanda-tanda kebesaran Kami silih berganti agar mereka memahami(nya)\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/854.mp3"
+    },
+    {
+      "id": 855,
+      "surahNumber": 6,
+      "number": 66,
+      "arab": "وَكَذَّبَ بِهِۦ قَوْمُكَ وَهُوَ ٱلْحَقُّ ۚ قُل لَّسْتُ عَلَيْكُم بِوَكِيلٍۢ",
+      "latin": "",
+      "text": "Dan kaummu mendustakannya (azab) padahal azab itu benar adanya. Katakanlah: \"Aku ini bukanlah orang yang diserahi mengurus urusanmu\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/855.mp3"
+    },
+    {
+      "id": 856,
+      "surahNumber": 6,
+      "number": 67,
+      "arab": "لِّكُلِّ نَبَإٍۢ مُّسْتَقَرٌّۭ ۚ وَسَوْفَ تَعْلَمُونَ",
+      "latin": "",
+      "text": "Untuk setiap berita (yang dibawa oleh rasul-rasul) ada (waktu) terjadinya dan kelak kamu akan mengetahui.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/856.mp3"
+    },
+    {
+      "id": 857,
+      "surahNumber": 6,
+      "number": 68,
+      "arab": "وَإِذَا رَأَيْتَ ٱلَّذِينَ يَخُوضُونَ فِىٓ ءَايَٰتِنَا فَأَعْرِضْ عَنْهُمْ حَتَّىٰ يَخُوضُوا۟ فِى حَدِيثٍ غَيْرِهِۦ ۚ وَإِمَّا يُنسِيَنَّكَ ٱلشَّيْطَٰنُ فَلَا تَقْعُدْ بَعْدَ ٱلذِّكْرَىٰ مَعَ ٱلْقَوْمِ ٱلظَّٰلِمِينَ",
+      "latin": "",
+      "text": "Dan apabila kamu melihat orang-orang memperolok-olokkan ayat-ayat Kami, maka tinggalkanlah mereka sehingga mereka membicarakan pembicaraan yang lain. Dan jika syaitan menjadikan kamu lupa (akan larangan ini), maka janganlah kamu duduk bersama orang-orang yang zalim itu sesudah teringat (akan larangan itu).",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/857.mp3"
+    },
+    {
+      "id": 858,
+      "surahNumber": 6,
+      "number": 69,
+      "arab": "وَمَا عَلَى ٱلَّذِينَ يَتَّقُونَ مِنْ حِسَابِهِم مِّن شَىْءٍۢ وَلَٰكِن ذِكْرَىٰ لَعَلَّهُمْ يَتَّقُونَ",
+      "latin": "",
+      "text": "Dan tidak ada pertanggungjawaban sedikitpun atas orang-orang yang bertakwa terhadap dosa mereka; akan tetapi (kewajiban mereka ialah) mengingatkan agar mereka bertakwa.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/858.mp3"
+    },
+    {
+      "id": 859,
+      "surahNumber": 6,
+      "number": 70,
+      "arab": "وَذَرِ ٱلَّذِينَ ٱتَّخَذُوا۟ دِينَهُمْ لَعِبًۭا وَلَهْوًۭا وَغَرَّتْهُمُ ٱلْحَيَوٰةُ ٱلدُّنْيَا ۚ وَذَكِّرْ بِهِۦٓ أَن تُبْسَلَ نَفْسٌۢ بِمَا كَسَبَتْ لَيْسَ لَهَا مِن دُونِ ٱللَّهِ وَلِىٌّۭ وَلَا شَفِيعٌۭ وَإِن تَعْدِلْ كُلَّ عَدْلٍۢ لَّا يُؤْخَذْ مِنْهَآ ۗ أُو۟لَٰٓئِكَ ٱلَّذِينَ أُبْسِلُوا۟ بِمَا كَسَبُوا۟ ۖ لَهُمْ شَرَابٌۭ مِّنْ حَمِيمٍۢ وَعَذَابٌ أَلِيمٌۢ بِمَا كَانُوا۟ يَكْفُرُونَ",
+      "latin": "",
+      "text": "Dan tinggalkan lah orang-orang yang menjadikan agama mereka sebagai main-main dan senda gurau, dan mereka telah ditipu oleh kehidupan dunia. Peringatkanlah (mereka) dengan Al-Quran itu agar masing-masing diri tidak dijerumuskan ke dalam neraka, karena perbuatannya sendiri. Tidak akan ada baginya pelindung dan tidak pula pemberi syafa'at selain daripada Allah. Dan jika ia menebus dengan segala macam tebusanpun, niscaya tidak akan diterima itu daripadanya. Mereka itulah orang-orang yang dijerumuskan ke dalam neraka. Bagi mereka (disediakan) minuman dari air yang sedang mendidih dan azab yang pedih disebabkan kekafiran mereka dahulu.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/859.mp3"
+    },
+    {
+      "id": 860,
+      "surahNumber": 6,
+      "number": 71,
+      "arab": "قُلْ أَنَدْعُوا۟ مِن دُونِ ٱللَّهِ مَا لَا يَنفَعُنَا وَلَا يَضُرُّنَا وَنُرَدُّ عَلَىٰٓ أَعْقَابِنَا بَعْدَ إِذْ هَدَىٰنَا ٱللَّهُ كَٱلَّذِى ٱسْتَهْوَتْهُ ٱلشَّيَٰطِينُ فِى ٱلْأَرْضِ حَيْرَانَ لَهُۥٓ أَصْحَٰبٌۭ يَدْعُونَهُۥٓ إِلَى ٱلْهُدَى ٱئْتِنَا ۗ قُلْ إِنَّ هُدَى ٱللَّهِ هُوَ ٱلْهُدَىٰ ۖ وَأُمِرْنَا لِنُسْلِمَ لِرَبِّ ٱلْعَٰلَمِينَ",
+      "latin": "",
+      "text": "Katakanlah: \"Apakah kita akan menyeru selain daripada Allah, sesuatu yang tidak dapat mendatangkan kemanfaatan kepada kita dan tidak (pula) mendatangkan kemudharatan kepada kita dan (apakah) kita akan kembali ke belakang, sesudah Allah memberi petunjuk kepada kita, seperti orang yang telah disesatkan oleh syaitan di pesawangan yang menakutkan; dalam keadaan bingung, dia mempunyai kawan-kawan yang memanggilnya kepada jalan yang lurus (dengan mengatakan): \"Marilah ikuti kami\". Katakanlah: \"Sesungguhnya petunjuk Allah itulah (yang sebenarnya) petunjuk; dan kita disuruh agar menyerahkan diri kepada Tuhan semesta alam,",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/860.mp3"
+    },
+    {
+      "id": 861,
+      "surahNumber": 6,
+      "number": 72,
+      "arab": "وَأَنْ أَقِيمُوا۟ ٱلصَّلَوٰةَ وَٱتَّقُوهُ ۚ وَهُوَ ٱلَّذِىٓ إِلَيْهِ تُحْشَرُونَ",
+      "latin": "",
+      "text": "dan agar mendirikan sembahyang serta bertakwa kepada-Nya\". Dan Dialah Tuhan yang kepada-Nya-lah kamu akan dihimpunkan.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/861.mp3"
+    },
+    {
+      "id": 862,
+      "surahNumber": 6,
+      "number": 73,
+      "arab": "وَهُوَ ٱلَّذِى خَلَقَ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضَ بِٱلْحَقِّ ۖ وَيَوْمَ يَقُولُ كُن فَيَكُونُ ۚ قَوْلُهُ ٱلْحَقُّ ۚ وَلَهُ ٱلْمُلْكُ يَوْمَ يُنفَخُ فِى ٱلصُّورِ ۚ عَٰلِمُ ٱلْغَيْبِ وَٱلشَّهَٰدَةِ ۚ وَهُوَ ٱلْحَكِيمُ ٱلْخَبِيرُ",
+      "latin": "",
+      "text": "Dan Dialah yang menciptakan langit dan bumi dengan benar. Dan benarlah perkataan-Nya di waktu Dia mengatakan: \"Jadilah, lalu terjadilah\", dan di tangan-Nya-lah segala kekuasaan di waktu sangkakala ditiup. Dia mengetahui yang ghaib dan yang nampak. Dan Dialah Yang Maha Bijaksana lagi Maha Mengetahui.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/862.mp3"
+    },
+    {
+      "id": 863,
+      "surahNumber": 6,
+      "number": 74,
+      "arab": "۞ وَإِذْ قَالَ إِبْرَٰهِيمُ لِأَبِيهِ ءَازَرَ أَتَتَّخِذُ أَصْنَامًا ءَالِهَةً ۖ إِنِّىٓ أَرَىٰكَ وَقَوْمَكَ فِى ضَلَٰلٍۢ مُّبِينٍۢ",
+      "latin": "",
+      "text": "Dan (ingatlah) di waktu Ibrahim berkata kepada bapaknya, Aazar, \"Pantaskah kamu menjadikan berhala-berhala sebagai tuhan-tuhan? Sesungguhnya aku melihat kamu dan kaummu dalam kesesatan yang nyata\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/863.mp3"
+    },
+    {
+      "id": 864,
+      "surahNumber": 6,
+      "number": 75,
+      "arab": "وَكَذَٰلِكَ نُرِىٓ إِبْرَٰهِيمَ مَلَكُوتَ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ وَلِيَكُونَ مِنَ ٱلْمُوقِنِينَ",
+      "latin": "",
+      "text": "Dan demikianlah Kami perlihatkan kepada Ibrahim tanda-tanda keagungan (Kami yang terdapat) di langit dan bumi dan (Kami memperlihatkannya) agar dia termasuk orang yang yakin.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/864.mp3"
+    },
+    {
+      "id": 865,
+      "surahNumber": 6,
+      "number": 76,
+      "arab": "فَلَمَّا جَنَّ عَلَيْهِ ٱلَّيْلُ رَءَا كَوْكَبًۭا ۖ قَالَ هَٰذَا رَبِّى ۖ فَلَمَّآ أَفَلَ قَالَ لَآ أُحِبُّ ٱلْءَافِلِينَ",
+      "latin": "",
+      "text": "Ketika malam telah gelap, dia melihat sebuah bintang (lalu) dia berkata: \"Inilah Tuhanku\", tetapi tatkala bintang itu tenggelam dia berkata: \"Saya tidak suka kepada yang tenggelam\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/865.mp3"
+    },
+    {
+      "id": 866,
+      "surahNumber": 6,
+      "number": 77,
+      "arab": "فَلَمَّا رَءَا ٱلْقَمَرَ بَازِغًۭا قَالَ هَٰذَا رَبِّى ۖ فَلَمَّآ أَفَلَ قَالَ لَئِن لَّمْ يَهْدِنِى رَبِّى لَأَكُونَنَّ مِنَ ٱلْقَوْمِ ٱلضَّآلِّينَ",
+      "latin": "",
+      "text": "Kemudian tatkala dia melihat bulan terbit dia berkata: \"Inilah Tuhanku\". Tetapi setelah bulan itu terbenam, dia berkata: \"Sesungguhnya jika Tuhanku tidak memberi petunjuk kepadaku, pastilah aku termasuk orang yang sesat\".",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/866.mp3"
+    },
+    {
+      "id": 867,
+      "surahNumber": 6,
+      "number": 78,
+      "arab": "فَلَمَّا رَءَا ٱلشَّمْسَ بَازِغَةًۭ قَالَ هَٰذَا رَبِّى هَٰذَآ أَكْبَرُ ۖ فَلَمَّآ أَفَلَتْ قَالَ يَٰقَوْمِ إِنِّى بَرِىٓءٌۭ مِّمَّا تُشْرِكُونَ",
+      "latin": "",
+      "text": "Kemudian tatkala ia melihat matahari terbit, dia berkata: \"Inilah Tuhanku, ini yang lebih besar\". Maka tatkala matahari itu terbenam, dia berkata: \"Hai kaumku, sesungguhnya aku berlepas diri dari apa yang kamu persekutukan.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/867.mp3"
+    },
+    {
+      "id": 868,
+      "surahNumber": 6,
+      "number": 79,
+      "arab": "إِنِّى وَجَّهْتُ وَجْهِىَ لِلَّذِى فَطَرَ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضَ حَنِيفًۭا ۖ وَمَآ أَنَا۠ مِنَ ٱلْمُشْرِكِينَ",
+      "latin": "",
+      "text": "Sesungguhnya aku menghadapkan diriku kepada Rabb yang menciptakan langit dan bumi, dengan cenderung kepada agama yang benar, dan aku bukanlah termasuk orang-orang yang mempersekutukan Tuhan.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/868.mp3"
+    },
+    {
+      "id": 869,
+      "surahNumber": 6,
+      "number": 80,
+      "arab": "وَحَآجَّهُۥ قَوْمُهُۥ ۚ قَالَ أَتُحَٰٓجُّوٓنِّى فِى ٱللَّهِ وَقَدْ هَدَىٰنِ ۚ وَلَآ أَخَافُ مَا تُشْرِكُونَ بِهِۦٓ إِلَّآ أَن يَشَآءَ رَبِّى شَيْـًۭٔا ۗ وَسِعَ رَبِّى كُلَّ شَىْءٍ عِلْمًا ۗ أَفَلَا تَتَذَكَّرُونَ",
+      "latin": "",
+      "text": "Dan dia dibantah oleh kaumnya. Dia berkata: \"Apakah kamu hendak membantah tentang Allah, padahal sesungguhnya Allah telah memberi petunjuk kepadaku\". Dan aku tidak takut kepada (malapetaka dari) sembahan-sembahan yang kamu persekutukan dengan Allah, kecuali di kala Tuhanku menghendaki sesuatu (dari malapetaka) itu. Pengetahuan Tuhanku meliputi segala sesuatu. Maka apakah kamu tidak dapat mengambil pelajaran (daripadanya)?\"",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/869.mp3"
+    },
+    {
+      "id": 870,
+      "surahNumber": 6,
+      "number": 81,
+      "arab": "وَكَيْفَ أَخَافُ مَآ أَشْرَكْتُمْ وَلَا تَخَافُونَ أَنَّكُمْ أَشْرَكْتُم بِٱللَّهِ مَا لَمْ يُنَزِّلْ بِهِۦ عَلَيْكُمْ سُلْطَٰنًۭا ۚ فَأَىُّ ٱلْفَرِيقَيْنِ أَحَقُّ بِٱلْأَمْنِ ۖ إِن كُنتُمْ تَعْلَمُونَ",
+      "latin": "",
+      "text": "Bagaimana aku takut kepada sembahan-sembahan yang kamu persekutukan (dengan Allah), padahal kamu tidak mempersekutukan Allah dengan sembahan-sembahan yang Allah sendiri tidak menurunkan hujjah kepadamu untuk mempersekutukan-Nya. Maka manakah di antara dua golongan itu yang lebih berhak memperoleh keamanan (dari malapetaka), jika kamu mengetahui?",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/870.mp3"
+    },
+    {
+      "id": 871,
+      "surahNumber": 6,
+      "number": 82,
+      "arab": "ٱلَّذِينَ ءَامَنُوا۟ وَلَمْ يَلْبِسُوٓا۟ إِيمَٰنَهُم بِظُلْمٍ أُو۟لَٰٓئِكَ لَهُمُ ٱلْأَمْنُ وَهُم مُّهْتَدُونَ",
+      "latin": "",
+      "text": "Orang-orang yang beriman dan tidak mencampuradukkan iman mereka dengan kezaliman (syirik), mereka itulah yang mendapat keamanan dan mereka itu adalah orang-orang yang mendapat petunjuk.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/871.mp3"
+    },
+    {
+      "id": 872,
+      "surahNumber": 6,
+      "number": 83,
+      "arab": "وَتِلْكَ حُجَّتُنَآ ءَاتَيْنَٰهَآ إِبْرَٰهِيمَ عَلَىٰ قَوْمِهِۦ ۚ نَرْفَعُ دَرَجَٰتٍۢ مَّن نَّشَآءُ ۗ إِنَّ رَبَّكَ حَكِيمٌ عَلِيمٌۭ",
+      "latin": "",
+      "text": "Dan itulah hujjah Kami yang Kami berikan kepada Ibrahim untuk menghadapi kaumnya. Kami tinggikan siapa yang Kami kehendaki beberapa derajat. Sesungguhnya Tuhanmu Maha Bijaksana lagi Maha Mengetahui.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/872.mp3"
+    },
+    {
+      "id": 873,
+      "surahNumber": 6,
+      "number": 84,
+      "arab": "وَوَهَبْنَا لَهُۥٓ إِسْحَٰقَ وَيَعْقُوبَ ۚ كُلًّا هَدَيْنَا ۚ وَنُوحًا هَدَيْنَا مِن قَبْلُ ۖ وَمِن ذُرِّيَّتِهِۦ دَاوُۥدَ وَسُلَيْمَٰنَ وَأَيُّوبَ وَيُوسُفَ وَمُوسَىٰ وَهَٰرُونَ ۚ وَكَذَٰلِكَ نَجْزِى ٱلْمُحْسِنِينَ",
+      "latin": "",
+      "text": "Dan Kami telah menganugerahkan Ishak dan Ya'qub kepadanya. Kepada keduanya masing-masing telah Kami beri petunjuk; dan kepada Nuh sebelum itu (juga) telah Kami beri petunjuk, dan kepada sebahagian dari keturunannya (Nuh) yaitu Daud, Sulaiman, Ayyub, Yusuf, Musa dan Harun. Demikianlah Kami memberi balasan kepada orang-orang yang berbuat baik.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/873.mp3"
+    },
+    {
+      "id": 874,
+      "surahNumber": 6,
+      "number": 85,
+      "arab": "وَزَكَرِيَّا وَيَحْيَىٰ وَعِيسَىٰ وَإِلْيَاسَ ۖ كُلٌّۭ مِّنَ ٱلصَّٰلِحِينَ",
+      "latin": "",
+      "text": "dan Zakaria, Yahya, Isa dan Ilyas. Semuanya termasuk orang-orang yang shaleh.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/874.mp3"
+    },
+    {
+      "id": 875,
+      "surahNumber": 6,
+      "number": 86,
+      "arab": "وَإِسْمَٰعِيلَ وَٱلْيَسَعَ وَيُونُسَ وَلُوطًۭا ۚ وَكُلًّۭا فَضَّلْنَا عَلَى ٱلْعَٰلَمِينَ",
+      "latin": "",
+      "text": "dan Ismail, Alyasa', Yunus dan Luth. Masing-masing Kami lebihkan derajatnya di atas umat (di masanya),",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/875.mp3"
+    },
+    {
+      "id": 876,
+      "surahNumber": 6,
+      "number": 87,
+      "arab": "وَمِنْ ءَابَآئِهِمْ وَذُرِّيَّٰتِهِمْ وَإِخْوَٰنِهِمْ ۖ وَٱجْتَبَيْنَٰهُمْ وَهَدَيْنَٰهُمْ إِلَىٰ صِرَٰطٍۢ مُّسْتَقِيمٍۢ",
+      "latin": "",
+      "text": "Dan Kami lebihkan (pula) derajat sebahagian dari bapak-bapak mereka, keturunan dan saudara-saudara mereka. Dan Kami telah memilih mereka (untuk menjadi nabi-nabi dan rasul-rasul) dan Kami menunjuki mereka ke jalan yang lurus.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/876.mp3"
+    },
+    {
+      "id": 877,
+      "surahNumber": 6,
+      "number": 88,
+      "arab": "ذَٰلِكَ هُدَى ٱللَّهِ يَهْدِى بِهِۦ مَن يَشَآءُ مِنْ عِبَادِهِۦ ۚ وَلَوْ أَشْرَكُوا۟ لَحَبِطَ عَنْهُم مَّا كَانُوا۟ يَعْمَلُونَ",
+      "latin": "",
+      "text": "Itulah petunjuk Allah, yang dengannya Dia memberi petunjuk kepada siapa yang dikehendaki-Nya di antara hamba-hamba-Nya. Seandainya mereka mempersekutukan Allah, niscaya lenyaplah dari mereka amalan yang telah mereka kerjakan.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/877.mp3"
+    },
+    {
+      "id": 878,
+      "surahNumber": 6,
+      "number": 89,
+      "arab": "أُو۟لَٰٓئِكَ ٱلَّذِينَ ءَاتَيْنَٰهُمُ ٱلْكِتَٰبَ وَٱلْحُكْمَ وَٱلنُّبُوَّةَ ۚ فَإِن يَكْفُرْ بِهَا هَٰٓؤُلَآءِ فَقَدْ وَكَّلْنَا بِهَا قَوْمًۭا لَّيْسُوا۟ بِهَا بِكَٰفِرِينَ",
+      "latin": "",
+      "text": "Mereka itulah orang-orang yang telah Kami berikan kitab, hikmat dan kenabian Jika orang-orang (Quraisy) itu mengingkarinya, maka sesungguhnya Kami akan menyerahkannya kepada kaum yang sekali-kali tidak akan mengingkarinya.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/878.mp3"
+    },
+    {
+      "id": 879,
+      "surahNumber": 6,
+      "number": 90,
+      "arab": "أُو۟لَٰٓئِكَ ٱلَّذِينَ هَدَى ٱللَّهُ ۖ فَبِهُدَىٰهُمُ ٱقْتَدِهْ ۗ قُل لَّآ أَسْـَٔلُكُمْ عَلَيْهِ أَجْرًا ۖ إِنْ هُوَ إِلَّا ذِكْرَىٰ لِلْعَٰلَمِينَ",
+      "latin": "",
+      "text": "Mereka itulah orang-orang yang telah diberi petunjuk oleh Allah, maka ikutilah petunjuk mereka. Katakanlah: \"Aku tidak meminta upah kepadamu dalam menyampaikan (Al-Quran)\". Al-Quran itu tidak lain hanyalah peringatan untuk seluruh ummat.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/879.mp3"
+    },
+    {
+      "id": 880,
+      "surahNumber": 6,
+      "number": 91,
+      "arab": "وَمَا قَدَرُوا۟ ٱللَّهَ حَقَّ قَدْرِهِۦٓ إِذْ قَالُوا۟ مَآ أَنزَلَ ٱللَّهُ عَلَىٰ بَشَرٍۢ مِّن شَىْءٍۢ ۗ قُلْ مَنْ أَنزَلَ ٱلْكِتَٰبَ ٱلَّذِى جَآءَ بِهِۦ مُوسَىٰ نُورًۭا وَهُدًۭى لِّلنَّاسِ ۖ تَجْعَلُونَهُۥ قَرَاطِيسَ تُبْدُونَهَا وَتُخْفُونَ كَثِيرًۭا ۖ وَعُلِّمْتُم مَّا لَمْ تَعْلَمُوٓا۟ أَنتُمْ وَلَآ ءَابَآؤُكُمْ ۖ قُلِ ٱللَّهُ ۖ ثُمَّ ذَرْهُمْ فِى خَوْضِهِمْ يَلْعَبُونَ",
+      "latin": "",
+      "text": "Dan mereka tidak menghormati Allah dengan penghormatan yang semestinya, di kala mereka berkata: \"Allah tidak menurunkan sesuatupun kepada manusia\". Katakanlah: \"Siapakah yang menurunkan kitab (Taurat) yang dibawa oleh Musa sebagai cahaya dan petunjuk bagi manusia, kamu jadikan kitab itu lembaran-lembaran kertas yang bercerai-berai, kamu perlihatkan (sebahagiannya) dan kamu sembunyikan sebahagian besarnya, padahal telah diajarkan kepadamu apa yang kamu dan bapak-bapak kamu tidak mengetahui(nya)?\" Katakanlah: \"Allah-lah (yang menurunkannya)\", kemudian (sesudah kamu menyampaikan Al Quran kepada mereka), biarkanlah mereka bermain-main dalam kesesatannya.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/880.mp3"
+    },
+    {
+      "id": 881,
+      "surahNumber": 6,
+      "number": 92,
+      "arab": "وَهَٰذَا كِتَٰبٌ أَنزَلْنَٰهُ مُبَارَكٌۭ مُّصَدِّقُ ٱلَّذِى بَيْنَ يَدَيْهِ وَلِتُنذِرَ أُمَّ ٱلْقُرَىٰ وَمَنْ حَوْلَهَا ۚ وَٱلَّذِينَ يُؤْمِنُونَ بِٱلْءَاخِرَةِ يُؤْمِنُونَ بِهِۦ ۖ وَهُمْ عَلَىٰ صَلَاتِهِمْ يُحَافِظُونَ",
+      "latin": "",
+      "text": "Dan ini (Al Quran) adalah kitab yang telah Kami turunkan yang diberkahi; membenarkan kitab-kitab yang (diturunkan) sebelumnya dan agar kamu memberi peringatan kepada (penduduk) Ummul Qura (Mekah) dan orang-orang yang di luar lingkungannya. Orang-orang yang beriman kepada adanya kehidupan akhirat tentu beriman kepadanya (Al Quran) dan mereka selalu memelihara sembahyangnya.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/881.mp3"
+    },
+    {
+      "id": 882,
+      "surahNumber": 6,
+      "number": 93,
+      "arab": "وَمَنْ أَظْلَمُ مِمَّنِ ٱفْتَرَىٰ عَلَى ٱللَّهِ كَذِبًا أَوْ قَالَ أُوحِىَ إِلَىَّ وَلَمْ يُوحَ إِلَيْهِ شَىْءٌۭ وَمَن قَالَ سَأُنزِلُ مِثْلَ مَآ أَنزَلَ ٱللَّهُ ۗ وَلَوْ تَرَىٰٓ إِذِ ٱلظَّٰلِمُونَ فِى غَمَرَٰتِ ٱلْمَوْتِ وَٱلْمَلَٰٓئِكَةُ بَاسِطُوٓا۟ أَيْدِيهِمْ أَخْرِجُوٓا۟ أَنفُسَكُمُ ۖ ٱلْيَوْمَ تُجْزَوْنَ عَذَابَ ٱلْهُونِ بِمَا كُنتُمْ تَقُولُونَ عَلَى ٱللَّهِ غَيْرَ ٱلْحَقِّ وَكُنتُمْ عَنْ ءَايَٰتِهِۦ تَسْتَكْبِرُونَ",
+      "latin": "",
+      "text": "Dan siapakah yang lebih zalim daripada orang yang membuat kedustaan terhadap Allah atau yang berkata: \"Telah diwahyukan kepada saya\", padahal tidak ada diwahyukan sesuatupun kepadanya, dan orang yang berkata: \"Saya akan menurunkan seperti apa yang diturunkan Allah\". Alangkah dahsyatnya sekiranya kamu melihat di waktu orang-orang yang zalim berada dalam tekanan sakratul maut, sedang para malaikat memukul dengan tangannya, (sambil berkata): \"Keluarkanlah nyawamu\" Di hari ini kamu dibalas dengan siksa yang sangat menghinakan, karena kamu selalu mengatakan terhadap Allah (perkataan) yang tidak benar dan (karena) kamu selalu menyombongkan diri terhadap ayat-ayat-Nya.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/882.mp3"
+    },
+    {
+      "id": 883,
+      "surahNumber": 6,
+      "number": 94,
+      "arab": "وَلَقَدْ جِئْتُمُونَا فُرَٰدَىٰ كَمَا خَلَقْنَٰكُمْ أَوَّلَ مَرَّةٍۢ وَتَرَكْتُم مَّا خَوَّلْنَٰكُمْ وَرَآءَ ظُهُورِكُمْ ۖ وَمَا نَرَىٰ مَعَكُمْ شُفَعَآءَكُمُ ٱلَّذِينَ زَعَمْتُمْ أَنَّهُمْ فِيكُمْ شُرَكَٰٓؤُا۟ ۚ لَقَد تَّقَطَّعَ بَيْنَكُمْ وَضَلَّ عَنكُم مَّا كُنتُمْ تَزْعُمُونَ",
+      "latin": "",
+      "text": "Dan sesungguhnya kamu datang kepada Kami sendiri-sendiri sebagaimana kamu Kami ciptakan pada mulanya, dan kamu tinggalkan di belakangmu (di dunia) apa yang telah Kami karuniakan kepadamu; dan Kami tiada melihat besertamu pemberi syafa'at yang kamu anggap bahwa mereka itu sekutu-sekutu Tuhan di antara kamu. Sungguh telah terputuslah (pertalian) antara kamu dan telah lenyap daripada kamu apa yang dahulu kamu anggap (sebagai sekutu Allah).",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/883.mp3"
+    },
+    {
+      "id": 884,
+      "surahNumber": 6,
+      "number": 95,
+      "arab": "۞ إِنَّ ٱللَّهَ فَالِقُ ٱلْحَبِّ وَٱلنَّوَىٰ ۖ يُخْرِجُ ٱلْحَىَّ مِنَ ٱلْمَيِّتِ وَمُخْرِجُ ٱلْمَيِّتِ مِنَ ٱلْحَىِّ ۚ ذَٰلِكُمُ ٱللَّهُ ۖ فَأَنَّىٰ تُؤْفَكُونَ",
+      "latin": "",
+      "text": "Sesungguhnya Allah menumbuhkan butir tumbuh-tumbuhan dan biji buah-buahan. Dia mengeluarkan yang hidup dari yang mati dan mengeluarkan yang mati dari yang hidup. (Yang memiliki sifat-sifat) demikian ialah Allah, maka mengapa kamu masih berpaling?",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/884.mp3"
+    },
+    {
+      "id": 885,
+      "surahNumber": 6,
+      "number": 96,
+      "arab": "فَالِقُ ٱلْإِصْبَاحِ وَجَعَلَ ٱلَّيْلَ سَكَنًۭا وَٱلشَّمْسَ وَٱلْقَمَرَ حُسْبَانًۭا ۚ ذَٰلِكَ تَقْدِيرُ ٱلْعَزِيزِ ٱلْعَلِيمِ",
+      "latin": "",
+      "text": "Dia menyingsingkan pagi dan menjadikan malam untuk beristirahat, dan (menjadikan) matahari dan bulan untuk perhitungan. Itulah ketentuan Allah Yang Maha Perkasa lagi Maha Mengetahui.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/885.mp3"
+    },
+    {
+      "id": 886,
+      "surahNumber": 6,
+      "number": 97,
+      "arab": "وَهُوَ ٱلَّذِى جَعَلَ لَكُمُ ٱلنُّجُومَ لِتَهْتَدُوا۟ بِهَا فِى ظُلُمَٰتِ ٱلْبَرِّ وَٱلْبَحْرِ ۗ قَدْ فَصَّلْنَا ٱلْءَايَٰتِ لِقَوْمٍۢ يَعْلَمُونَ",
+      "latin": "",
+      "text": "Dan Dialah yang menjadikan bintang-bintang bagimu, agar kamu menjadikannya petunjuk dalam kegelapan di darat dan di laut. Sesungguhnya Kami telah menjelaskan tanda-tanda kebesaran (Kami) kepada orang-orang yang mengetahui.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/886.mp3"
+    },
+    {
+      "id": 887,
+      "surahNumber": 6,
+      "number": 98,
+      "arab": "وَهُوَ ٱلَّذِىٓ أَنشَأَكُم مِّن نَّفْسٍۢ وَٰحِدَةٍۢ فَمُسْتَقَرٌّۭ وَمُسْتَوْدَعٌۭ ۗ قَدْ فَصَّلْنَا ٱلْءَايَٰتِ لِقَوْمٍۢ يَفْقَهُونَ",
+      "latin": "",
+      "text": "Dan Dialah yang menciptakan kamu dari seorang diri, maka (bagimu) ada tempat tetap dan tempat simpanan. Sesungguhnya telah Kami jelaskan tanda-tanda kebesaran Kami kepada orang-orang yang mengetahui.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/887.mp3"
+    },
+    {
+      "id": 888,
+      "surahNumber": 6,
+      "number": 99,
+      "arab": "وَهُوَ ٱلَّذِىٓ أَنزَلَ مِنَ ٱلسَّمَآءِ مَآءًۭ فَأَخْرَجْنَا بِهِۦ نَبَاتَ كُلِّ شَىْءٍۢ فَأَخْرَجْنَا مِنْهُ خَضِرًۭا نُّخْرِجُ مِنْهُ حَبًّۭا مُّتَرَاكِبًۭا وَمِنَ ٱلنَّخْلِ مِن طَلْعِهَا قِنْوَانٌۭ دَانِيَةٌۭ وَجَنَّٰتٍۢ مِّنْ أَعْنَابٍۢ وَٱلزَّيْتُونَ وَٱلرُّمَّانَ مُشْتَبِهًۭا وَغَيْرَ مُتَشَٰبِهٍ ۗ ٱنظُرُوٓا۟ إِلَىٰ ثَمَرِهِۦٓ إِذَآ أَثْمَرَ وَيَنْعِهِۦٓ ۚ إِنَّ فِى ذَٰلِكُمْ لَءَايَٰتٍۢ لِّقَوْمٍۢ يُؤْمِنُونَ",
+      "latin": "",
+      "text": "Dan Dialah yang menurunkan air hujan dari langit, lalu Kami tumbuhkan dengan air itu segala macam tumbuh-tumbuhan maka Kami keluarkan dari tumbuh-tumbuhan itu tanaman yang menghijau. Kami keluarkan dari tanaman yang menghijau itu butir yang banyak; dan dari mayang korma mengurai tangkai-tangkai yang menjulai, dan kebun-kebun anggur, dan (Kami keluarkan pula) zaitun dan delima yang serupa dan yang tidak serupa. Perhatikanlah buahnya di waktu pohonnya berbuah dan (perhatikan pulalah) kematangannya. Sesungguhnya pada yang demikian itu ada tanda-tanda (kekuasaan Allah) bagi orang-orang yang beriman.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/888.mp3"
+    },
+    {
+      "id": 889,
+      "surahNumber": 6,
+      "number": 100,
+      "arab": "وَجَعَلُوا۟ لِلَّهِ شُرَكَآءَ ٱلْجِنَّ وَخَلَقَهُمْ ۖ وَخَرَقُوا۟ لَهُۥ بَنِينَ وَبَنَٰتٍۭ بِغَيْرِ عِلْمٍۢ ۚ سُبْحَٰنَهُۥ وَتَعَٰلَىٰ عَمَّا يَصِفُونَ",
+      "latin": "",
+      "text": "Dan mereka (orang-orang musyrik) menjadikan jin itu sekutu bagi Allah, padahal Allah-lah yang menciptakan jin-jin itu, dan mereka membohong (dengan mengatakan): \"Bahwasanya Allah mempunyai anak laki-laki dan perempuan\", tanpa (berdasar) ilmu pengetahuan. Maha Suci Allah dan Maha Tinggi dari sifat-sifat yang mereka berikan.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/889.mp3"
+    },
+    {
+      "id": 890,
+      "surahNumber": 6,
+      "number": 101,
+      "arab": "بَدِيعُ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ ۖ أَنَّىٰ يَكُونُ لَهُۥ وَلَدٌۭ وَلَمْ تَكُن لَّهُۥ صَٰحِبَةٌۭ ۖ وَخَلَقَ كُلَّ شَىْءٍۢ ۖ وَهُوَ بِكُلِّ شَىْءٍ عَلِيمٌۭ",
+      "latin": "",
+      "text": "Dia Pencipta langit dan bumi. Bagaimana Dia mempunyai anak padahal Dia tidak mempunyai isteri. Dia menciptakan segala sesuatu; dan Dia mengetahui segala sesuatu.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/890.mp3"
+    },
+    {
+      "id": 891,
+      "surahNumber": 6,
+      "number": 102,
+      "arab": "ذَٰلِكُمُ ٱللَّهُ رَبُّكُمْ ۖ لَآ إِلَٰهَ إِلَّا هُوَ ۖ خَٰلِقُ كُلِّ شَىْءٍۢ فَٱعْبُدُوهُ ۚ وَهُوَ عَلَىٰ كُلِّ شَىْءٍۢ وَكِيلٌۭ",
+      "latin": "",
+      "text": "(Yang memiliki sifat-sifat yang) demikian itu ialah Allah Tuhan kamu; tidak ada Tuhan selain Dia; Pencipta segala sesuatu, maka sembahlah Dia; dan Dia adalah Pemelihara segala sesuatu.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/891.mp3"
+    },
+    {
+      "id": 892,
+      "surahNumber": 6,
+      "number": 103,
+      "arab": "لَّا تُدْرِكُهُ ٱلْأَبْصَٰرُ وَهُوَ يُدْرِكُ ٱلْأَبْصَٰرَ ۖ وَهُوَ ٱللَّطِيفُ ٱلْخَبِيرُ",
+      "latin": "",
+      "text": "Dia tidak dapat dicapai oleh penglihatan mata, sedang Dia dapat melihat segala yang kelihatan; dan Dialah Yang Maha Halus lagi Maha Mengetahui.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/892.mp3"
+    },
+    {
+      "id": 893,
+      "surahNumber": 6,
+      "number": 104,
+      "arab": "قَدْ جَآءَكُم بَصَآئِرُ مِن رَّبِّكُمْ ۖ فَمَنْ أَبْصَرَ فَلِنَفْسِهِۦ ۖ وَمَنْ عَمِىَ فَعَلَيْهَا ۚ وَمَآ أَنَا۠ عَلَيْكُم بِحَفِيظٍۢ",
+      "latin": "",
+      "text": "Sesungguhnya telah datang dari Tuhanmu bukti-bukti yang terang; maka barangsiapa melihat (kebenaran itu), maka (manfaatnya) bagi dirinya sendiri; dan barangsiapa buta (tidak melihat kebenaran itu), maka kemudharatannya kembali kepadanya. Dan aku (Muhammad) sekali-kali bukanlah pemelihara(mu).",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/893.mp3"
+    },
+    {
+      "id": 894,
+      "surahNumber": 6,
+      "number": 105,
+      "arab": "وَكَذَٰلِكَ نُصَرِّفُ ٱلْءَايَٰتِ وَلِيَقُولُوا۟ دَرَسْتَ وَلِنُبَيِّنَهُۥ لِقَوْمٍۢ يَعْلَمُونَ",
+      "latin": "",
+      "text": "Demikianlah Kami mengulang-ulangi ayat-ayat Kami supaya (orang-orang yang beriman mendapat petunjuk) dan supaya orang-orang musyrik mengatakan: \"Kamu telah mempelajari ayat-ayat itu (dari Ahli Kitab)\", dan supaya Kami menjelaskan Al Quran itu kepada orang-orang yang mengetahui.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/894.mp3"
+    },
+    {
+      "id": 895,
+      "surahNumber": 6,
+      "number": 106,
+      "arab": "ٱتَّبِعْ مَآ أُوحِىَ إِلَيْكَ مِن رَّبِّكَ ۖ لَآ إِلَٰهَ إِلَّا هُوَ ۖ وَأَعْرِضْ عَنِ ٱلْمُشْرِكِينَ",
+      "latin": "",
+      "text": "Ikutilah apa yang telah diwahyukan kepadamu dari Tuhanmu; tidak ada Tuhan selain Dia; dan berpalinglah dari orang-orang musyrik.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/895.mp3"
+    },
+    {
+      "id": 896,
+      "surahNumber": 6,
+      "number": 107,
+      "arab": "وَلَوْ شَآءَ ٱللَّهُ مَآ أَشْرَكُوا۟ ۗ وَمَا جَعَلْنَٰكَ عَلَيْهِمْ حَفِيظًۭا ۖ وَمَآ أَنتَ عَلَيْهِم بِوَكِيلٍۢ",
+      "latin": "",
+      "text": "Dan kalau Allah menghendaki, niscaya mereka tidak memperkutukan(Nya). Dan Kami tidak menjadikan kamu pemelihara bagi mereka; dan kamu sekali-kali bukanlah pemelihara bagi mereka.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/896.mp3"
+    },
+    {
+      "id": 897,
+      "surahNumber": 6,
+      "number": 108,
+      "arab": "وَلَا تَسُبُّوا۟ ٱلَّذِينَ يَدْعُونَ مِن دُونِ ٱللَّهِ فَيَسُبُّوا۟ ٱللَّهَ عَدْوًۢا بِغَيْرِ عِلْمٍۢ ۗ كَذَٰلِكَ زَيَّنَّا لِكُلِّ أُمَّةٍ عَمَلَهُمْ ثُمَّ إِلَىٰ رَبِّهِم مَّرْجِعُهُمْ فَيُنَبِّئُهُم بِمَا كَانُوا۟ يَعْمَلُونَ",
+      "latin": "",
+      "text": "Dan janganlah kamu memaki sembahan-sembahan yang mereka sembah selain Allah, karena mereka nanti akan memaki Allah dengan melampaui batas tanpa pengetahuan. Demikianlah Kami jadikan setiap umat menganggap baik pekerjaan mereka. Kemudian kepada Tuhan merekalah kembali mereka, lalu Dia memberitakan kepada mereka apa yang dahulu mereka kerjakan.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/897.mp3"
+    },
+    {
+      "id": 898,
+      "surahNumber": 6,
+      "number": 109,
+      "arab": "وَأَقْسَمُوا۟ بِٱللَّهِ جَهْدَ أَيْمَٰنِهِمْ لَئِن جَآءَتْهُمْ ءَايَةٌۭ لَّيُؤْمِنُنَّ بِهَا ۚ قُلْ إِنَّمَا ٱلْءَايَٰتُ عِندَ ٱللَّهِ ۖ وَمَا يُشْعِرُكُمْ أَنَّهَآ إِذَا جَآءَتْ لَا يُؤْمِنُونَ",
+      "latin": "",
+      "text": "Mereka bersumpah dengan nama Allah dengan segala kesungguhan, bahwa sungguh jika datang kepada mereka sesuatu mu jizat, pastilah mereka beriman kepada-Nya. Katakanlah: \"Sesungguhnya mukjizat-mukjizat itu hanya berada di sisi Allah\". Dan apakah yang memberitahukan kepadamu bahwa apabila mukjizat datang mereka tidak akan beriman.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/898.mp3"
+    },
+    {
+      "id": 899,
+      "surahNumber": 6,
+      "number": 110,
+      "arab": "وَنُقَلِّبُ أَفْـِٔدَتَهُمْ وَأَبْصَٰرَهُمْ كَمَا لَمْ يُؤْمِنُوا۟ بِهِۦٓ أَوَّلَ مَرَّةٍۢ وَنَذَرُهُمْ فِى طُغْيَٰنِهِمْ يَعْمَهُونَ",
+      "latin": "",
+      "text": "Dan (begitu pula) Kami memalingkan hati dan penglihatan mereka seperti mereka belum pernah beriman kepadanya (Al Quran) pada permulaannya, dan Kami biarkan mereka bergelimang dalam kesesatannya yang sangat.",
+      "audio": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/899.mp3"
+    }
+  ]
+}
