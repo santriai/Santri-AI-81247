@@ -2454,8 +2454,8 @@ export const MultiplayerQuizView: React.FC<Props> = ({ topics, onBackToSinglePla
                 </label>
                 
                 {/* Quick time selection */}
-                <div className="grid grid-cols-3 sm:grid-cols-5 gap-1.5 mb-2">
-                  {['3 Menit Lagi', '5 Menit Lagi', '10 Menit Lagi', '15 Menit Lagi', '30 Menit Lagi'].map((opt) => (
+                <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5 mb-2">
+                  {['1 Menit Lagi', '3 Menit Lagi', '5 Menit Lagi', '10 Menit Lagi', '15 Menit Lagi', '30 Menit Lagi'].map((opt) => (
                     <button
                       key={opt}
                       type="button"

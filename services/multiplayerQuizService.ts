@@ -385,7 +385,8 @@ export const createQuizRoom = async (
 
   // Calculate scheduled start time
   let scheduledMs = Date.now();
-  if (startTimeOption === '3 Menit Lagi') scheduledMs += 3 * 60 * 1000;
+  if (startTimeOption === '1 Menit Lagi') scheduledMs += 1 * 60 * 1000;
+  else if (startTimeOption === '3 Menit Lagi') scheduledMs += 3 * 60 * 1000;
   else if (startTimeOption === '5 Menit Lagi') scheduledMs += 5 * 60 * 1000;
   else if (startTimeOption === '10 Menit Lagi') scheduledMs += 10 * 60 * 1000;
   else if (startTimeOption === '15 Menit Lagi') scheduledMs += 15 * 60 * 1000;
