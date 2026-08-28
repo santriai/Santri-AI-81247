@@ -56,6 +56,34 @@ interface BookmarkUnifiedItem {
   raw: any;
 }
 
+// Color mapping for card backgrounds based on bookmark type
+const getCategoryCardStyle = (type: BookmarkCategory) => {
+  switch (type) {
+    case 'kitab':
+      return 'bg-emerald-50/70 dark:bg-emerald-950/25 border-emerald-200/80 dark:border-emerald-800/50 hover:border-emerald-400 dark:hover:border-emerald-600';
+    case 'quran':
+      return 'bg-teal-50/70 dark:bg-teal-950/25 border-teal-200/80 dark:border-teal-800/50 hover:border-teal-400 dark:hover:border-teal-600';
+    case 'hadis':
+      return 'bg-indigo-50/70 dark:bg-indigo-950/25 border-indigo-200/80 dark:border-indigo-800/50 hover:border-indigo-400 dark:hover:border-indigo-600';
+    case 'doa':
+      return 'bg-cyan-50/70 dark:bg-cyan-950/25 border-cyan-200/80 dark:border-cyan-800/50 hover:border-cyan-400 dark:hover:border-cyan-600';
+    case 'video':
+      return 'bg-rose-50/70 dark:bg-rose-950/25 border-rose-200/80 dark:border-rose-800/50 hover:border-rose-400 dark:hover:border-rose-600';
+    case 'audio':
+      return 'bg-amber-50/70 dark:bg-amber-950/25 border-amber-200/80 dark:border-amber-800/50 hover:border-amber-400 dark:hover:border-amber-600';
+    case 'community':
+      return 'bg-purple-50/70 dark:bg-purple-950/25 border-purple-200/80 dark:border-purple-800/50 hover:border-purple-400 dark:hover:border-purple-600';
+    case 'munawwir':
+      return 'bg-orange-50/70 dark:bg-orange-950/25 border-orange-200/80 dark:border-orange-800/50 hover:border-orange-400 dark:hover:border-orange-600';
+    case 'news':
+      return 'bg-emerald-50/70 dark:bg-emerald-950/25 border-emerald-200/80 dark:border-emerald-800/50 hover:border-emerald-400 dark:hover:border-emerald-600';
+    case 'features':
+      return 'bg-yellow-50/70 dark:bg-yellow-950/25 border-yellow-200/80 dark:border-yellow-800/50 hover:border-yellow-400 dark:hover:border-yellow-600';
+    default:
+      return 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800';
+  }
+};
+
 export const BookmarksScreen: React.FC = () => {
   const navigate = useNavigate();
   const { showToast } = useToast();
@@ -884,7 +912,7 @@ export const BookmarksScreen: React.FC = () => {
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ type: 'spring', stiffness: 500, damping: 35 }}
                   onClick={() => handleOpenItem(item)}
-                  className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-100 dark:border-slate-800/80 hover:border-emerald-500/40 dark:hover:border-emerald-600/40 shadow-xs hover:shadow-md transition-all cursor-pointer group relative overflow-hidden"
+                  className={`rounded-2xl p-4 border shadow-xs hover:shadow-md transition-all cursor-pointer group relative overflow-hidden ${getCategoryCardStyle(item.type)}`}
                 >
                   {/* Category Accent Line */}
                   <div className={`absolute top-0 left-0 bottom-0 w-1.5 ${item.color.split(' ')[0]}`} />
@@ -893,26 +921,26 @@ export const BookmarksScreen: React.FC = () => {
                     {/* Item Header */}
                     <div className="flex items-start justify-between gap-3 mb-2">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className={`px-2.5 py-0.5 rounded-md text-[10px] font-bold text-white flex items-center gap-1 ${item.color.split(' ')[0]}`}>
+                        <span className={`px-2.5 py-0.5 rounded-md text-[10px] font-bold text-white flex items-center gap-1 shadow-xs ${item.color.split(' ')[0]}`}>
                           <Icon size={12} />
                           {item.categoryLabel}
                         </span>
                         {item.subtitle && (
-                          <span className="text-[11px] text-slate-400 dark:text-slate-500 font-medium line-clamp-1">
+                          <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium line-clamp-1">
                             {item.subtitle}
                           </span>
                         )}
                       </div>
 
                       {/* Action buttons */}
-                      <div className="flex items-center gap-1 shrink-0">
+                      <div className="flex items-center gap-1.5 shrink-0">
                         {item.type !== 'features' && (
                           <button
                             onClick={(e) => handleCopyText(e, item)}
-                            className="p-1.5 text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                            className="p-1.5 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 bg-white/90 dark:bg-slate-800/90 hover:bg-white dark:hover:bg-slate-800 rounded-lg border border-slate-200/80 dark:border-slate-700/80 transition-all shadow-2xs cursor-pointer active:scale-95"
                             title="Salin Teks"
                           >
-                            {isCopied ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
+                            {isCopied ? <Check size={14} className="text-emerald-600 stroke-[2.5]" /> : <Copy size={14} />}
                           </button>
                         )}
                         <button
@@ -920,10 +948,10 @@ export const BookmarksScreen: React.FC = () => {
                             e.stopPropagation();
                             setDeleteModalItem(item);
                           }}
-                          className="p-1.5 text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 rounded-lg transition-colors"
+                          className="p-1.5 text-rose-600 dark:text-rose-400 hover:text-white bg-rose-100/90 dark:bg-rose-950/70 hover:bg-rose-600 dark:hover:bg-rose-600 rounded-lg border border-rose-200 dark:border-rose-900/60 transition-all shadow-2xs cursor-pointer active:scale-95"
                           title="Hapus Bookmark"
                         >
-                          <Trash2 size={14} />
+                          <Trash2 size={14} className="stroke-[2.2]" />
                         </button>
                       </div>
                     </div>
@@ -931,14 +959,14 @@ export const BookmarksScreen: React.FC = () => {
                     {/* Title */}
                     <h3 className="text-sm font-bold text-slate-800 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors mb-1.5 flex items-center justify-between">
                       <span className="line-clamp-1">{item.title}</span>
-                      <ChevronRight size={16} className="text-slate-300 dark:text-slate-600 group-hover:translate-x-1 transition-transform shrink-0 ml-2" />
+                      <ChevronRight size={16} className="text-slate-400 dark:text-slate-500 group-hover:translate-x-1 transition-transform shrink-0 ml-2" />
                     </h3>
 
                     {/* Arabic Text if exists */}
                     {item.arabic && (
                       <div 
                         dir="rtl" 
-                        className="font-amiri text-base md:text-lg text-emerald-950 dark:text-emerald-200 leading-loose line-clamp-2 my-1.5 bg-emerald-50/50 dark:bg-emerald-950/20 p-2 rounded-xl border border-emerald-100/50 dark:border-emerald-900/30"
+                        className="font-amiri text-base md:text-lg text-emerald-950 dark:text-emerald-100 leading-loose line-clamp-2 my-2 bg-white/80 dark:bg-slate-900/70 p-3 rounded-xl border border-slate-200/60 dark:border-slate-800/60 shadow-2xs"
                       >
                         {item.arabic}
                       </div>
@@ -946,7 +974,7 @@ export const BookmarksScreen: React.FC = () => {
 
                     {/* Translation / Content snippet */}
                     {item.translation && (
-                      <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed mt-1">
+                      <p className="text-xs text-slate-700 dark:text-slate-300 line-clamp-2 leading-relaxed mt-1">
                         {item.translation}
                       </p>
                     )}
