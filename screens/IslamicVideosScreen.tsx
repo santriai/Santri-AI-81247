@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   ArrowLeft, Video, Search, Volume2, Share2, Star, Play, PlayCircle, Clock, 
   Sparkles, Check, Bookmark, BookmarkCheck, Heart, Info, Loader2, RefreshCw, 
@@ -8,7 +8,7 @@ import {
 import { useToast } from '../contexts/ToastContext';
 import { PLAYSTORE_LINK } from '../constants';
 
-interface IslamicVideo {
+export interface IslamicVideo {
   id: string; // YouTube Video ID
   title: string;
   speaker: string;
@@ -20,7 +20,7 @@ interface IslamicVideo {
   featured?: boolean;
 }
 
-const VIDEO_PLAYLIST: IslamicVideo[] = [
+export const VIDEO_PLAYLIST: IslamicVideo[] = [
   {
     id: 'tGq6QZ5LjdU',
     title: 'Kunci Ketenangan dan Kebahagiaan Hidup Hakiki',
@@ -416,6 +416,7 @@ const VIDEO_PLAYLIST: IslamicVideo[] = [
 
 const IslamicVideosScreen: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { showToast } = useToast();
   
   const [searchQuery, setSearchQuery] = useState('');
@@ -430,6 +431,24 @@ const IslamicVideosScreen: React.FC = () => {
       return [];
     }
   });
+
+  // Handle incoming navigation state (e.g. from Bookmarks)
+  useEffect(() => {
+    if (location.state) {
+      const state = location.state as any;
+      if (state.videoId) {
+        const found = VIDEO_PLAYLIST.find(v => v.id === state.videoId);
+        if (found) {
+          setSelectedVideo(found);
+          setIsPlaying(true);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
+      if (state.tab) {
+        setActiveCategory(state.tab);
+      }
+    }
+  }, [location.state]);
 
   // Sync favorites to localStorage
   useEffect(() => {

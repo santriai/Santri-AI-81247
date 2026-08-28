@@ -543,6 +543,10 @@ const CommunityScreen: React.FC = () => {
     const matchedPost = posts.find(p => p.id === targetId);
     if (matchedPost) {
       setSelectedPost(matchedPost);
+      setTimeout(() => {
+        const el = document.getElementById(`post-${targetId}`);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
       return;
     }
 
@@ -551,6 +555,10 @@ const CommunityScreen: React.FC = () => {
     if (matchedPrayer) {
       setActiveTab('doa');
       setSelectedPrayer(matchedPrayer);
+      setTimeout(() => {
+        const el = document.getElementById(`prayer-${targetId}`);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
       return;
     }
 
@@ -1474,6 +1482,7 @@ const CommunityScreen: React.FC = () => {
                   return (
                     <motion.div 
                       key={prayer.id || idx}
+                      id={`prayer-${prayer.id}`}
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: idx * 0.05 }}
@@ -1592,6 +1601,7 @@ const CommunityScreen: React.FC = () => {
                 return (
                   <motion.div 
                     key={post.id || idx}
+                    id={`post-${post.id}`}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.05 }}

@@ -883,6 +883,27 @@ export const subscribeUserBookmarks = (userId: string, type: string, callback: (
   });
 };
 
+export const subscribeAllUserBookmarks = (userId: string, callback: (data: any[]) => void) => {
+  if (!db) return () => {};
+  const q = query(collection(db, 'users', userId, 'bookmarks'));
+  return onSnapshot(q, (snapshot) => {
+    const items = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    items.sort((a: any, b: any) => {
+      const timeA = a.createdAt?.seconds || 0;
+      const timeB = b.createdAt?.seconds || 0;
+      return timeB - timeA;
+    });
+    callback(items);
+  }, (error) => {
+    try {
+      handleFirestoreError(error, 'list', `users/${userId}/bookmarks`);
+    } catch (e) {
+      callback([]);
+      throw e;
+    }
+  });
+};
+
 // --- TASBIH LOGS ---
 
 export const saveTasbihLog = async (userId: string, log: any) => {

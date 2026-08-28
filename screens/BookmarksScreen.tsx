@@ -20,7 +20,10 @@ import {
   ChevronRight,
   Clock,
   Layers,
-  BookMarked
+  BookMarked,
+  Video,
+  Music2,
+  Play
 } from 'lucide-react';
 import { 
   getBedahKitabBookmarks, 
@@ -33,13 +36,15 @@ import {
 } from '../services/bookmarkService';
 import { useToast } from '../contexts/ToastContext';
 import { useAuth } from '../contexts/AuthContext';
-import { removeUserBookmark } from '../services/firebase';
+import { removeUserBookmark, subscribeAllUserBookmarks } from '../services/firebase';
+import { VIDEO_PLAYLIST, IslamicVideo } from './IslamicVideosScreen';
+import { AUDIO_DATA } from './PlaylistScreen';
 
-type BookmarkCategory = 'all' | 'kitab' | 'quran' | 'hadis' | 'doa' | 'munawwir' | 'news' | 'community' | 'features';
+type BookmarkCategory = 'all' | 'kitab' | 'quran' | 'hadis' | 'doa' | 'video' | 'audio' | 'community' | 'munawwir' | 'news' | 'features';
 
 interface BookmarkUnifiedItem {
   id: string;
-  type: 'kitab' | 'quran' | 'hadis' | 'doa' | 'munawwir' | 'news' | 'community' | 'features';
+  type: BookmarkCategory;
   title: string;
   subtitle?: string;
   arabic?: string;
@@ -66,12 +71,17 @@ export const BookmarksScreen: React.FC = () => {
   const [quranBookmarks, setQuranBookmarks] = useState<any[]>([]);
   const [hadisBookmarks, setHadisBookmarks] = useState<any[]>([]);
   const [doaBookmarks, setDoaBookmarks] = useState<any[]>([]);
+  const [videoBookmarks, setVideoBookmarks] = useState<string[]>([]);
+  const [audioBookmarks, setAudioBookmarks] = useState<string[]>([]);
   const [munawwirBookmarks, setMunawwirBookmarks] = useState<any[]>([]);
   const [newsBookmarks, setNewsBookmarks] = useState<any[]>([]);
   const [postBookmarks, setPostBookmarks] = useState<any[]>([]);
   const [featureBookmarks, setFeatureBookmarks] = useState<FeatureItem[]>([]);
 
-  const loadAllBookmarks = () => {
+  // Cloud bookmarks for logged in user
+  const [firebaseBookmarks, setFirebaseBookmarks] = useState<any[]>([]);
+
+  const loadAllLocalBookmarks = () => {
     // 1. Bedah Kitab
     setKitabBookmarks(getBedahKitabBookmarks());
 
@@ -99,7 +109,23 @@ export const BookmarksScreen: React.FC = () => {
       setDoaBookmarks([]);
     }
 
-    // 5. Munawwir
+    // 5. Video Islami Favorites
+    try {
+      const v = localStorage.getItem('santri_video_favorites');
+      setVideoBookmarks(v ? JSON.parse(v) : []);
+    } catch {
+      setVideoBookmarks([]);
+    }
+
+    // 6. Audio MP3 Favorites
+    try {
+      const a = localStorage.getItem('santri_audio_favorites');
+      setAudioBookmarks(a ? JSON.parse(a) : []);
+    } catch {
+      setAudioBookmarks([]);
+    }
+
+    // 7. Munawwir
     try {
       const m = localStorage.getItem('santri_munawwir_bookmarks');
       setMunawwirBookmarks(m ? JSON.parse(m) : []);
@@ -107,7 +133,7 @@ export const BookmarksScreen: React.FC = () => {
       setMunawwirBookmarks([]);
     }
 
-    // 6. News
+    // 8. News
     try {
       const n = localStorage.getItem('santri_news_bookmarks');
       setNewsBookmarks(n ? JSON.parse(n) : []);
@@ -115,7 +141,7 @@ export const BookmarksScreen: React.FC = () => {
       setNewsBookmarks([]);
     }
 
-    // 7. Community Posts
+    // 9. Community Posts
     try {
       const p = localStorage.getItem('santri_post_bookmarks');
       setPostBookmarks(p ? JSON.parse(p) : []);
@@ -123,37 +149,58 @@ export const BookmarksScreen: React.FC = () => {
       setPostBookmarks([]);
     }
 
-    // 8. Pinned Features
+    // 10. Pinned Features
     setFeatureBookmarks(getBookmarkedFeatures());
   };
 
   useEffect(() => {
-    loadAllBookmarks();
+    loadAllLocalBookmarks();
 
-    const unsubscribe = subscribeToBookmarkChanges(() => {
-      loadAllBookmarks();
+    const unsubscribeService = subscribeToBookmarkChanges(() => {
+      loadAllLocalBookmarks();
     });
 
     const handleStorage = (e: StorageEvent) => {
-      if (e.key && e.key.includes('bookmark')) {
-        loadAllBookmarks();
+      if (e.key && (e.key.includes('bookmark') || e.key.includes('favorite'))) {
+        loadAllLocalBookmarks();
       }
     };
     window.addEventListener('storage', handleStorage);
 
     return () => {
-      unsubscribe();
+      unsubscribeService();
       window.removeEventListener('storage', handleStorage);
     };
   }, []);
 
-  // Map into unified items
+  // Sync Firebase Bookmarks if user is logged in
+  useEffect(() => {
+    if (user?.uid) {
+      const unsubscribe = subscribeAllUserBookmarks(user.uid, (data) => {
+        setFirebaseBookmarks(data || []);
+      });
+      return () => unsubscribe();
+    } else {
+      setFirebaseBookmarks([]);
+    }
+  }, [user]);
+
+  // Merge and Map into unified items
   const unifiedItems: BookmarkUnifiedItem[] = useMemo(() => {
     const list: BookmarkUnifiedItem[] = [];
+    const seenIds = new Set<string>();
 
-    // Bedah Kitab
+    // Helper to add unique
+    const addUnique = (item: BookmarkUnifiedItem) => {
+      if (!seenIds.has(item.id)) {
+        seenIds.add(item.id);
+        list.push(item);
+      }
+    };
+
+    // 1. Bedah Kitab (Local)
     kitabBookmarks.forEach(b => {
-      list.push({
+      addUnique({
         id: `kitab-${b.id}`,
         type: 'kitab',
         title: b.title || 'Bedah Kitab',
@@ -168,82 +215,234 @@ export const BookmarksScreen: React.FC = () => {
       });
     });
 
-    // Quran
+    // 2. Quran (Local)
     quranBookmarks.forEach(q => {
-      list.push({
-        id: `quran-${q.id || (q.surahNumber + '-' + q.ayahNumber)}`,
+      const surahNum = q.surahNumber || q.ayah?.surahNumber;
+      const ayahNum = q.ayah?.number || q.ayahNumber || q.number || 1;
+      const surahName = q.surahName || q.surahLatin || (surahNum ? `Surah ${surahNum}` : 'Surah');
+      const arab = q.ayah?.arab || q.arab || q.arabic || q.arabicText || '';
+      const trans = q.ayah?.text || q.text || q.translation || q.textTranslation || '';
+
+      addUnique({
+        id: `quran-${q.id || `${surahNum}-${ayahNum}`}`,
         type: 'quran',
-        title: q.surahName ? `Surah ${q.surahName} : Ayat ${q.ayahNumber}` : `Ayat ${q.ayahNumber}`,
-        subtitle: `Al-Qur'an Juz ${q.juz || '-'}`,
-        arabic: q.arabic || q.arabicText,
-        translation: q.translation || q.textTranslation,
+        title: `${surahName} : Ayat ${ayahNum}`,
+        subtitle: `Al-Qur'an ${q.juz ? `Juz ${q.juz}` : ''}`,
+        arabic: arab,
+        translation: trans,
         categoryLabel: 'Al-Qur\'an',
         color: 'bg-teal-600 text-teal-600',
         icon: BookOpen,
-        date: q.createdAt || q.date,
-        raw: q
+        date: q.savedAt || q.createdAt || q.date,
+        raw: { ...q, surahNumber: surahNum, ayahNumber: ayahNum, surahName }
       });
     });
 
-    // Hadis
+    // 3. Hadis (Local)
     hadisBookmarks.forEach(h => {
-      list.push({
-        id: `hadis-${h.id || (h.bookId + '-' + h.number)}`,
+      const bookName = h.bookName || (h.bookId ? h.bookId.toUpperCase() : 'Hadis');
+      const num = h.number || h.hadithNumber;
+      const arab = h.arab || h.arabic || '';
+      const trans = h.idTranslation || h.translation || h.id || '';
+
+      addUnique({
+        id: `hadis-${h.id || `${h.bookId}-${num}`}`,
         type: 'hadis',
-        title: h.bookName ? `${h.bookName} No. ${h.number}` : `Hadis No. ${h.number}`,
+        title: `${bookName} No. ${num}`,
         subtitle: 'Koleksi Hadits Shahih',
-        arabic: h.arab || h.arabic,
-        translation: h.idTranslation || h.translation,
+        arabic: arab,
+        translation: trans,
         categoryLabel: 'Hadits',
         color: 'bg-indigo-600 text-indigo-600',
         icon: Scroll,
-        date: h.createdAt,
-        raw: h
+        date: h.savedAt || h.createdAt,
+        raw: { ...h, bookName, number: num }
       });
     });
 
-    // Doa
+    // 4. Doa (Local)
     doaBookmarks.forEach(d => {
-      list.push({
+      const title = d.title || d.nama || 'Doa Harian';
+      const arab = d.arabic || d.arab || '';
+      const trans = d.translation || d.arti || d.artinya || '';
+      const subtitle = d.source || d.riwayat || d.category || d.kategori || 'Koleksi Doa & Dzikir';
+
+      addUnique({
         id: `doa-${d.id}`,
         type: 'doa',
-        title: d.title || d.nama || 'Doa Harian',
-        subtitle: d.source || d.kategori || 'Koleksi Doa & Dzikir',
-        arabic: d.arabic || d.arab,
-        translation: d.translation || d.artinya,
+        title: title,
+        subtitle: subtitle,
+        arabic: arab,
+        translation: trans,
         categoryLabel: 'Doa & Dzikir',
         color: 'bg-cyan-600 text-cyan-600',
         icon: Heart,
-        date: d.createdAt,
+        date: d.savedAt || d.createdAt,
         raw: d
       });
     });
 
-    // Munawwir
+    // 5. Firebase Bookmarks (Cloud)
+    firebaseBookmarks.forEach(fb => {
+      const type = fb.type;
+      if (type === 'quran') {
+        const surahNum = fb.surahNumber || fb.ayah?.surahNumber;
+        const ayahNum = fb.ayah?.number || fb.ayahNumber || fb.number || 1;
+        const surahName = fb.surahName || fb.surahLatin || (surahNum ? `Surah ${surahNum}` : 'Surah');
+        const arab = fb.ayah?.arab || fb.arab || fb.arabic || fb.arabicText || '';
+        const trans = fb.ayah?.text || fb.text || fb.translation || fb.textTranslation || '';
+
+        addUnique({
+          id: `quran-${fb.id || `${surahNum}-${ayahNum}`}`,
+          type: 'quran',
+          title: `${surahName} : Ayat ${ayahNum}`,
+          subtitle: `Al-Qur'an ${fb.juz ? `Juz ${fb.juz}` : ''}`,
+          arabic: arab,
+          translation: trans,
+          categoryLabel: 'Al-Qur\'an',
+          color: 'bg-teal-600 text-teal-600',
+          icon: BookOpen,
+          date: fb.createdAt?.seconds ? fb.createdAt.seconds * 1000 : fb.savedAt,
+          raw: { ...fb, surahNumber: surahNum, ayahNumber: ayahNum, surahName }
+        });
+      } else if (type === 'hadis') {
+        const bookName = fb.bookName || (fb.bookId ? fb.bookId.toUpperCase() : 'Hadis');
+        const num = fb.number || fb.hadithNumber;
+        const arab = fb.arab || fb.arabic || '';
+        const trans = fb.idTranslation || fb.translation || fb.id || '';
+
+        addUnique({
+          id: `hadis-${fb.id || `${fb.bookId}-${num}`}`,
+          type: 'hadis',
+          title: `${bookName} No. ${num}`,
+          subtitle: 'Koleksi Hadits Shahih',
+          arabic: arab,
+          translation: trans,
+          categoryLabel: 'Hadits',
+          color: 'bg-indigo-600 text-indigo-600',
+          icon: Scroll,
+          date: fb.createdAt?.seconds ? fb.createdAt.seconds * 1000 : fb.savedAt,
+          raw: { ...fb, bookName, number: num }
+        });
+      } else if (type === 'doa') {
+        const title = fb.title || fb.nama || 'Doa Harian';
+        const arab = fb.arabic || fb.arab || '';
+        const trans = fb.translation || fb.arti || fb.artinya || '';
+        const subtitle = fb.source || fb.riwayat || fb.category || fb.kategori || 'Koleksi Doa & Dzikir';
+
+        addUnique({
+          id: `doa-${fb.id}`,
+          type: 'doa',
+          title: title,
+          subtitle: subtitle,
+          arabic: arab,
+          translation: trans,
+          categoryLabel: 'Doa & Dzikir',
+          color: 'bg-cyan-600 text-cyan-600',
+          icon: Heart,
+          date: fb.createdAt?.seconds ? fb.createdAt.seconds * 1000 : fb.savedAt,
+          raw: fb
+        });
+      } else if (type === 'bedah_kitab' || type === 'kitab') {
+        addUnique({
+          id: `kitab-${fb.id}`,
+          type: 'kitab',
+          title: fb.title || 'Bedah Kitab',
+          subtitle: fb.source ? `Kitab: ${fb.source}` : 'Analisis Teks Kitab',
+          arabic: fb.originalText || fb.data?.matan || fb.data?.originalText,
+          translation: fb.data?.modernTranslation || fb.data?.syarah || fb.data?.maknaGandul,
+          categoryLabel: 'Bedah Kitab',
+          color: 'bg-emerald-600 text-emerald-600',
+          icon: Sparkles,
+          date: fb.createdAt?.seconds ? fb.createdAt.seconds * 1000 : fb.savedAt,
+          raw: fb
+        });
+      }
+    });
+
+    // 6. Video Islami Favorites
+    videoBookmarks.forEach(vid => {
+      const vidId = typeof vid === 'string' ? vid : (vid as any)?.id;
+      const videoObj = VIDEO_PLAYLIST.find(v => v.id === vidId) || (typeof vid === 'object' ? vid : null);
+      if (videoObj) {
+        addUnique({
+          id: `video-${vidId}`,
+          type: 'video',
+          title: videoObj.title,
+          subtitle: `${videoObj.speaker} • Durasi: ${videoObj.duration}`,
+          translation: videoObj.description,
+          categoryLabel: 'Video Islami',
+          color: 'bg-rose-600 text-rose-600',
+          icon: Video,
+          date: videoObj.publishedAt,
+          raw: videoObj
+        });
+      }
+    });
+
+    // 7. Galeri Audio MP3 Favorites
+    audioBookmarks.forEach(aud => {
+      const audId = typeof aud === 'string' ? aud : (aud as any)?.id;
+      const audioObj = AUDIO_DATA.find(a => a.id === audId) || (typeof aud === 'object' ? aud : null);
+      if (audioObj) {
+        addUnique({
+          id: `audio-${audId}`,
+          type: 'audio',
+          title: audioObj.title,
+          subtitle: `${audioObj.artist} • Kategori: ${audioObj.category.toUpperCase()}`,
+          categoryLabel: 'Galeri Audio',
+          color: 'bg-amber-600 text-amber-600',
+          icon: Music2,
+          raw: audioObj
+        });
+      }
+    });
+
+    // 8. Community Post Bookmarks
+    postBookmarks.forEach(p => {
+      const author = p.authorName || p.author || p.userName || 'Santri';
+      const previewText = p.content ? (p.content.slice(0, 140) + (p.content.length > 140 ? '...' : '')) : '';
+
+      addUnique({
+        id: `community-${p.id}`,
+        type: 'community',
+        title: `Postingan oleh ${author}`,
+        subtitle: p.category ? `Kategori: ${p.category}` : 'Komunitas Santri AI',
+        translation: previewText,
+        categoryLabel: 'Postingan',
+        color: 'bg-violet-600 text-violet-600',
+        icon: MessageSquare,
+        date: p.createdAt,
+        raw: p
+      });
+    });
+
+    // 9. Munawwir
     munawwirBookmarks.forEach(m => {
-      list.push({
-        id: `munawwir-${m.word || m.arabic || Math.random()}`,
+      const word = m.word || m.arabic || 'Mufradat';
+      addUnique({
+        id: `munawwir-${word}`,
         type: 'munawwir',
-        title: m.word || m.arabic || 'Mufradat',
+        title: word,
         subtitle: m.root ? `Akar kata: ${m.root}` : 'Kamus Munawwir Arab-Indonesia',
-        arabic: m.word || m.arabic,
+        arabic: word,
         translation: m.meaning || m.arti || m.indonesian,
         categoryLabel: 'Kamus Munawwir',
-        color: 'bg-amber-600 text-amber-600',
+        color: 'bg-amber-700 text-amber-700',
         icon: BookMarked,
         date: m.createdAt,
         raw: m
       });
     });
 
-    // News
+    // 10. News
     newsBookmarks.forEach(n => {
-      list.push({
+      addUnique({
         id: `news-${n.id}`,
         type: 'news',
         title: n.title || 'Warta Santri',
         subtitle: n.category || 'Berita & Artikel Santri',
-        translation: n.excerpt || n.summary || (n.content ? n.content.slice(0, 100) + '...' : ''),
+        translation: n.excerpt || n.summary || (n.content ? n.content.slice(0, 120) + '...' : ''),
         categoryLabel: 'Warta Santri',
         color: 'bg-emerald-700 text-emerald-700',
         icon: Newspaper,
@@ -252,38 +451,34 @@ export const BookmarksScreen: React.FC = () => {
       });
     });
 
-    // Community
-    postBookmarks.forEach(p => {
-      list.push({
-        id: `post-${p.id}`,
-        type: 'community',
-        title: p.authorName || p.author || 'Postingan Santri',
-        subtitle: 'Komunitas Santri AI',
-        translation: p.content ? (p.content.slice(0, 120) + (p.content.length > 120 ? '...' : '')) : '',
-        categoryLabel: 'Komunitas',
-        color: 'bg-violet-600 text-violet-600',
-        icon: MessageSquare,
-        date: p.createdAt,
-        raw: p
-      });
-    });
-
-    // Features
+    // 11. Features
     featureBookmarks.forEach(f => {
-      list.push({
+      addUnique({
         id: `feat-${f.label}`,
         type: 'features',
         title: f.label,
-        subtitle: 'Fitur Favorit Santri AI',
-        categoryLabel: 'Fitur Favorit',
-        color: 'bg-amber-500 text-amber-500',
+        subtitle: 'Akses Cepat Fitur Santri AI',
+        categoryLabel: 'Fitur Cepat',
+        color: 'bg-orange-500 text-orange-500',
         icon: Star,
         raw: f
       });
     });
 
     return list;
-  }, [kitabBookmarks, quranBookmarks, hadisBookmarks, doaBookmarks, munawwirBookmarks, newsBookmarks, postBookmarks, featureBookmarks]);
+  }, [
+    kitabBookmarks, 
+    quranBookmarks, 
+    hadisBookmarks, 
+    doaBookmarks, 
+    firebaseBookmarks, 
+    videoBookmarks, 
+    audioBookmarks, 
+    postBookmarks, 
+    munawwirBookmarks, 
+    newsBookmarks, 
+    featureBookmarks
+  ]);
 
   // Filtered by category and search
   const filteredItems = useMemo(() => {
@@ -308,54 +503,122 @@ export const BookmarksScreen: React.FC = () => {
   }, [unifiedItems, activeCategory, searchQuery]);
 
   // Counts for tabs
-  const counts = useMemo(() => ({
-    all: unifiedItems.length,
-    kitab: kitabBookmarks.length,
-    quran: quranBookmarks.length,
-    hadis: hadisBookmarks.length,
-    doa: doaBookmarks.length,
-    munawwir: munawwirBookmarks.length,
-    news: newsBookmarks.length,
-    community: postBookmarks.length,
-    features: featureBookmarks.length,
-  }), [unifiedItems, kitabBookmarks, quranBookmarks, hadisBookmarks, doaBookmarks, munawwirBookmarks, newsBookmarks, postBookmarks, featureBookmarks]);
+  const counts = useMemo(() => {
+    const map: Record<string, number> = {
+      all: unifiedItems.length,
+      kitab: 0,
+      quran: 0,
+      hadis: 0,
+      doa: 0,
+      video: 0,
+      audio: 0,
+      community: 0,
+      munawwir: 0,
+      news: 0,
+      features: 0
+    };
+    unifiedItems.forEach(item => {
+      if (map[item.type] !== undefined) {
+        map[item.type]++;
+      }
+    });
+    return map;
+  }, [unifiedItems]);
 
+  // Handle direct item click with Deep Linking
   const handleOpenItem = (item: BookmarkUnifiedItem) => {
     switch (item.type) {
       case 'kitab':
         navigate('/result', {
           state: {
-            result: item.raw.data,
-            source: item.raw.source,
-            query: item.raw.title,
+            result: item.raw.data || item.raw,
+            source: item.raw.source || 'Kitab',
+            query: item.raw.title || item.title,
             mode: 'kitab'
           }
         });
         break;
-      case 'quran':
-        if (item.raw.surahNumber) {
-          navigate(`/quran/${item.raw.surahNumber}`, {
-            state: { targetAyah: item.raw.ayahNumber }
-          });
-        } else {
-          navigate('/quran', { state: { tab: 'bookmark' } });
-        }
+
+      case 'quran': {
+        const surahNum = item.raw.surahNumber || item.raw.ayah?.surahNumber || 1;
+        const ayahNum = item.raw.ayahNumber || item.raw.ayah?.number || 1;
+        navigate('/quran', { 
+          state: { 
+            surahNumber: Number(surahNum), 
+            targetAyah: Number(ayahNum) 
+          } 
+        });
         break;
-      case 'hadis':
-        navigate('/hadis', { state: { tab: 'bookmark' } });
+      }
+
+      case 'hadis': {
+        const bookId = item.raw.bookId || 'bukhari';
+        const hadithNum = item.raw.number || item.raw.hadithNumber || 1;
+        navigate('/hadis', { 
+          state: { 
+            tab: 'bookmark', 
+            bookId: bookId, 
+            hadithNumber: hadithNum 
+          } 
+        });
         break;
-      case 'doa':
-        navigate('/doa', { state: { autoSearch: item.title, tab: 'bookmark' } });
+      }
+
+      case 'doa': {
+        const doaId = item.raw.id;
+        const doaTitle = item.raw.title || item.raw.nama || item.title;
+        navigate('/doa', { 
+          state: { 
+            tab: 'bookmark', 
+            doaId: doaId, 
+            autoSearch: doaTitle 
+          } 
+        });
         break;
+      }
+
+      case 'video': {
+        const videoId = item.raw.id || item.raw;
+        navigate('/video-islami', {
+          state: {
+            videoId: videoId,
+            tab: 'favorit'
+          }
+        });
+        break;
+      }
+
+      case 'audio': {
+        const audioId = item.raw.id || item.raw;
+        navigate('/playlist', {
+          state: {
+            audioId: audioId,
+            tab: 'favorit'
+          }
+        });
+        break;
+      }
+
+      case 'community': {
+        const postId = item.raw.id || item.raw.postId;
+        navigate('/community', {
+          state: {
+            targetId: postId,
+            highlightPostId: postId,
+            tab: 'feed'
+          }
+        });
+        break;
+      }
+
       case 'munawwir':
         navigate('/munawwir', { state: { initialSearch: item.title } });
         break;
+
       case 'news':
         navigate('/news-detail', { state: { news: item.raw } });
         break;
-      case 'community':
-        navigate('/community');
-        break;
+
       case 'features':
         if (item.raw.path) {
           navigate(item.raw.path, { state: item.raw.state });
@@ -393,6 +656,9 @@ export const BookmarksScreen: React.FC = () => {
       case 'quran': {
         const updated = quranBookmarks.filter(q => (q.id || `${q.surahNumber}-${q.ayahNumber}`) !== (item.raw.id || `${item.raw.surahNumber}-${item.raw.ayahNumber}`));
         localStorage.setItem('santriai_quran_bookmarks', JSON.stringify(updated));
+        if (user?.uid && item.raw.id) {
+          try { await removeUserBookmark(user.uid, item.raw.id); } catch {}
+        }
         setQuranBookmarks(updated);
         break;
       }
@@ -410,7 +676,31 @@ export const BookmarksScreen: React.FC = () => {
       case 'doa': {
         const updated = doaBookmarks.filter(d => d.id !== item.raw.id);
         localStorage.setItem('santriai_doa_bookmarks', JSON.stringify(updated));
+        if (user?.uid && item.raw.id) {
+          try { await removeUserBookmark(user.uid, item.raw.id); } catch {}
+        }
         setDoaBookmarks(updated);
+        break;
+      }
+
+      case 'video': {
+        const updated = videoBookmarks.filter(id => id !== item.raw.id);
+        localStorage.setItem('santri_video_favorites', JSON.stringify(updated));
+        setVideoBookmarks(updated);
+        break;
+      }
+
+      case 'audio': {
+        const updated = audioBookmarks.filter(id => id !== item.raw.id);
+        localStorage.setItem('santri_audio_favorites', JSON.stringify(updated));
+        setAudioBookmarks(updated);
+        break;
+      }
+
+      case 'community': {
+        const updated = postBookmarks.filter(p => p.id !== item.raw.id);
+        localStorage.setItem('santri_post_bookmarks', JSON.stringify(updated));
+        setPostBookmarks(updated);
         break;
       }
 
@@ -425,13 +715,6 @@ export const BookmarksScreen: React.FC = () => {
         const updated = newsBookmarks.filter(n => n.id !== item.raw.id);
         localStorage.setItem('santri_news_bookmarks', JSON.stringify(updated));
         setNewsBookmarks(updated);
-        break;
-      }
-
-      case 'community': {
-        const updated = postBookmarks.filter(p => p.id !== item.raw.id);
-        localStorage.setItem('santri_post_bookmarks', JSON.stringify(updated));
-        setPostBookmarks(updated);
         break;
       }
 
@@ -451,9 +734,11 @@ export const BookmarksScreen: React.FC = () => {
     { id: 'quran' as BookmarkCategory, label: 'Al-Qur\'an', count: counts.quran, icon: BookOpen },
     { id: 'hadis' as BookmarkCategory, label: 'Hadits', count: counts.hadis, icon: Scroll },
     { id: 'doa' as BookmarkCategory, label: 'Doa & Dzikir', count: counts.doa, icon: Heart },
+    { id: 'video' as BookmarkCategory, label: 'Video Islami', count: counts.video, icon: Video },
+    { id: 'audio' as BookmarkCategory, label: 'Galeri Audio', count: counts.audio, icon: Music2 },
+    { id: 'community' as BookmarkCategory, label: 'Postingan', count: counts.community, icon: MessageSquare },
     { id: 'munawwir' as BookmarkCategory, label: 'Munawwir', count: counts.munawwir, icon: BookMarked },
     { id: 'news' as BookmarkCategory, label: 'Warta Santri', count: counts.news, icon: Newspaper },
-    { id: 'community' as BookmarkCategory, label: 'Komunitas', count: counts.community, icon: MessageSquare },
     { id: 'features' as BookmarkCategory, label: 'Fitur Cepat', count: counts.features, icon: Star },
   ];
 
@@ -581,7 +866,7 @@ export const BookmarksScreen: React.FC = () => {
                 <p className="text-xs text-slate-400 dark:text-slate-500 mt-1 leading-relaxed">
                   {searchQuery 
                     ? 'Coba gunakan kata kunci pencarian yang lain.'
-                    : 'Gunakan ikon bookmark di fitur Bedah Kitab, Al-Qur\'an, Hadits, Doa, Munawwir, atau Warta untuk menyimpan konten favorit Anda di sini.'}
+                    : 'Gunakan ikon bookmark di fitur Bedah Kitab, Al-Qur\'an, Hadits, Doa, Video Islami, Audio MP3, atau Komunitas untuk menyimpan konten favorit Anda di sini.'}
                 </p>
               </div>
             </motion.div>
@@ -613,7 +898,7 @@ export const BookmarksScreen: React.FC = () => {
                           {item.categoryLabel}
                         </span>
                         {item.subtitle && (
-                          <span className="text-[11px] text-slate-400 dark:text-slate-500 font-medium">
+                          <span className="text-[11px] text-slate-400 dark:text-slate-500 font-medium line-clamp-1">
                             {item.subtitle}
                           </span>
                         )}
@@ -710,3 +995,4 @@ export const BookmarksScreen: React.FC = () => {
     </div>
   );
 };
+

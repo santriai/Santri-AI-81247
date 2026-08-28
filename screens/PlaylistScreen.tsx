@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft, Music2, Play, Pause, Search, Disc, Headset, Music, Sparkles, Mic, Filter, BookOpen, Heart, Share2, Flag, X, Loader2, Clock } from 'lucide-react';
 import { useAudio } from '../contexts/AudioContext';
 import { AudioLibraryItem } from '../types';
@@ -58,13 +58,14 @@ const BASE_AUDIO_DATA: AudioLibraryItem[] = [
   { id: 'dzikir_pagi_petang', category: 'dzikir', title: 'Dzikir Pagi & Petang Al-Matsurat', artist: 'Dzikir Suara Merdu', url: 'https://ia801503.us.archive.org/15/items/nadhoman-sunda-pengantar-tidur-sambil-tafakur/NADHOMAN%20SUNDA%20-%20PENGANTAR%20TIDUR%20SAMBIL%20TAFAKUR.mp3', cover: 'https://i.imgur.com/3kP9dih.jpeg' },
 ];
 
-const AUDIO_DATA: AudioLibraryItem[] = [
+export const AUDIO_DATA: AudioLibraryItem[] = [
   ...BASE_AUDIO_DATA,
   ...ALL_SURAH_TRANSLATION_ITEMS
 ];
 
 const PlaylistScreen: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { playLibraryTrack, isPlaying, togglePlay, currentLibraryItem, mode } = useAudio();
   const { showToast } = useToast();
   const [searchQuery, setSearchQuery] = useState('');
@@ -87,6 +88,28 @@ const PlaylistScreen: React.FC = () => {
       return [];
     }
   });
+
+  // Handle incoming navigation state (e.g. from Bookmarks)
+  useEffect(() => {
+    if (location.state) {
+      const state = location.state as any;
+      if (state.audioId) {
+        const found = AUDIO_DATA.find(a => a.id === state.audioId);
+        if (found) {
+          playLibraryTrack(found, AUDIO_DATA);
+          setTimeout(() => {
+            const el = document.getElementById(`audio-item-${found.id}`);
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          }, 300);
+        }
+      }
+      if (state.tab) {
+        setActiveCategory(state.tab);
+      }
+    }
+  }, [location.state]);
 
   // Sync favorites to localStorage
   useEffect(() => {
@@ -298,6 +321,7 @@ const PlaylistScreen: React.FC = () => {
             return (
               <div 
                 key={item.id}
+                id={`audio-item-${item.id}`}
                 onClick={() => handlePlay(item)}
                 className={`flex flex-col gap-3 p-4 rounded-3xl border transition-all duration-300 text-left cursor-pointer hover:shadow-md group max-w-full overflow-hidden box-border
                   ${isThisPlaying 

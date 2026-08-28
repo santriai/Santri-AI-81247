@@ -244,8 +244,16 @@ const HadisScreen: React.FC = () => {
   useEffect(() => {
     if (location.state) {
       const state = location.state as any;
-      if (state.tab === 'bookmark') {
+      if (state.tab === 'bookmark' || state.tab === 'bookmarks') {
         setViewMode('bookmarks');
+        if (state.hadithNumber && state.bookId) {
+          setTimeout(() => {
+            const el = document.getElementById(`hadis-bm-${state.bookId}-${state.hadithNumber}`);
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          }, 350);
+        }
       } else if (state.autoSearch) {
         setSearchQuery(state.autoSearch);
         setViewMode('books');
@@ -1792,7 +1800,11 @@ const HadisScreen: React.FC = () => {
               </div>
             ) : (
               bookmarks.map((hadith, idx) => (
-                <div key={`${hadith.bookId}-${hadith.number}-${idx}`} className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm p-5 transition-colors">
+                <div 
+                  key={`${hadith.bookId}-${hadith.number}-${idx}`} 
+                  id={`hadis-bm-${hadith.bookId}-${hadith.number}`} 
+                  className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm p-5 transition-colors"
+                >
                    <div className="flex justify-between items-center mb-4">
                       <div className="flex flex-col">
                         <span className="text-xs text-slate-400 font-medium">{hadith.bookName}</span>

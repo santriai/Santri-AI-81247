@@ -54,10 +54,25 @@ const DoaScreen: React.FC = () => {
   // State for Bookmarks
   const [bookmarks, setBookmarks] = useState<DoaItem[]>([]);
 
-  // Handle incoming navigation state (e.g. from Settings)
+  // Handle incoming navigation state (e.g. from Settings / Bookmarks)
   useEffect(() => {
-    if (location.state && (location.state as any).tab === 'bookmark') {
-      setSelectedCategory('Tersimpan');
+    if (location.state) {
+      const state = location.state as any;
+      if (state.tab === 'bookmark') {
+        setSelectedCategory('Tersimpan');
+      }
+      if (state.autoSearch) {
+        setSearchQuery(state.autoSearch);
+      }
+      if (state.doaId) {
+        setExpandedId(state.doaId);
+        setTimeout(() => {
+          const el = document.getElementById(`doa-${state.doaId}`);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 350);
+      }
     }
   }, [location]);
 
@@ -351,7 +366,7 @@ const DoaScreen: React.FC = () => {
                      const bookmarked = isBookmarked(item.id);
                      
                      return (
-                       <div key={item.id} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm transition-all hover:shadow-md">
+                       <div key={item.id} id={`doa-${item.id}`} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm transition-all hover:shadow-md">
                          <button 
                            onClick={() => toggleExpand(item.id)}
                            className={`w-full flex items-center justify-between p-4 text-left transition-colors ${
