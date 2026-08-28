@@ -73,6 +73,7 @@ import PostBookmarksScreen from './screens/PostBookmarksScreen';
 import DeathAnniversaryScreen from './screens/DeathAnniversaryScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import FeatureBookmarksScreen from './screens/FeatureBookmarksScreen';
+import { BookmarksScreen } from './screens/BookmarksScreen';
 import BahtsulMasailScreen from './screens/BahtsulMasailScreen';
 
 // Fiqih Calculators
@@ -468,6 +469,7 @@ const AppContent: React.FC = () => {
                   <Route path="/post-bookmarks" element={<PostBookmarksScreen />} /> 
                   <Route path="/info/:slug" element={<InfoScreen />} />
                   <Route path="/settings" element={<SettingsScreen settings={settings} onSaveSettings={handleSaveSettings} />} />
+                  <Route path="/bookmarks" element={<BookmarksScreen />} />
                   <Route path="/feature-bookmarks" element={<FeatureBookmarksScreen />} />
                   <Route path="/haid" element={<MenstrualCalculatorScreen />} />
                   <Route path="/travel" element={<TravelCalculatorScreen />} />

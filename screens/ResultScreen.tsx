@@ -6,7 +6,13 @@ import { useToast } from '../contexts/ToastContext';
 import { useHistory } from '../contexts/HistoryContext';
 import { useAudio } from '../contexts/AudioContext';
 import { useAuth } from '../contexts/AuthContext';
-import { deductWasilahForAI } from '../services/firebase';
+import { deductWasilahForAI, saveUserBookmark, removeUserBookmark } from '../services/firebase';
+import { 
+  getBedahKitabBookmarks, 
+  saveBedahKitabBookmark, 
+  removeBedahKitabBookmark, 
+  isBedahKitabBookmarked 
+} from '../services/bookmarkService';
 import { UserAvatar } from '../components/UserAvatar';
 import { v4 as uuidv4 } from 'uuid';
 import { 
@@ -45,7 +51,9 @@ import {
   User,
   BookOpen,
   Flag,
-  ZoomIn
+  ZoomIn,
+  ZoomOut,
+  Bookmark
 } from 'lucide-react';
 import { generateKitabAnalysis } from '../services/geminiService'; 
 import { PLAYSTORE_LINK } from '../constants';
@@ -345,6 +353,68 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ fontSize }) => {
   const [reportData, setReportData] = useState<{ featureName: string; snippet: string } | null>(null);
   const [showNoWasilahModal, setShowNoWasilahModal] = useState(false);
   const [textScaleLevel, setTextScaleLevel] = useState<number>(0);
+
+  // --- BEDAH KITAB BOOKMARK LOGIC ---
+  const [isResultBookmarked, setIsResultBookmarked] = useState(false);
+
+  const getResultBookmarkId = () => {
+    const rawKey = (data?.originalText || data?.matan || query || source || 'bedah-kitab').trim();
+    // Deterministic simple ID based on content
+    return 'bedah_' + encodeURIComponent(rawKey.slice(0, 70));
+  };
+
+  useEffect(() => {
+    if (data?.originalText || data?.matan || query) {
+      const id = getResultBookmarkId();
+      setIsResultBookmarked(isBedahKitabBookmarked(id));
+    }
+  }, [data, query]);
+
+  const handleToggleBookmark = async () => {
+    if (!data) return;
+    const bookmarkId = getResultBookmarkId();
+    const isCurrentlyBookmarked = isBedahKitabBookmarked(bookmarkId);
+
+    if (isCurrentlyBookmarked) {
+      removeBedahKitabBookmark(bookmarkId);
+      if (user?.uid) {
+        try {
+          await removeUserBookmark(user.uid, bookmarkId);
+        } catch (err) {
+          console.error("Gagal menghapus bookmark bedah kitab di cloud:", err);
+        }
+      }
+      setIsResultBookmarked(false);
+      showToast("Dihapus dari Bookmark", "info");
+    } else {
+      const bookmarkData = {
+        id: bookmarkId,
+        title: query || source || (data.matan ? data.matan.slice(0, 45) + '...' : 'Bedah Kitab'),
+        source: source || 'Bedah Kitab',
+        originalText: data.originalText || data.matan || query || '',
+        data: data,
+        createdAt: Date.now()
+      };
+      saveBedahKitabBookmark(bookmarkData);
+      if (user?.uid) {
+        try {
+          await saveUserBookmark(user.uid, 'bedah_kitab', bookmarkId, bookmarkData);
+        } catch (err) {
+          console.error("Gagal menyimpan bookmark bedah kitab di cloud:", err);
+        }
+      }
+      setIsResultBookmarked(true);
+      showToast("Berhasil disimpan ke Bookmark!", "success");
+    }
+  };
+
+  const handleIncreaseZoom = () => {
+    setTextScaleLevel((prev) => Math.min(prev + 1, 4));
+  };
+
+  const handleDecreaseZoom = () => {
+    setTextScaleLevel((prev) => Math.max(prev - 1, -1));
+  };
 
   const handleToggleZoom = () => {
     setTextScaleLevel((prev) => (prev + 1) % 3);
@@ -649,18 +719,33 @@ Download Aplikasi: ${PLAYSTORE_LINK}
                   </h2>
              </div>
 
-             <button 
-               onClick={() => navigate('/settings')} 
-               className="relative active:scale-90 transition-all flex-shrink-0"
-             >
-               <UserAvatar 
-                 photoURL={userData?.avatarUrl || userData?.photoURL || user?.photoURL}
-                 displayName={user?.displayName}
-                 points={userData?.points || 0}
-                 size="sm"
-                 avatarFrame={userData?.avatarFrame}
-               />
-             </button>
+             <div className="flex items-center gap-2 flex-shrink-0">
+                  <button 
+                    type="button"
+                    onClick={handleToggleBookmark}
+                    className={`p-2 rounded-xl transition-all active:scale-90 border flex items-center justify-center ${
+                      isResultBookmarked 
+                        ? 'bg-amber-400/20 text-amber-300 border-amber-300/40 shadow-xs' 
+                        : 'bg-white/10 text-emerald-100 hover:text-white hover:bg-white/20 border-white/10'
+                    }`}
+                    title={isResultBookmarked ? "Hapus dari Bookmark" : "Simpan ke Bookmark"}
+                  >
+                     <Bookmark size={20} className={isResultBookmarked ? "fill-amber-300 text-amber-300" : ""} />
+                  </button>
+
+                  <button 
+                    onClick={() => navigate('/settings')} 
+                    className="relative active:scale-90 transition-all flex-shrink-0"
+                  >
+                    <UserAvatar 
+                      photoURL={userData?.avatarUrl || userData?.photoURL || user?.photoURL}
+                      displayName={user?.displayName}
+                      points={userData?.points || 0}
+                      size="sm"
+                      avatarFrame={userData?.avatarFrame}
+                    />
+                  </button>
+             </div>
         </div>
 
         <div className="px-0 pt-0 space-y-0 animate-in fade-in transition-all duration-500">
@@ -717,25 +802,30 @@ Download Aplikasi: ${PLAYSTORE_LINK}
                               <button 
                                 onClick={(e) => {
                                     e.stopPropagation();
-                                    handleToggleZoom();
+                                    handleIncreaseZoom();
                                 }}
                                 className={`p-2 rounded-xl transition-all shadow-2xs border ${
                                     textScaleLevel > 0 
                                         ? 'bg-emerald-600 text-white border-emerald-600' 
                                         : 'bg-emerald-100/80 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300 border-emerald-200/80 dark:border-emerald-800/60 hover:bg-emerald-200 dark:hover:bg-emerald-800'
                                 }`}
-                                title="Perbesar / Ubah Ukuran Teks"
+                                title="Perbesar Teks (+)"
                               >
                                  <ZoomIn size={15} className="shrink-0" />
                               </button>
                               <button 
                                 onClick={(e) => {
                                     e.stopPropagation();
-                                    speakTts(data?.originalText || '', true, "Teks Asli", 'original');
+                                    handleDecreaseZoom();
                                 }}
-                                className={`p-2 rounded-xl transition-all shadow-2xs ${currentTtsInfo?.id === 'original' ? 'bg-emerald-500 text-white animate-pulse' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:text-slate-800'}`}
+                                className={`p-2 rounded-xl transition-all shadow-2xs border ${
+                                    textScaleLevel < 0 
+                                        ? 'bg-emerald-600 text-white border-emerald-600' 
+                                        : 'bg-emerald-100/80 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300 border-emerald-200/80 dark:border-emerald-800/60 hover:bg-emerald-200 dark:hover:bg-emerald-800'
+                                }`}
+                                title="Kecilkan Teks (-)"
                               >
-                                 {isAudioLoading && currentTtsInfo?.id === 'original' ? <Loader2 size={15} className="animate-spin" /> : currentTtsInfo?.id === 'original' && isPlaying ? <StopCircle size={15} /> : <Volume2 size={15} />}
+                                 <ZoomOut size={15} className="shrink-0" />
                               </button>
                               <button 
                                 onClick={() => {
@@ -747,6 +837,7 @@ Download Aplikasi: ${PLAYSTORE_LINK}
                                    }
                                 }}
                                 className="p-2 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:text-slate-800 rounded-xl shadow-2xs transition-all"
+                                title="Salin Teks"
                               >
                                  {textCopied ? <Check size={15} className="text-green-500" /> : <Copy size={15} />}
                               </button>
@@ -829,32 +920,35 @@ Download Aplikasi: ${PLAYSTORE_LINK}
                                               </div>
                                           </div>
 
-                                          <div className="flex items-center gap-2">
+                                          <div className="flex items-center gap-1.5">
                                               <button 
                                                   onClick={(e) => {
                                                       e.stopPropagation();
-                                                      handleToggleZoom();
+                                                      handleIncreaseZoom();
                                                   }}
                                                   className={`p-1.5 rounded-lg border transition-all ${
                                                       textScaleLevel > 0 
                                                           ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs' 
                                                           : 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border-emerald-200/80 dark:border-emerald-800/60 hover:bg-emerald-100 dark:hover:bg-emerald-900/80'
                                                   }`}
-                                                  title="Perbesar / Ubah Ukuran Teks"
+                                                  title="Perbesar Teks (+)"
                                               >
                                                   <ZoomIn size={14} className="shrink-0" />
                                               </button>
-                                              {hasData && (
-                                                <button 
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        speakTts(ensureString(content), isArabicContent, card.label, card.id);
-                                                    }}
-                                                    className={`p-1.5 rounded-lg border transition-colors ${currentTtsInfo?.id === card.id ? 'bg-emerald-500 text-white border-emerald-500' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:text-slate-800'}`}
-                                                >
-                                                    {isAudioLoading && currentTtsInfo?.id === card.id ? <Loader2 size={14} className="animate-spin" /> : currentTtsInfo?.id === card.id && isPlaying ? <StopCircle size={14} /> : <Volume2 size={14} />}
-                                                </button>
-                                              )}
+                                              <button 
+                                                  onClick={(e) => {
+                                                      e.stopPropagation();
+                                                      handleDecreaseZoom();
+                                                  }}
+                                                  className={`p-1.5 rounded-lg border transition-all ${
+                                                      textScaleLevel < 0 
+                                                          ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs' 
+                                                          : 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border-emerald-200/80 dark:border-emerald-800/60 hover:bg-emerald-100 dark:hover:bg-emerald-900/80'
+                                                  }`}
+                                                  title="Kecilkan Teks (-)"
+                                              >
+                                                  <ZoomOut size={14} className="shrink-0" />
+                                              </button>
                                               {isExpanded ? <ChevronUp size={16} className="text-slate-400 dark:text-slate-500" /> : <ChevronDown size={16} className="text-slate-400 dark:text-slate-500" />}
                                           </div>
                                       </div>

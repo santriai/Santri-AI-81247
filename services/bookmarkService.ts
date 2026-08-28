@@ -4,7 +4,7 @@ import {
   Scroll, Trophy, Gamepad2, Library, Disc, Tv, Video, Radio, Fingerprint, User, 
   MapPin, School, GraduationCap, Star, Compass, Calendar, Wind, History as HistoryIcon,
   LayoutGrid, Sparkles, MessageSquare, CalendarClock, Gem, ShoppingBag, Store, StickyNote,
-  HeartHandshake, Mic, CalendarCheck, Newspaper, Crown, Settings, Keyboard
+  HeartHandshake, Mic, CalendarCheck, Newspaper, Crown, Settings, Keyboard, Bookmark
 } from 'lucide-react';
 import { OpenHandsIcon } from '../components/OpenHandsIcon';
 import { CupidHeartIcon } from '../components/CupidHeartIcon';
@@ -132,6 +132,7 @@ export const SUB_FEATURES: Record<string, FeatureItem[]> = {
     { icon: Sparkles, label: "Nisfu Syaban", color: "bg-purple-600", path: "/nisfu-syaban" },
   ],
   more: [
+    { id: 'all_bookmarks', icon: Bookmark, label: "Bookmark", color: "bg-emerald-600", path: "/bookmarks" },
     { id: 'guide', icon: BookOpen, label: "Panduan Penggunaan", color: "bg-emerald-600", path: "/info/guide" },
     { id: 'chat_admin', icon: MessageSquare, label: "Chat Admin", color: "bg-emerald-600", path: "/chat-admin" },
     { id: 'mutiara_ulama', icon: Sparkles, label: "Mutiara Ulama", color: "bg-teal-600", path: "/mutiara" },
@@ -167,6 +168,52 @@ export const ALL_SUB_FEATURES: FeatureItem[] = [
 
 const LOCAL_STORAGE_KEY = 'santri_ai_bookmarked_features';
 const EVENT_NAME = 'santri_ai_bookmarks_changed';
+const BEDAH_KITAB_STORAGE_KEY = 'santri_bedah_kitab_bookmarks';
+
+export interface BedahKitabBookmark {
+  id: string;
+  title: string;
+  source?: string;
+  originalText: string;
+  data: any;
+  createdAt: number;
+}
+
+// --- BEDAH KITAB BOOKMARKS ---
+export const getBedahKitabBookmarks = (): BedahKitabBookmark[] => {
+  try {
+    const saved = localStorage.getItem(BEDAH_KITAB_STORAGE_KEY);
+    return saved ? JSON.parse(saved) : [];
+  } catch (e) {
+    console.error("Gagal mengambil bookmark bedah kitab:", e);
+    return [];
+  }
+};
+
+export const saveBedahKitabBookmark = (bookmark: BedahKitabBookmark) => {
+  try {
+    const list = getBedahKitabBookmarks().filter(b => b.id !== bookmark.id);
+    const updated = [bookmark, ...list];
+    localStorage.setItem(BEDAH_KITAB_STORAGE_KEY, JSON.stringify(updated));
+    window.dispatchEvent(new Event(EVENT_NAME));
+  } catch (e) {
+    console.error("Gagal menyimpan bookmark bedah kitab:", e);
+  }
+};
+
+export const removeBedahKitabBookmark = (id: string) => {
+  try {
+    const list = getBedahKitabBookmarks().filter(b => b.id !== id);
+    localStorage.setItem(BEDAH_KITAB_STORAGE_KEY, JSON.stringify(list));
+    window.dispatchEvent(new Event(EVENT_NAME));
+  } catch (e) {
+    console.error("Gagal menghapus bookmark bedah kitab:", e);
+  }
+};
+
+export const isBedahKitabBookmarked = (id: string): boolean => {
+  return getBedahKitabBookmarks().some(b => b.id === id);
+};
 
 // Get lists of bookmarked feature labels
 export const getBookmarkedFeatureLabels = (): string[] => {
