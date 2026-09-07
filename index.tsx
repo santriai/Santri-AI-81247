@@ -25,6 +25,12 @@ declare global {
     // Callback called by Android when Google Play Billing purchase fails or is cancelled
     onPurchaseCancelled?: (error: string) => void;
 
+    // Callback called by Android when FCM notification is tapped (Deep Link Navigation)
+    handleFcmNavigation?: (targetScreen: string, targetUrl?: string) => void;
+
+    // Callback called by Android when FCM Registration Token is received or refreshed
+    onFcmTokenReceived?: (token: string) => void;
+
     AndroidNativeInterface?: {
       // Existing Media Controls
       updateMediaNotification(title: string, subtitle: string, isPlaying: boolean): void;
@@ -32,6 +38,12 @@ declare global {
       
       // NEW: Generic Notification (Adzan, Post-Adzan & Broadcast)
       showNotification(title: string, message: string, type: 'adzan' | 'post_adzan' | 'broadcast'): void;
+      showNotificationWithAction?(title: string, message: string, type: string, targetScreen: string, url?: string): void;
+
+      // FCM (Firebase Cloud Messaging) Bridge Methods
+      getFcmToken?(): void;
+      subscribeToTopic?(topic: string): void;
+      unsubscribeFromTopic?(topic: string): void;
 
       // NEW: Schedule Prayer Times
       schedulePrayerTimes(json: string): void;

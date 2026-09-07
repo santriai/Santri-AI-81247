@@ -10,12 +10,12 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.os.Message
-import android.webkit.GeolocationPermissions
-import android.webkit.WebChromeClient
-import android.webkit.WebResourceRequest
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.os.PowerManager
+import android.provider.MediaStore
+import android.provider.Settings
+import android.webkit.*
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.IntentSenderRequest
@@ -23,6 +23,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import com.android.billingclient.api.*
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
@@ -31,8 +32,15 @@ import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity(), PurchasesUpdatedListener {
+
+    companion object {
+        var activeInstance: MainActivity? = null
+    }
 
     private lateinit var webView: WebView
     private var webAppInterface: WebAppInterface? = null
@@ -41,7 +49,7 @@ class MainActivity : AppCompatActivity(), PurchasesUpdatedListener {
     // Google Play Billing
     private lateinit var billingClient: BillingClient
 
-    // AdMob Ads (Sample Test ID untuk keamanan pengetesan)
+    // AdMob Ads (Sample Test ID untuk pengujian aman)
     private var interstitialAd: InterstitialAd? = null
     private var rewardedAd: RewardedAd? = null
     private val TEST_INTERSTITIAL_ID = "ca-app-pub-3940256099942544/1033173712"
@@ -49,6 +57,34 @@ class MainActivity : AppCompatActivity(), PurchasesUpdatedListener {
 
     // URL Web App Santri AI
     private val WEB_APP_URL = "https://ais-pre-aaeh7slgokaz4avmfjrawc-825769205276.asia-southeast1.run.app"
+
+    // File Chooser untuk Kamera & Scan Kitab
+    private var fileUploadCallback: ValueCallback<Array<Uri>>? = null
+    private var currentPhotoPath: String? = null
+    private var cameraImageUri: Uri? = null
+
+    // Pending navigasi dari klik notifikasi FCM / status bar
+    private var pendingTargetScreen: String? = null
+    private var pendingTargetUrl: String? = null
+    private var isWebViewPageLoaded = false
+
+    private val fileChooserLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (fileUploadCallback == null) return@registerForActivityResult
+
+        var results: Array<Uri>? = null
+        if (result.resultCode == RESULT_OK) {
+            val dataString = result.data?.dataString
+            if (dataString != null) {
+                results = arrayOf(Uri.parse(dataString))
+            } else if (cameraImageUri != null) {
+                results = arrayOf(cameraImageUri!!)
+            }
+        }
+        fileUploadCallback?.onReceiveValue(results)
+        fileUploadCallback = null
+    }
 
     // Launcher untuk Dialog Popup Menyalakan GPS Resmi Android
     private val gpsResolutionLauncher = registerForActivityResult(
@@ -74,18 +110,18 @@ class MainActivity : AppCompatActivity(), PurchasesUpdatedListener {
                 }
                 NotificationHelper.ACTION_MEDIA_NEXT -> {
                     webView.evaluateJavascript(
-                        "if (window.AppMediaControls && typeof window.AppMediaControls.nextAyah === 'function') { window.AppMediaControls.nextAyah(); }",
+                        "if (window.AppMediaControls && typeof window.AppMediaControls.playNext === 'function') { window.AppMediaControls.playNext(); }",
                         null
                     )
                 }
                 NotificationHelper.ACTION_MEDIA_PREV -> {
                     webView.evaluateJavascript(
-                        "if (window.AppMediaControls && typeof window.AppMediaControls.prevAyah === 'function') { window.AppMediaControls.prevAyah(); }",
+                        "if (window.AppMediaControls && typeof window.AppMediaControls.playPrev === 'function') { window.AppMediaControls.playPrev(); }",
                         null
                     )
                 }
                 NotificationHelper.ACTION_MEDIA_CLOSE -> {
-                    notificationHelper.cancelMediaNotification()
+                    webAppInterface?.stopQuranAudio()
                 }
             }
         }
@@ -93,71 +129,106 @@ class MainActivity : AppCompatActivity(), PurchasesUpdatedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        activeInstance = this
 
         notificationHelper = NotificationHelper(this)
+
+        setContentView(R.layout.activity_main)
         webView = findViewById(R.id.webView)
 
-        // 1. Minta Izin Notifikasi & Lokasi
-        requestRequiredPermissions()
-
-        // 2. Daftarkan BroadcastReceiver untuk tombol bilah media
-        registerMediaReceiver()
-
-        // 3. Billing & AdMob
-        setupBillingClient()
-        MobileAds.initialize(this) {}
-        loadInterstitialAd()
-        loadRewardedAd()
-
-        // 4. Setup WebView
+        setupMediaReceiver()
+        initBilling()
+        initAdMob()
         setupWebView()
+
+        // Tangani navigasi jika aplikasi dibuka dari notifikasi status bar / FCM
+        handleIntentNavigation(intent)
+
         setupBackPressHandler()
+        checkAndRequestPermissions()
 
         webView.loadUrl(WEB_APP_URL)
     }
 
-    private fun requestRequiredPermissions() {
-        val permissions = mutableListOf<String>()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                permissions.add(Manifest.permission.POST_NOTIFICATIONS)
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        handleIntentNavigation(intent)
+    }
+
+    private fun handleIntentNavigation(intent: Intent?) {
+        val targetScreen = intent?.getStringExtra("targetScreen")
+        val targetUrl = intent?.getStringExtra("targetUrl")
+
+        if (!targetScreen.isNullOrEmpty() || !targetUrl.isNullOrEmpty()) {
+            if (isWebViewPageLoaded) {
+                val safeScreen = (targetScreen ?: "").replace("'", "\\'")
+                val safeUrl = (targetUrl ?: "").replace("'", "\\'")
+                val js = "if (window.handleFcmNavigation) { window.handleFcmNavigation('$safeScreen', '$safeUrl'); }"
+                webView.evaluateJavascript(js, null)
+            } else {
+                pendingTargetScreen = targetScreen
+                pendingTargetUrl = targetUrl
             }
-        }
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            permissions.add(Manifest.permission.ACCESS_FINE_LOCATION)
-            permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION)
-        }
-        if (permissions.isNotEmpty()) {
-            ActivityCompat.requestPermissions(this, permissions.toTypedArray(), 100)
         }
     }
 
-    // ==========================================================
-    // LOGIKA DIALOG POP-UP MENGAKTIFKAN GPS OTOMATIS
-    // ==========================================================
-    fun checkAndPromptGpsSettings() {
-        val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 10000).build()
-        val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
-        val client: SettingsClient = LocationServices.getSettingsClient(this)
+    fun sendFcmTokenToWebView(token: String) {
+        runOnUiThread {
+            val js = "if (window.onFcmTokenReceived) { window.onFcmTokenReceived('$token'); }"
+            webView.evaluateJavascript(js, null)
+        }
+    }
 
-        client.checkLocationSettings(builder.build())
-            .addOnSuccessListener {
-                // GPS sudah aktif
-            }
-            .addOnFailureListener { exception ->
-                if (exception is ResolvableApiException) {
-                    try {
-                        val intentSenderRequest = IntentSenderRequest.Builder(exception.resolution).build()
-                        gpsResolutionLauncher.launch(intentSenderRequest)
-                    } catch (e: Exception) {
-                        e.printStackTrace()
+    fun requestBatteryOptimizationExemption() {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+                if (!powerManager.isIgnoringBatteryOptimizations(packageName)) {
+                    val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS).apply {
+                        data = Uri.parse("package:$packageName")
                     }
+                    startActivity(intent)
                 }
             }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
-    private fun registerMediaReceiver() {
+    fun saveTextToFile(filename: String, content: String) {
+        try {
+            val downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+            val file = File(downloadsDir, filename)
+            file.writeText(content)
+            Toast.makeText(this, "Tersimpan di Unduhan: $filename", Toast.LENGTH_LONG).show()
+        } catch (e: Exception) {
+            Toast.makeText(this, "Gagal menyimpan berkas", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun shareImage(base64Image: String, filename: String) {
+        try {
+            val cleanBase64 = if (base64Image.contains(",")) base64Image.split(",")[1] else base64Image
+            val imageBytes = android.util.Base64.decode(cleanBase64, android.util.Base64.DEFAULT)
+            val cachePath = File(cacheDir, "images")
+            cachePath.mkdirs()
+            val file = File(cachePath, filename)
+            file.writeBytes(imageBytes)
+            val contentUri = FileProvider.getUriForFile(this, "$packageName.fileprovider", file)
+            val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "image/png"
+                putExtra(Intent.EXTRA_STREAM, contentUri)
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            }
+            startActivity(Intent.createChooser(shareIntent, "Bagikan Gambar"))
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
+    private fun setupMediaReceiver() {
         val filter = IntentFilter().apply {
             addAction(NotificationHelper.ACTION_MEDIA_PLAY_PAUSE)
             addAction(NotificationHelper.ACTION_MEDIA_NEXT)
@@ -171,48 +242,133 @@ class MainActivity : AppCompatActivity(), PurchasesUpdatedListener {
         }
     }
 
-    // ==========================================
-    // SETUP WEBVIEW & INTERFACE
-    // ==========================================
     @SuppressLint("SetJavaScriptEnabled")
     private fun setupWebView() {
-        val settings = webView.settings
-        settings.javaScriptEnabled = true
-        settings.domStorageEnabled = true
-        settings.databaseEnabled = true
-        settings.allowFileAccess = true
-        settings.mediaPlaybackRequiresUserGesture = false
-        settings.setSupportMultipleWindows(true)
-        settings.javaScriptCanOpenWindowsAutomatically = true
-
-        // Izinkan akses Geolocation
-        settings.setGeolocationEnabled(true)
-
         webAppInterface = WebAppInterface(
             activity = this,
             notificationHelper = notificationHelper,
             onTriggerInterstitial = { showInterstitial() },
             onTriggerRewarded = { showRewarded() },
             onLaunchBilling = { productId -> launchBilling(productId) },
-            onRequestGps = { checkAndPromptGpsSettings() }
+            onRequestGps = { checkLocationSettingsAndPrompt() }
         )
+
+        webView.settings.apply {
+            javaScriptEnabled = true
+            domStorageEnabled = true
+            databaseEnabled = true
+            mediaPlaybackRequiresUserGesture = false
+            allowFileAccess = true
+            allowContentAccess = true
+            setGeolocationEnabled(true)
+            cacheMode = WebSettings.LOAD_DEFAULT
+            mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+            userAgentString = "$userAgentString SantriAINativeApp/1.0"
+            setSupportMultipleWindows(true)
+            javaScriptCanOpenWindowsAutomatically = true
+        }
 
         webView.addJavascriptInterface(webAppInterface!!, "AndroidNativeInterface")
 
         webView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
                 val url = request?.url?.toString() ?: return false
-                if (openExternalLink(url)) return true
+
+                if (url.startsWith("market://") || url.startsWith("tokopedia://") ||
+                    url.startsWith("shopee://") || url.startsWith("whatsapp://") ||
+                    url.startsWith("tel:") || url.startsWith("mailto:")
+                ) {
+                    try {
+                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                        return true
+                    } catch (e: Exception) {
+                        return false
+                    }
+                }
                 return false
+            }
+
+            override fun onPageFinished(view: WebView?, url: String?) {
+                super.onPageFinished(view, url)
+                isWebViewPageLoaded = true
+
+                // 1. Eksekusi pending navigasi FCM jika ada
+                if (!pendingTargetScreen.isNullOrEmpty() || !pendingTargetUrl.isNullOrEmpty()) {
+                    val safeScreen = (pendingTargetScreen ?: "").replace("'", "\\'")
+                    val safeUrl = (pendingTargetUrl ?: "").replace("'", "\\'")
+                    val js = "if (window.handleFcmNavigation) { window.handleFcmNavigation('$safeScreen', '$safeUrl'); }"
+                    webView.evaluateJavascript(js, null)
+                    pendingTargetScreen = null
+                    pendingTargetUrl = null
+                }
+
+                // 2. Berikan token FCM tersimpan ke Website
+                val prefs = getSharedPreferences(SantriFirebaseMessagingService.PREFS_NAME, Context.MODE_PRIVATE)
+                val cachedToken = prefs.getString(SantriFirebaseMessagingService.KEY_FCM_TOKEN, null)
+                if (!cachedToken.isNullOrEmpty()) {
+                    sendFcmTokenToWebView(cachedToken)
+                }
             }
         }
 
         webView.webChromeClient = object : WebChromeClient() {
+            override fun onPermissionRequest(request: PermissionRequest?) {
+                runOnUiThread {
+                    request?.grant(request.resources)
+                }
+            }
+
             override fun onGeolocationPermissionsShowPrompt(
                 origin: String?,
                 callback: GeolocationPermissions.Callback?
             ) {
                 callback?.invoke(origin, true, false)
+            }
+
+            override fun onShowFileChooser(
+                webView: WebView?,
+                filePathCallback: ValueCallback<Array<Uri>>?,
+                fileChooserParams: FileChooserParams?
+            ): Boolean {
+                fileUploadCallback?.onReceiveValue(null)
+                fileUploadCallback = filePathCallback
+
+                val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                val photoFile: File? = try {
+                    createImageFile()
+                } catch (ex: Exception) {
+                    null
+                }
+
+                if (photoFile != null) {
+                    cameraImageUri = FileProvider.getUriForFile(
+                        this@MainActivity,
+                        "$packageName.fileprovider",
+                        photoFile
+                    )
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, cameraImageUri)
+                }
+
+                val contentSelectionIntent = Intent(Intent.ACTION_GET_CONTENT).apply {
+                    addCategory(Intent.CATEGORY_OPENABLE)
+                    type = "*/*"
+                    putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/*", "application/pdf"))
+                }
+
+                val intentArray: Array<Intent> = if (photoFile != null) {
+                    arrayOf(takePictureIntent)
+                } else {
+                    emptyArray()
+                }
+
+                val chooserIntent = Intent(Intent.ACTION_CHOOSER).apply {
+                    putExtra(Intent.EXTRA_INTENT, contentSelectionIntent)
+                    putExtra(Intent.EXTRA_TITLE, "Pilih Foto Kitab atau Buka Kamera")
+                    putExtra(Intent.EXTRA_INITIAL_INTENTS, intentArray)
+                }
+
+                fileChooserLauncher.launch(chooserIntent)
+                return true
             }
 
             override fun onCreateWindow(
@@ -221,95 +377,85 @@ class MainActivity : AppCompatActivity(), PurchasesUpdatedListener {
                 isUserGesture: Boolean,
                 resultMsg: Message?
             ): Boolean {
-                val tempWebView = WebView(this@MainActivity)
-                tempWebView.webViewClient = object : WebViewClient() {
-                    override fun shouldOverrideUrlLoading(v: WebView?, req: WebResourceRequest?): Boolean {
-                        val targetUrl = req?.url?.toString() ?: return false
-                        openExternalLink(targetUrl)
+                val newWebView = WebView(this@MainActivity)
+                newWebView.webViewClient = object : WebViewClient() {
+                    override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                        val url = request?.url?.toString() ?: return false
+                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
                         return true
                     }
                 }
                 val transport = resultMsg?.obj as? WebView.WebViewTransport
-                transport?.webView = tempWebView
+                transport?.webView = newWebView
                 resultMsg?.sendToTarget()
                 return true
             }
         }
     }
 
-    fun openExternalLink(url: String): Boolean {
-        if (url.isBlank()) return false
-        val uri = Uri.parse(url)
+    private fun createImageFile(): File {
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile("JPEG_${timeStamp}_", ".jpg", storageDir).apply {
+            currentPhotoPath = absolutePath
+        }
+    }
 
-        if (url.startsWith("intent://")) {
-            try {
-                val intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME)
-                if (intent != null) {
-                    val info = packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY)
-                    if (info != null) {
-                        startActivity(intent)
-                        return true
-                    } else {
-                        val fallbackUrl = intent.getStringExtra("browser_fallback_url")
-                        if (!fallbackUrl.isNullOrEmpty()) {
-                            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(fallbackUrl)))
-                            return true
-                        }
-                    }
+    private fun checkLocationSettingsAndPrompt() {
+        val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 10000).build()
+        val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
+        val client: SettingsClient = LocationServices.getSettingsClient(this)
+        val task = client.checkLocationSettings(builder.build())
+
+        task.addOnFailureListener { exception ->
+            if (exception is ResolvableApiException) {
+                try {
+                    val intentSenderRequest = IntentSenderRequest.Builder(exception.resolution).build()
+                    gpsResolutionLauncher.launch(intentSenderRequest)
+                } catch (sendEx: Exception) {
+                    startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
                 }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-            return true
-        }
-
-        if (!url.startsWith("http://") && !url.startsWith("https://")) {
-            try {
-                startActivity(Intent(Intent.ACTION_VIEW, uri))
-                return true
-            } catch (e: Exception) {
-                Toast.makeText(this, "Aplikasi pendukung belum terinstal.", Toast.LENGTH_SHORT).show()
-                return true
+            } else {
+                startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
             }
         }
+    }
 
-        val host = uri.host?.lowercase() ?: ""
-        val isInternalApp = host.contains("ais-pre-aaeh7slgokaz4avmfjrawc") || host.contains("run.app")
+    private fun checkAndRequestPermissions() {
+        val permissions = mutableListOf(
+            Manifest.permission.CAMERA,
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
 
-        if (!isInternalApp) {
-            try {
-                startActivity(Intent(Intent.ACTION_VIEW, uri))
-                return true
-            } catch (e: Exception) {
-                return false
-            }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            permissions.add(Manifest.permission.POST_NOTIFICATIONS)
         }
-        return false
+
+        val needed = permissions.filter {
+            ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
+        }
+
+        if (needed.isNotEmpty()) {
+            ActivityCompat.requestPermissions(this, needed.toTypedArray(), 101)
+        }
     }
 
     private fun setupBackPressHandler() {
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                webView.evaluateJavascript(
-                    "(function() { return !!(window.handleAndroidBackPress && window.handleAndroidBackPress()); })();"
-                ) { result ->
-                    val handledByReact = result?.trim()?.equals("true", ignoreCase = true) == true
-                    if (!handledByReact) {
-                        if (webView.canGoBack()) {
-                            webView.goBack()
-                        } else {
-                            finish()
-                        }
-                    }
+                if (webView.canGoBack()) {
+                    webView.goBack()
+                } else {
+                    isEnabled = false
+                    onBackPressedDispatcher.onBackPressed()
                 }
             }
         })
     }
 
-    // ==========================================
-    // BILLING & ADMOB
-    // ==========================================
-    private fun setupBillingClient() {
+    private fun initBilling() {
         billingClient = BillingClient.newBuilder(this)
             .setListener(this)
             .enablePendingPurchases()
@@ -321,22 +467,15 @@ class MainActivity : AppCompatActivity(), PurchasesUpdatedListener {
         })
     }
 
-    private fun launchBilling(productId: String) {
-        if (!billingClient.isReady) {
-            billingClient.startConnection(object : BillingClientStateListener {
-                override fun onBillingSetupFinished(result: BillingResult) {
-                    if (result.responseCode == BillingClient.BillingResponseCode.OK) {
-                        queryAndLaunchProduct(productId)
-                    }
-                }
-                override fun onBillingServiceDisconnected() {}
-            })
-            return
-        }
-        queryAndLaunchProduct(productId)
+    private fun initAdMob() {
+        MobileAds.initialize(this) {}
+        loadInterstitialAd()
+        loadRewardedAd()
     }
 
-    private fun queryAndLaunchProduct(productId: String) {
+    private fun launchBilling(productId: String) {
+        if (!billingClient.isReady) return
+
         val productList = listOf(
             QueryProductDetailsParams.Product.newBuilder()
                 .setProductId(productId)
@@ -414,7 +553,10 @@ class MainActivity : AppCompatActivity(), PurchasesUpdatedListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        unregisterReceiver(mediaControlReceiver)
+        if (activeInstance == this) activeInstance = null
+        try {
+            unregisterReceiver(mediaControlReceiver)
+        } catch (e: Exception) {}
         webAppInterface?.destroy()
         if (::billingClient.isInitialized) billingClient.endConnection()
     }

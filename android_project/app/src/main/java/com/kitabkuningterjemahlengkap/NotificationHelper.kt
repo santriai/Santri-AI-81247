@@ -5,6 +5,8 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.media.AudioAttributes
+import android.media.RingtoneManager
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.media.app.NotificationCompat.MediaStyle
@@ -17,6 +19,8 @@ class NotificationHelper(private val context: Context) {
     companion object {
         const val CHANNEL_ADZAN_ID = "channel_adzan_santri"
         const val CHANNEL_MEDIA_ID = "channel_media_santri"
+        const val CHANNEL_FCM_BROADCAST = "channel_fcm_santri"
+
         const val ADZAN_NOTIF_ID = 1001
         const val MEDIA_NOTIF_ID = 1002
 
@@ -32,7 +36,13 @@ class NotificationHelper(private val context: Context) {
 
     private fun createNotificationChannels() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Channel 1: Notifikasi Adzan & Waktu Sholat (High Priority / Pop-up)
+            val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+            val audioAttributes = AudioAttributes.Builder()
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                .build()
+
+            // Channel 1: Notifikasi Adzan & Waktu Sholat (Prioritas Tinggi / Pop-up)
             val adzanChannel = NotificationChannel(
                 CHANNEL_ADZAN_ID,
                 "Waktu Sholat & Adzan",
@@ -40,9 +50,21 @@ class NotificationHelper(private val context: Context) {
             ).apply {
                 description = "Pemberitahuan waktu sholat dan pengingat adzan"
                 enableVibration(true)
+                setSound(defaultSoundUri, audioAttributes)
             }
 
-            // Channel 2: Kontrol Pemutar Audio Murottal (Low Priority agar tidak bersuara saat ganti lagu)
+            // Channel 2: Notifikasi Push FCM & Pengumuman Santri (Prioritas Tinggi)
+            val fcmChannel = NotificationChannel(
+                CHANNEL_FCM_BROADCAST,
+                "Pengumuman & Kajian Santri",
+                NotificationManager.IMPORTANCE_HIGH
+            ).apply {
+                description = "Pesan siaran, kajian harian, dan notifikasi FCM dari pengurus"
+                enableVibration(true)
+                setSound(defaultSoundUri, audioAttributes)
+            }
+
+            // Channel 3: Kontrol Pemutar Audio Murottal (Prioritas Rendah agar tenang di status bar)
             val mediaChannel = NotificationChannel(
                 CHANNEL_MEDIA_ID,
                 "Pemutar Audio Al-Qur'an",
@@ -53,16 +75,57 @@ class NotificationHelper(private val context: Context) {
             }
 
             notificationManager.createNotificationChannel(adzanChannel)
+            notificationManager.createNotificationChannel(fcmChannel)
             notificationManager.createNotificationChannel(mediaChannel)
         }
     }
 
     // ==========================================================
-    // 1. NOTIFIKASI STATUSBAR ADZAN
+    // 1. NOTIFIKASI STATUS BAR FCM & BROADCAST PUSH NOTIFICATION
+    // ==========================================================
+    fun showFcmNotification(
+        title: String,
+        message: String,
+        type: String? = "broadcast",
+        targetScreen: String? = null,
+        targetUrl: String? = null
+    ) {
+        val openAppIntent = Intent(context, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            putExtra("targetScreen", targetScreen ?: "")
+            putExtra("targetUrl", targetUrl ?: "")
+            putExtra("notificationType", type ?: "broadcast")
+        }
+
+        val requestCode = (System.currentTimeMillis() % 100000).toInt()
+        val pendingIntent = PendingIntent.getActivity(
+            context,
+            requestCode,
+            openAppIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val notification = NotificationCompat.Builder(context, CHANNEL_FCM_BROADCAST)
+            .setSmallIcon(android.R.drawable.ic_dialog_info)
+            .setContentTitle(title)
+            .setContentText(message)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(message))
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setAutoCancel(true)
+            .setContentIntent(pendingIntent)
+            .build()
+
+        notificationManager.notify(requestCode, notification)
+    }
+
+    // ==========================================================
+    // 2. NOTIFIKASI STATUS BAR ADZAN & WAKTU SHOLAT
     // ==========================================================
     fun showAdzanNotification(title: String, message: String) {
         val openAppIntent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            putExtra("targetScreen", "jadwal-sholat")
+            putExtra("notificationType", "adzan")
         }
         val pendingIntent = PendingIntent.getActivity(
             context,
@@ -85,10 +148,12 @@ class NotificationHelper(private val context: Context) {
     }
 
     // ==========================================================
-    // 2. NOTIFIKASI STATUSBAR PEMUTAR MEDIA (MUROTTAL)
+    // 3. NOTIFIKASI STATUS BAR PEMUTAR MEDIA (MUROTTAL)
     // ==========================================================
     fun updateMediaNotification(title: String, subtitle: String, isPlaying: Boolean) {
-        val openAppIntent = Intent(context, MainActivity::class.java)
+        val openAppIntent = Intent(context, MainActivity::class.java).apply {
+            putExtra("targetScreen", "quran")
+        }
         val contentPendingIntent = PendingIntent.getActivity(
             context, 0, openAppIntent, PendingIntent.FLAG_IMMUTABLE
         )

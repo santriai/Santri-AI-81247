@@ -1,7 +1,7 @@
 # Proyek Android Studio - Santri AI (Modern)
 **Package Name:** `com.kitabkuningterjemahlengkap`
 
-Proyek ini merupakan pembungkus resmi Android (Native WebView Shell) yang menghubungkan antarmuka web React dengan perangkat keras Android secara penuh (AdMob, Google Play Billing, Statusbar Adzan, Media Murottal, GPS Otomatis, dan Tautan Toko Santri).
+Proyek ini merupakan pembungkus resmi Android (Native WebView Shell) yang menghubungkan antarmuka web React AI Studio dengan seluruh perangkat keras Android dan Firebase Cloud Messaging (FCM).
 
 ---
 
@@ -9,43 +9,94 @@ Proyek ini merupakan pembungkus resmi Android (Native WebView Shell) yang menghu
 
 ```
 android_project/
-├── build.gradle.kts                      # Konfigurasi plugin root Gradle
-├── settings.gradle.kts                   # Pengaturan repositori Google & Maven
+├── build.gradle.kts                      # Plugin Android & Google Services 4.4.2
+├── settings.gradle.kts                   # Repositori Google & MavenCentral
+├── README.md                             # Panduan lengkap integrasi
 ├── app/
-│   ├── build.gradle.kts                  # Dependensi AdMob, Billing v7, Location, Media
+│   ├── build.gradle.kts                  # Dependensi FCM, AdMob, Billing v7, Location, Media
+│   ├── google-services.json              # Berkas konfigurasi resmi Firebase (Project: santriai)
 │   └── src/
 │       └── main/
-│           ├── AndroidManifest.xml       # Izin sistem & deklarasi Activity
+│           ├── AndroidManifest.xml       # Izin Kamera, Mic, Notifikasi, Media, FCM & FileProvider
 │           ├── res/
 │           │   ├── layout/
 │           │   │   └── activity_main.xml # Layout antarmuka WebView
+│           │   ├── xml/
+│           │   │   └── file_paths.xml    # Konfigurasi FileProvider untuk Kamera
 │           │   └── values/
-│           │       ├── colors.xml        # Palet warna Santri AI
+│           │       ├── colors.xml        # Palet warna tema Santri AI
 │           │       ├── strings.xml       # Nama aplikasi
 │           │       └── themes.xml        # Tema aplikasi (NoActionBar)
 │           └── java/
 │               └── com/
 │                   └── kitabkuningterjemahlengkap/
-│                       ├── MainActivity.kt       # Activity utama & inisialisasi WebView
-│                       ├── WebAppInterface.kt    # Jembatan JavaScript <-> Kotlin Android
-│                       └── NotificationHelper.kt # Pengelola notifikasi Adzan & bilah audio
+│                       ├── MainActivity.kt                  # Activity utama, WebChromeClient (Kamera, Mic, GPS, Navigasi FCM)
+│                       ├── WebAppInterface.kt               # Jembatan Murottal, Adzan, FCM, TTS, Iklan, Billing
+│                       ├── NotificationHelper.kt            # Notifikasi FCM, Adzan & Bilah Kontrol Pemutar Murottal
+│                       └── SantriFirebaseMessagingService.kt # Eksekutor Pesan Push Notifikasi FCM di Latar Belakang
 ```
 
 ---
 
-## 🛠️ Cara Membuka di Android Studio
-1. Ekspor repositori ini ke **GitHub** atau unduh sebagai **ZIP** melalui menu **Settings > Export to GitHub / Download ZIP** di AI Studio.
-2. Buka **Android Studio**.
-3. Pilih menu **File > Open...** lalu arahkan ke folder `android_project`.
-4. Tunggu proses **Gradle Sync** selesai.
-5. Jalankan aplikasi pada perangkat fisik atau Emulator Android.
+## 🔔 Arsitektur Notifikasi Status Bar FCM (Pemberi Perintah vs Eksekutor):
+
+### 1. Website / AI Studio (Pemberi Perintah / Pengendali)
+* **Berlangganan Topik FCM**: Menginstruksikan Android untuk mendaftarkan perangkat ke topik siaran:
+  ```javascript
+  window.AndroidNativeInterface.subscribeToTopic('semua_santri');
+  window.AndroidNativeInterface.subscribeToTopic('kajian_harian');
+  ```
+* **Mendapatkan Token FCM**: Meminta token unik perangkat santri dari Android:
+  ```javascript
+  window.AndroidNativeInterface.getFcmToken();
+  // Hasil token dikirimkan kembali ke callback:
+  window.onFcmTokenReceived = (token) => {
+    localStorage.setItem('santriai_fcm_token', token);
+  };
+  ```
+* **Perintah Langsung Tampilkan Notifikasi Status Bar**:
+  ```javascript
+  window.AndroidNativeInterface.showNotification(title, message, 'broadcast');
+  window.AndroidNativeInterface.showNotificationWithAction(title, message, 'kajian', 'quran', url);
+  ```
+* **Pemberi Respon Navigasi saat Notifikasi Diklik**:
+  ```javascript
+  window.handleFcmNavigation = (targetScreen, targetUrl) => {
+    // Otomatis berpindah layar ke Jadwal Sholat, Al-Qur'an, Chat AI, dll.
+  };
+  ```
+* **Pengecualian Optimasi Baterai**:
+  ```javascript
+  window.AndroidNativeInterface.requestBatteryOptimizationExemption();
+  ```
+
+### 2. Android Studio / Kotlin (Eksekutor Sistem & Perangkat Keras)
+* **`SantriFirebaseMessagingService.kt`**:
+  - Menerima sinyal FCM baik saat aplikasi dibuka, di latar belakang (*background*), maupun saat aplikasi mati (*killed state*).
+  - Menguraikan data notifikasi: `title`, `body`, `type` (`adzan` / `broadcast` / `kajian`), `targetScreen`, dan `targetUrl`.
+  - Jika tipe adalah `adzan`: Memunculkan notifikasi adzan darurat (*Heads-up*) serta memutar audio MP3 adzan.
+  - Jika tipe pengumuman/kajian: Mengirimkan notifikasi status bar prioritas tinggi yang dapat diperluas (*BigTextStyle*).
+* **`MainActivity.kt` & `NotificationHelper.kt`**:
+  - Saat santri mengklik notifikasi di status bar Android, `MainActivity` dibuka secara `singleTop` dan langsung mengeksekusi navigasi web:
+    `window.handleFcmNavigation(targetScreen, targetUrl)`
+  - Meneruskan token baru (`onNewToken`) langsung ke website melalui `window.onFcmTokenReceived(token)`.
 
 ---
 
-## ✨ Fitur-Fitur yang Sudah Terintegrasi
-1. **AdMob Aman (Anti Invalid Traffic):** Menggunakan Test Ad Unit ID secara bawaan untuk pengujian yang aman sebelum rilis.
-2. **Google Play Billing v7:** Menangani pembelian donasi, kuota wasilah, dan item toko dengan callback langsung ke `window.onPurchaseSuccess`.
-3. **Notifikasi Adzan Status Bar:** Notifikasi waktu sholat dengan tingkat prioritas tinggi (Heads-Up).
-4. **Bilah Pemutar Murottal:** Kontrol interaktif di status bar (Sebelumnya, Putar/Jeda, Selanjutnya, Tutup) yang tersinkronisasi dengan `window.AppMediaControls`.
-5. **Pop-up GPS Otomatis:** Menampilkan dialog bawaan Google Play Services untuk menyalakan GPS otomatis saat santri menekan tombol *Ganti Lokasi*.
-6. **Deep Link Toko Santri:** Tautan Shopee, Tokopedia, dan WhatsApp otomatis membuka aplikasi aslinya di perangkat tanpa error skema.
+## 🕌 Fitur-Fitur Perangkat Keras Lain yang Sudah Terintegrasi:
+
+1. **Pemutar Murottal & Audio MP3:**
+   - Pemutaran audio native streaming & offline via `MediaPlayer`.
+   - Bilah kontrol notifikasi di status bar Android (Sebelumnya, Putar/Jeda, Selanjutnya, Tutup) yang tersinkronisasi dua arah dengan `window.AppMediaControls`.
+2. **Kamera & Scan Kitab (OCR):**
+   - Akses WebRTC Kamera (`navigator.mediaDevices.getUserMedia`) disetujui otomatis.
+   - `onShowFileChooser` + `FileProvider` untuk jepret foto kitab langsung atau unggah dari galeri.
+3. **Microphone (Tanya AI & Tes Tahfidz):**
+   - Izin `RECORD_AUDIO` dan `PermissionRequest.RESOURCE_AUDIO_CAPTURE` aktif untuk input suara santri.
+4. **Text-To-Speech (TTS):**
+   - Mendukung audio format Base64 dan cadangan TextToSpeech bawaan Android bahasa Indonesia (`id-ID`).
+5. **Pop-up GPS Otomatis:**
+   - Menampilkan dialog resmi Google Play Services saat tombol *Ganti Lokasi* ditekan.
+6. **AdMob & Google Play Billing:**
+   - Interstitial & Rewarded Video Ads.
+   - Pembelian produk / donasi in-app Play Store v7.

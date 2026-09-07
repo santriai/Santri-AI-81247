@@ -204,6 +204,65 @@ const GlobalListener = ({ onOfflineChange, onShowExitConfirm }: { onOfflineChang
     return () => { delete window.handleAndroidBackPress; };
   }, [location, navigate, onShowExitConfirm]);
 
+  // Handler Notifikasi FCM: Penanganan Aksi Navigasi & Token Perangkat
+  useEffect(() => {
+    window.handleFcmNavigation = (targetScreen: string, targetUrl?: string) => {
+      if (targetUrl && (targetUrl.startsWith('http://') || targetUrl.startsWith('https://'))) {
+        window.open(targetUrl, '_blank');
+        return;
+      }
+      if (targetScreen) {
+        const routeMap: Record<string, string> = {
+          'jadwal-sholat': '/prayer-times',
+          'prayer-times': '/prayer-times',
+          'quran': '/quran',
+          'chat': '/chat-ai',
+          'chat-ai': '/chat-ai',
+          'doa': '/doa',
+          'kitab': '/kitab',
+          'hadis': '/hadis',
+          'cerdas-cermat': '/cerdas-cermat',
+          'toko': '/wasilah-shop',
+          'shop': '/wasilah-shop',
+          'video': '/islamic-videos',
+          'radio': '/radio',
+          'tv': '/tv-makkah',
+          'notifikasi': '/notifications',
+          'settings': '/settings',
+        };
+
+        const target = routeMap[targetScreen.toLowerCase()] || (targetScreen.startsWith('/') ? targetScreen : `/${targetScreen}`);
+        navigate(target);
+      }
+    };
+
+    window.onFcmTokenReceived = (token: string) => {
+      try {
+        localStorage.setItem('santriai_fcm_token', token);
+      } catch (e) {}
+    };
+
+    // Website memberikan perintah awal ke Android Kotlin
+    if (window.AndroidNativeInterface) {
+      try {
+        // 1. Berlangganan topik siaran massal santri
+        window.AndroidNativeInterface.subscribeToTopic?.('semua_santri');
+        window.AndroidNativeInterface.subscribeToTopic?.('kajian_harian');
+        // 2. Meminta token FCM untuk disimpan di web / user profile
+        window.AndroidNativeInterface.getFcmToken?.();
+        // 3. Meminta pengecualian optimasi baterai agar adzan & FCM selalu tepat waktu
+        window.AndroidNativeInterface.requestBatteryOptimizationExemption?.();
+      } catch (e) {
+        console.warn('Gagal sinkronisasi awal perintah Android Native Interface:', e);
+      }
+    }
+
+    return () => {
+      delete window.handleFcmNavigation;
+      delete window.onFcmTokenReceived;
+    };
+  }, [navigate]);
+
   useEffect(() => {
     const handleOffline = async () => {
       onOfflineChange(true);
