@@ -591,11 +591,31 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       setIsPlaying(s);
       isPlayingRef.current = s;
     };
+
+    // Sinkronisasi tombol bilah status bar Android (Play/Pause, Next, Prev)
+    window.AppMediaControls = {
+      togglePlay: () => {
+        togglePlay();
+      },
+      playNext: () => {
+        nextTrack();
+      },
+      playPrev: () => {
+        prevTrack();
+      },
+      nextAyah: () => {
+        nextTrack();
+      },
+      prevAyah: () => {
+        prevTrack();
+      }
+    };
+
     return () => {
       delete (window as any).onNativeAudioEnded;
       delete (window as any).setNativePlaybackState;
     };
-  }, []);
+  }, [togglePlay, nextTrack, prevTrack]);
 
   // Live reload playing ayah audio if selected Qori changes during active playback
   useEffect(() => {

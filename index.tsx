@@ -111,10 +111,33 @@ declare global {
     sendNativeShare?: (title: string, text: string, url?: string) => Promise<void>;
     AppMediaControls?: {
       togglePlay: () => void;
-      nextAyah: () => void;
-      prevAyah: () => void;
+      playNext: () => void;
+      playPrev: () => void;
+      nextAyah?: () => void;
+      prevAyah?: () => void;
     };
   }
+}
+
+// Inisialisasi default objek window.AppMediaControls agar selalu siap dipanggil oleh Android Native
+if (typeof window !== 'undefined') {
+  window.AppMediaControls = {
+    togglePlay: () => {
+      console.log('AppMediaControls: togglePlay called');
+    },
+    playNext: () => {
+      console.log('AppMediaControls: playNext called');
+    },
+    playPrev: () => {
+      console.log('AppMediaControls: playPrev called');
+    },
+    nextAyah: () => {
+      console.log('AppMediaControls: nextAyah called');
+    },
+    prevAyah: () => {
+      console.log('AppMediaControls: prevAyah called');
+    },
+  };
 }
 
 // Update Helper to use new native method & Browser Notification fallback
