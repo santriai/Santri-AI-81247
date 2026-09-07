@@ -480,7 +480,7 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, []);
 
   const togglePlay = useCallback(() => {
-    if (isPlaying) {
+    if (isPlayingRef.current) {
       window.AndroidNativeInterface?.pauseQuranAudio();
       browserAudioRef.current?.pause();
       if (isTranslationPlayingRef.current) {
@@ -494,7 +494,7 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       setIsPlaying(true);
       isPlayingRef.current = true;
     }
-  }, [isPlaying]);
+  }, []);
 
   const toggleLoop = useCallback(() => {
     setIsLooping(prev => !prev);
@@ -585,6 +585,13 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     nextTrack();
   };
 
+  const nextTrackRef = useRef(nextTrack);
+  nextTrackRef.current = nextTrack;
+  const prevTrackRef = useRef(prevTrack);
+  prevTrackRef.current = prevTrack;
+  const togglePlayRef = useRef(togglePlay);
+  togglePlayRef.current = togglePlay;
+
   useEffect(() => {
     (window as any).onNativeAudioEnded = () => handleAudioEndedRef.current();
     (window as any).setNativePlaybackState = (s: boolean) => {
@@ -595,27 +602,28 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     // Sinkronisasi tombol bilah status bar Android (Play/Pause, Next, Prev)
     window.AppMediaControls = {
       togglePlay: () => {
-        togglePlay();
+        togglePlayRef.current();
       },
       playNext: () => {
-        nextTrack();
+        nextTrackRef.current();
       },
       playPrev: () => {
-        prevTrack();
+        prevTrackRef.current();
       },
       nextAyah: () => {
-        nextTrack();
+        nextTrackRef.current();
       },
       prevAyah: () => {
-        prevTrack();
+        prevTrackRef.current();
       }
     };
 
     return () => {
       delete (window as any).onNativeAudioEnded;
       delete (window as any).setNativePlaybackState;
+      delete window.AppMediaControls;
     };
-  }, [togglePlay, nextTrack, prevTrack]);
+  }, []);
 
   // Live reload playing ayah audio if selected Qori changes during active playback
   useEffect(() => {

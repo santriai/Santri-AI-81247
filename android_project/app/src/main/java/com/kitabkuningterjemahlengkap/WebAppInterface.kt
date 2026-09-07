@@ -192,6 +192,12 @@ class WebAppInterface(
                     }
                     setOnCompletionListener {
                         notificationHelper.updateMediaNotification(title, subtitle, false)
+                        activity.runOnUiThread {
+                            activity.webView.evaluateJavascript(
+                                "if (typeof window.onNativeAudioEnded === 'function') { window.onNativeAudioEnded(); }",
+                                null
+                            )
+                        }
                     }
                 }
             } catch (e: Exception) {
@@ -205,6 +211,10 @@ class WebAppInterface(
         activity.runOnUiThread {
             mediaPlayer?.pause()
             notificationHelper.updateMediaNotification("Santri AI Murottal", "Audio dijeda", false)
+            activity.webView.evaluateJavascript(
+                "if (typeof window.setNativePlaybackState === 'function') { window.setNativePlaybackState(false); }",
+                null
+            )
         }
     }
 
@@ -213,6 +223,10 @@ class WebAppInterface(
         activity.runOnUiThread {
             mediaPlayer?.start()
             notificationHelper.updateMediaNotification("Santri AI Murottal", "Sedang memutar audio", true)
+            activity.webView.evaluateJavascript(
+                "if (typeof window.setNativePlaybackState === 'function') { window.setNativePlaybackState(true); }",
+                null
+            )
         }
     }
 
