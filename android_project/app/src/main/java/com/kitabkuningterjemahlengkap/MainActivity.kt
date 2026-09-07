@@ -55,8 +55,8 @@ class MainActivity : AppCompatActivity(), PurchasesUpdatedListener {
     private val TEST_INTERSTITIAL_ID = "ca-app-pub-3940256099942544/1033173712"
     private val TEST_REWARDED_ID = "ca-app-pub-3940256099942544/5224354917"
 
-    // URL Web App Santri AI
-    private val WEB_APP_URL = "https://ais-pre-aaeh7slgokaz4avmfjrawc-825769205276.asia-southeast1.run.app"
+    // URL Web App Santri AI (Gunakan tanpa /#/ karena HashRouter otomatis menangani rute)
+    private val WEB_APP_URL = "https://santri-ai-81247.vercel.app/"
 
     // File Chooser untuk Kamera & Scan Kitab
     private var fileUploadCallback: ValueCallback<Array<Uri>>? = null
@@ -445,11 +445,20 @@ class MainActivity : AppCompatActivity(), PurchasesUpdatedListener {
     private fun setupBackPressHandler() {
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if (webView.canGoBack()) {
-                    webView.goBack()
-                } else {
-                    isEnabled = false
-                    onBackPressedDispatcher.onBackPressed()
+                // Prioritaskan navigasi internal web & popup dialog keluar (Kafaratul Majelis)
+                webView.evaluateJavascript(
+                    "(function() { if (typeof window.handleAndroidBackPress === 'function') { return window.handleAndroidBackPress(); } return false; })();"
+                ) { result ->
+                    val isHandled = result != null && (result == "true" || result.toBoolean())
+                    if (!isHandled) {
+                        if (webView.canGoBack()) {
+                            webView.goBack()
+                        } else {
+                            isEnabled = false
+                            onBackPressedDispatcher.onBackPressed()
+                            isEnabled = true
+                        }
+                    }
                 }
             }
         })

@@ -470,15 +470,18 @@ const QuranScreen: React.FC = () => {
   };
 
   const getWordSyncIndex = (words: string[], currentTime: number, duration: number): number => {
-    if (!words.length || duration <= 0) return 0;
+    if (!words.length) return 0;
+    const safeDuration = (duration && !isNaN(duration) && duration > 0)
+      ? duration 
+      : Math.max(3, words.length * 1.0);
     
     // Qari recitation characteristics:
     // 1. Initial breath / start pause (~0.25s or 5% of duration)
     // 2. Trailing pause / waqaf hold (~0.35s or 7% of duration)
-    const headOffset = Math.min(0.3, duration * 0.05);
-    const tailOffset = Math.min(0.5, duration * 0.08);
-    const effectiveDuration = Math.max(0.1, duration - headOffset - tailOffset);
-    const effectiveCurrentTime = Math.max(0, Math.min(effectiveDuration, currentTime - headOffset));
+    const headOffset = Math.min(0.3, safeDuration * 0.05);
+    const tailOffset = Math.min(0.5, safeDuration * 0.08);
+    const effectiveDuration = Math.max(0.1, safeDuration - headOffset - tailOffset);
+    const effectiveCurrentTime = Math.max(0, Math.min(effectiveDuration, (currentTime || 0) - headOffset));
 
     // Calculate phonetic weight per word:
     // - Base character count
@@ -2062,7 +2065,8 @@ const QuranScreen: React.FC = () => {
               return (
                 <div className="space-y-4">
                   {filteredAyahs.map((ayah) => {
-                    const isPlayingThis = currentAyah?.id === ayah.id && isPlaying;
+                    const isMatchAyah = currentAyah?.id === ayah.id || (currentAyah?.number === ayah.number && currentAyah?.surahNumber === surahDetail?.number);
+                    const isPlayingThis = isMatchAyah && isPlaying;
                     const isCopied = copiedId === ayah.id;
                     const ayahJuz = surahDetail ? getCurrentJuz(surahDetail.number, ayah.number) : 1;
                     const words = ayah.arab.trim().split(/\s+/).filter(Boolean);
@@ -2072,8 +2076,8 @@ const QuranScreen: React.FC = () => {
 
                     return (
                       <div key={ayah.id} id={`ayah-${ayah.id}`} className={`scroll-mt-32 transition-all duration-500 rounded-2xl border p-5 shadow-sm mb-4 ${
-                        currentAyah?.id === ayah.id 
-                          ? 'bg-green-50 dark:bg-green-900/10 border-green-300 dark:border-green-800 shadow-md ring-1 ring-emerald-400/30' 
+                        isMatchAyah 
+                          ? 'bg-green-50 dark:bg-green-900/10 border-green-300 dark:border-green-800 shadow-md ring-2 ring-emerald-500/40' 
                           : quranTheme === 'sepia' 
                             ? 'bg-[#fbf0d9] dark:bg-[#342a1b] text-[#3d3220] dark:text-[#fde68a] border-amber-200 dark:border-amber-900/40' 
                             : quranTheme === 'dark' 
@@ -2116,7 +2120,7 @@ const QuranScreen: React.FC = () => {
                             <button 
                               onClick={() => {
                                 if (surahDetail) {
-                                  if (currentAyah?.id === ayah.id && isPlaying && isTranslationPlaying) {
+                                  if (isMatchAyah && isPlaying && isTranslationPlaying) {
                                     stop();
                                   } else {
                                     playTranslationOnly(surahDetail, ayah);
@@ -2125,13 +2129,13 @@ const QuranScreen: React.FC = () => {
                                 }
                               }} 
                               className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center border transition-all shrink-0 shadow-sm cursor-pointer ${
-                                currentAyah?.id === ayah.id && isPlaying && isTranslationPlaying 
+                                isMatchAyah && isPlaying && isTranslationPlaying 
                                   ? 'bg-amber-500 text-white border-amber-400 shadow-amber-500/30 ring-2 ring-amber-300 animate-pulse' 
                                   : 'bg-white dark:bg-slate-800 text-amber-600 dark:text-amber-400 border-slate-200 dark:border-slate-700 hover:bg-amber-50 dark:hover:bg-slate-700'
                               }`}
-                              title={currentAyah?.id === ayah.id && isPlaying && isTranslationPlaying ? "Hentikan Suara Terjemahan" : "Dengarkan Suara Terjemahan (ID)"}
+                              title={isMatchAyah && isPlaying && isTranslationPlaying ? "Hentikan Suara Terjemahan" : "Dengarkan Suara Terjemahan (ID)"}
                             >
-                              {currentAyah?.id === ayah.id && isPlaying && isTranslationPlaying ? <VolumeX size={17} /> : <Volume2 size={17} />}
+                              {isMatchAyah && isPlaying && isTranslationPlaying ? <VolumeX size={17} /> : <Volume2 size={17} />}
                             </button>
 
                             {isPlayingThis && (
@@ -2164,9 +2168,9 @@ const QuranScreen: React.FC = () => {
                             return (
                               <span
                                 key={wIdx}
-                                className={`inline-block transition-all duration-200 rounded-lg px-1 py-0.5 mx-0.5 ${
+                                className={`inline-block transition-all duration-200 rounded-lg px-1.5 py-0.5 mx-0.5 ${
                                   isCurrentWordActive
-                                    ? 'bg-amber-300/40 dark:bg-amber-400/30 text-amber-900 dark:text-amber-200 font-extrabold ring-2 ring-amber-400 shadow-md scale-105'
+                                    ? 'bg-amber-300 dark:bg-amber-400 text-amber-950 dark:text-slate-950 font-black ring-2 ring-amber-400 shadow-md scale-105'
                                     : ''
                                 }`}
                                 dangerouslySetInnerHTML={{ __html: coloredWordHtml }}

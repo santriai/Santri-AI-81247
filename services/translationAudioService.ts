@@ -1,8 +1,12 @@
 /**
  * Service for generating Indonesian Text-to-Speech (TTS) for Quran translations.
- * Uses high quality Web Speech API (id-ID) with natural speech rate and punctuation pauses,
- * with fallback to online Indonesian TTS audio streaming.
+ * Prioritizes:
+ * 1. Android Native TextToSpeech via AndroidNativeInterface (reliable in WebView)
+ * 2. Web Speech API (id-ID) for modern desktop/mobile browsers
+ * 3. Gemini High-Quality Indonesian AI Voice fallback
  */
+
+import { generateSpeech } from './geminiService';
 
 let speechSynth: SpeechSynthesis | null = null;
 if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
@@ -35,8 +39,48 @@ export const playIndonesianTranslationAudio = (
 
   let isCancelled = false;
 
-  // Use Web Speech API if supported in browser/Android WebView
-  if (speechSynth) {
+  // 1. Android Native TextToSpeech (Khusus Android WebView)
+  if (typeof window !== 'undefined' && window.AndroidNativeInterface) {
+    try {
+      if (typeof window.AndroidNativeInterface.speakTranslation === 'function') {
+        window.onNativeTranslationStarted = () => {
+          if (!isCancelled) onStart?.();
+        };
+        window.onNativeTranslationEnded = () => {
+          if (!isCancelled) onEnded?.();
+        };
+        window.AndroidNativeInterface.speakTranslation(cleanText);
+        return () => {
+          isCancelled = true;
+          stopIndonesianTranslationAudio();
+        };
+      } else if (typeof window.AndroidNativeInterface.speak === 'function') {
+        // Fallback untuk versi Android lama: speak via native TTS dengan perkiraan durasi
+        if (!isCancelled) onStart?.();
+        window.AndroidNativeInterface.speak('', cleanText);
+        const durationMs = Math.max(2500, Math.min(25000, (cleanText.length / 12) * 1000));
+        const timer = setTimeout(() => {
+          if (!isCancelled) onEnded?.();
+        }, durationMs);
+        return () => {
+          isCancelled = true;
+          clearTimeout(timer);
+          stopIndonesianTranslationAudio();
+        };
+      }
+    } catch (androidErr) {
+      console.warn('Gagal memutar TTS Android native:', androidErr);
+    }
+  }
+
+  // 2. Web Speech API (Untuk Browser Web standar)
+  // Periksa apakah bukan Android WebView dan speechSynth memiliki suara atau didukung
+  const isAndroidWebView = typeof window !== 'undefined' && (
+    !!window.AndroidNativeInterface || 
+    /wv|Android.*Version\/[\d.]+/i.test(navigator.userAgent)
+  );
+
+  if (speechSynth && !isAndroidWebView) {
     try {
       speechSynth.cancel(); // ensure clear queue
 
@@ -71,22 +115,21 @@ export const playIndonesianTranslationAudio = (
 
       utterance.onerror = (err) => {
         if (!isCancelled) {
-          console.warn('SpeechSynthesis error, trying audio stream fallback:', err);
+          console.warn('SpeechSynthesis error, mencoba fallback Gemini AI Voice:', err);
           currentUtterance = null;
-          playViaAudioStream(cleanText, isCancelled, onStart, onEnded, onError);
+          playViaAiVoice(cleanText, () => isCancelled, onStart, onEnded, onError);
         }
       };
 
-      // Workaround for Chrome/Android speech synthesis pause bug
       speechSynth.resume();
       speechSynth.speak(utterance);
 
-      // Timeout watchdog in case speech synthesis gets stuck
+      // Watchdog jika speech synthesis macet
       const timer = setTimeout(() => {
         if (!hasStarted && !isCancelled && speechSynth) {
           speechSynth.resume();
         }
-      }, 500);
+      }, 600);
 
       return () => {
         isCancelled = true;
@@ -94,71 +137,89 @@ export const playIndonesianTranslationAudio = (
         stopIndonesianTranslationAudio();
       };
     } catch (e) {
-      console.warn('Web Speech failed to initialize, fallback to audio stream:', e);
+      console.warn('Web Speech gagal, fallback ke AI Voice:', e);
     }
   }
 
-  // Fallback to Google TTS Audio stream
-  return playViaAudioStream(cleanText, isCancelled, onStart, onEnded, onError);
+  // 3. Fallback AI Voice (Gemini TTS Bahasa Indonesia)
+  playViaAiVoice(cleanText, () => isCancelled, onStart, onEnded, onError);
+
+  return () => {
+    isCancelled = true;
+    stopIndonesianTranslationAudio();
+  };
 };
 
-const playViaAudioStream = (
+const playViaAiVoice = (
   text: string,
-  isCancelled: boolean,
+  getIsCancelled: () => boolean,
   onStart?: () => void,
   onEnded?: () => void,
   onError?: (e: any) => void
-): (() => void) => {
-  try {
-    const encoded = encodeURIComponent(text.slice(0, 300));
-    const ttsAudioUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=id&client=tw-ob&q=${encoded}`;
-
-    const audio = new Audio(ttsAudioUrl);
-    currentTranslationAudio = audio;
-
-    audio.onplay = () => {
-      if (!isCancelled) onStart?.();
-    };
-
-    audio.onended = () => {
-      if (!isCancelled) {
-        currentTranslationAudio = null;
-        onEnded?.();
+) => {
+  generateSpeech(text, false)
+    .then((audioUrl) => {
+      if (getIsCancelled() || !audioUrl) {
+        if (!getIsCancelled()) onEnded?.();
+        return;
       }
-    };
 
-    audio.onerror = (err) => {
-      if (!isCancelled) {
-        console.error('TTS Audio Stream error:', err);
-        currentTranslationAudio = null;
+      const audio = new Audio(audioUrl);
+      currentTranslationAudio = audio;
+
+      audio.onplay = () => {
+        if (!getIsCancelled()) onStart?.();
+      };
+
+      audio.onended = () => {
+        if (!getIsCancelled()) {
+          currentTranslationAudio = null;
+          onEnded?.();
+        }
+      };
+
+      audio.onerror = (err) => {
+        if (!getIsCancelled()) {
+          console.error('AI Voice audio error:', err);
+          currentTranslationAudio = null;
+          onError?.(err);
+          onEnded?.();
+        }
+      };
+
+      audio.play().catch((err) => {
+        if (!getIsCancelled()) {
+          console.warn('AI Voice play error:', err);
+          onEnded?.();
+        }
+      });
+    })
+    .catch((err) => {
+      if (!getIsCancelled()) {
+        console.warn('Gagal generate AI speech untuk terjemahan:', err);
         onError?.(err);
         onEnded?.();
       }
-    };
-
-    audio.play().catch((err) => {
-      if (!isCancelled) {
-        console.error('Audio play error:', err);
-        onEnded?.();
-      }
     });
-
-    return () => {
-      stopIndonesianTranslationAudio();
-    };
-  } catch (err) {
-    onError?.(err);
-    onEnded?.();
-    return () => {};
-  }
 };
 
 export const stopIndonesianTranslationAudio = () => {
+  // Hentikan Android Native TTS
+  if (typeof window !== 'undefined' && window.AndroidNativeInterface) {
+    try {
+      window.AndroidNativeInterface.stopTranslationSpeech?.();
+    } catch (e) {}
+  }
+
+  delete (window as any).onNativeTranslationStarted;
+  delete (window as any).onNativeTranslationEnded;
+
   if (currentTranslationAudio) {
     currentTranslationAudio.pause();
     currentTranslationAudio.src = '';
     currentTranslationAudio = null;
   }
+
   if (speechSynth) {
     try {
       speechSynth.cancel();

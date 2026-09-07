@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.speech.tts.TextToSpeech
+import android.speech.tts.UtteranceProgressListener
 import android.util.Base64
 import android.util.Log
 import android.webkit.JavascriptInterface
@@ -39,6 +40,44 @@ class WebAppInterface(
             if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 tts?.setLanguage(Locale.getDefault())
             }
+            tts?.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
+                override fun onStart(utteranceId: String?) {
+                    activity.runOnUiThread {
+                        (activity as? MainActivity)?.webView?.evaluateJavascript(
+                            "if (typeof window.onNativeTranslationStarted === 'function') { window.onNativeTranslationStarted(); }",
+                            null
+                        )
+                    }
+                }
+
+                override fun onDone(utteranceId: String?) {
+                    activity.runOnUiThread {
+                        (activity as? MainActivity)?.webView?.evaluateJavascript(
+                            "if (typeof window.onNativeTranslationEnded === 'function') { window.onNativeTranslationEnded(); }",
+                            null
+                        )
+                    }
+                }
+
+                @Deprecated("Deprecated in Java")
+                override fun onError(utteranceId: String?) {
+                    activity.runOnUiThread {
+                        (activity as? MainActivity)?.webView?.evaluateJavascript(
+                            "if (typeof window.onNativeTranslationEnded === 'function') { window.onNativeTranslationEnded(); }",
+                            null
+                        )
+                    }
+                }
+
+                override fun onError(utteranceId: String?, errorCode: Int) {
+                    activity.runOnUiThread {
+                        (activity as? MainActivity)?.webView?.evaluateJavascript(
+                            "if (typeof window.onNativeTranslationEnded === 'function') { window.onNativeTranslationEnded(); }",
+                            null
+                        )
+                    }
+                }
+            })
             isTtsInitialized = true
         }
     }
@@ -284,6 +323,31 @@ class WebAppInterface(
         activity.runOnUiThread {
             tts?.stop()
             mediaPlayer?.stop()
+        }
+    }
+
+    @JavascriptInterface
+    fun speakTranslation(text: String) {
+        activity.runOnUiThread {
+            if (isTtsInitialized && text.isNotBlank()) {
+                val utteranceId = "ayah_trans_" + System.currentTimeMillis()
+                val params = Bundle().apply {
+                    putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, utteranceId)
+                }
+                tts?.speak(text, TextToSpeech.QUEUE_FLUSH, params, utteranceId)
+            } else {
+                (activity as? MainActivity)?.webView?.evaluateJavascript(
+                    "if (typeof window.onNativeTranslationEnded === 'function') { window.onNativeTranslationEnded(); }",
+                    null
+                )
+            }
+        }
+    }
+
+    @JavascriptInterface
+    fun stopTranslationSpeech() {
+        activity.runOnUiThread {
+            tts?.stop()
         }
     }
 

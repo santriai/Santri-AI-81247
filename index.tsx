@@ -31,6 +31,10 @@ declare global {
     // Callback called by Android when FCM Registration Token is received or refreshed
     onFcmTokenReceived?: (token: string) => void;
 
+    // Callback called by Android when Native TextToSpeech translation starts / ends
+    onNativeTranslationStarted?: () => void;
+    onNativeTranslationEnded?: () => void;
+
     AndroidNativeInterface?: {
       // Existing Media Controls
       updateMediaNotification(title: string, subtitle: string, isPlaying: boolean): void;
@@ -59,6 +63,8 @@ declare global {
 
       // NEW: TTS AI Interface
       speak(audioBase64: string, text: string): void;
+      speakTranslation?(text: string): void;
+      stopTranslationSpeech?(): void;
 
       // NEW: Native Share
       shareText(title: string, message: string): void;

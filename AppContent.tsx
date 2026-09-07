@@ -168,7 +168,17 @@ export const triggerLocalStatusBarNotification = (title: string, message: string
   }
 };
 
-const GlobalListener = ({ onOfflineChange, onShowExitConfirm }: { onOfflineChange: (status: boolean) => void, onShowExitConfirm: () => void }) => {
+const GlobalListener = ({ 
+  onOfflineChange, 
+  onShowExitConfirm,
+  isExitConfirmOpen,
+  onCloseExitConfirm
+}: { 
+  onOfflineChange: (status: boolean) => void, 
+  onShowExitConfirm: () => void,
+  isExitConfirmOpen: boolean,
+  onCloseExitConfirm: () => void
+}) => {
   const { showToast } = useToast();
   const { user, loading: authLoading } = useAuth(); 
   const showToastRef = useRef(showToast);
@@ -193,7 +203,11 @@ const GlobalListener = ({ onOfflineChange, onShowExitConfirm }: { onOfflineChang
 
   useEffect(() => {
     window.handleAndroidBackPress = () => {
-      if (location.pathname !== '/') {
+      if (isExitConfirmOpen) {
+        onCloseExitConfirm();
+        return true;
+      }
+      if (location.pathname !== '/' && location.pathname !== '') {
         navigate(-1);
         return true; 
       } else {
@@ -202,7 +216,7 @@ const GlobalListener = ({ onOfflineChange, onShowExitConfirm }: { onOfflineChang
       }
     };
     return () => { delete window.handleAndroidBackPress; };
-  }, [location, navigate, onShowExitConfirm]);
+  }, [location, navigate, onShowExitConfirm, isExitConfirmOpen, onCloseExitConfirm]);
 
   // Handler Notifikasi FCM: Penanganan Aksi Navigasi & Token Perangkat
   useEffect(() => {
@@ -458,7 +472,9 @@ const AppContent: React.FC = () => {
         <AudioProvider>
             <GlobalListener 
                 onOfflineChange={setIsOffline} 
-                onShowExitConfirm={() => setShowExitConfirm(true)} 
+                onShowExitConfirm={() => setShowExitConfirm(true)}
+                isExitConfirmOpen={showExitConfirm}
+                onCloseExitConfirm={() => setShowExitConfirm(false)}
             />
             
             {isOffline ? (

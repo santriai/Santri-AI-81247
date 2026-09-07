@@ -104,6 +104,7 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [currentTtsInfo, setCurrentTtsInfo] = useState<TtsInfo | null>(null);
   const browserAudioRef = useRef<HTMLAudioElement | null>(null);
   const translationCancelRef = useRef<(() => void) | null>(null);
+  const nativeTickerRef = useRef<any>(null);
 
   const quranPlaylistRef = useRef<Ayah[]>([]);
   const libraryPlaylistRef = useRef<AudioLibraryItem[]>([]);
@@ -143,6 +144,10 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, [isLooping]);
 
   const stopBrowserAudio = useCallback(() => {
+    if (nativeTickerRef.current) {
+      clearInterval(nativeTickerRef.current);
+      nativeTickerRef.current = null;
+    }
     if (translationCancelRef.current) {
       translationCancelRef.current();
       translationCancelRef.current = null;
@@ -161,8 +166,21 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, []);
 
   const stop = useCallback(() => {
+    if (nativeTickerRef.current) {
+      clearInterval(nativeTickerRef.current);
+      nativeTickerRef.current = null;
+    }
     if (window.AndroidNativeInterface?.stopQuranAudio) {
       window.AndroidNativeInterface.stopQuranAudio();
+    }
+    if (window.AndroidNativeInterface?.stopTranslationSpeech) {
+      window.AndroidNativeInterface.stopTranslationSpeech();
+    }
+    if ((window.AndroidNativeInterface as any)?.stopSpeaking) {
+      (window.AndroidNativeInterface as any).stopSpeaking();
+    }
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      try { window.speechSynthesis.cancel(); } catch (e) {}
     }
     stopBrowserAudio();
     setIsPlaying(false);
@@ -248,6 +266,23 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     isTranslationPlayingRef.current = false;
 
     if (window.AndroidNativeInterface?.playQuranAudio) {
+      stopBrowserAudio();
+      const wordCount = ayahToPlay.arab.trim().split(/\s+/).filter(Boolean).length;
+      const initialEstimateDuration = Math.max(3, wordCount * 1.1);
+      setAudioCurrentTime(0);
+      setAudioDuration(initialEstimateDuration);
+
+      if (nativeTickerRef.current) clearInterval(nativeTickerRef.current);
+      const startTime = Date.now();
+      nativeTickerRef.current = setInterval(() => {
+        if (!isPlayingRef.current) {
+          if (nativeTickerRef.current) clearInterval(nativeTickerRef.current);
+          return;
+        }
+        const elapsed = (Date.now() - startTime) / 1000;
+        setAudioCurrentTime((prev) => Math.max(prev, Math.min(initialEstimateDuration, elapsed)));
+      }, 150);
+
       window.AndroidNativeInterface.playQuranAudio(
         audioUrl,
         `QS. ${surahOfAyah.name_latin}: ${ayahToPlay.number}`,
@@ -437,6 +472,27 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setTimeout(() => setIsLoading(false), 1500);
   }, [stopBrowserAudio]);
 
+  const togglePlay = useCallback(() => {
+    if (isPlayingRef.current) {
+      if (nativeTickerRef.current) {
+        clearInterval(nativeTickerRef.current);
+        nativeTickerRef.current = null;
+      }
+      window.AndroidNativeInterface?.pauseQuranAudio();
+      browserAudioRef.current?.pause();
+      if (isTranslationPlayingRef.current) {
+        stopIndonesianTranslationAudio();
+      }
+      setIsPlaying(false);
+      isPlayingRef.current = false;
+    } else {
+      window.AndroidNativeInterface?.resumeQuranAudio();
+      browserAudioRef.current?.play();
+      setIsPlaying(true);
+      isPlayingRef.current = true;
+    }
+  }, []);
+
   const speakTts = useCallback(async (text: string, isArabic: boolean, title: string, id: string) => {
     if (currentTtsInfo?.id === id) {
       togglePlay();
@@ -447,6 +503,38 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setMode('tts');
     modeRef.current = 'tts';
     setCurrentTtsInfo({ text, title, id, isArabic });
+
+    // 1. Android Native Text-to-Speech bawaan perangkat (Cepat, Offline & stabil)
+    if (window.AndroidNativeInterface) {
+      try {
+        if (typeof window.AndroidNativeInterface.speakTranslation === 'function') {
+          (window as any).onNativeTranslationStarted = () => {
+            setIsPlaying(true);
+            isPlayingRef.current = true;
+          };
+          (window as any).onNativeTranslationEnded = () => {
+            setIsPlaying(false);
+            isPlayingRef.current = false;
+            setCurrentTtsInfo(null);
+          };
+          window.AndroidNativeInterface.speakTranslation(text);
+          setIsLoading(false);
+          setIsPlaying(true);
+          isPlayingRef.current = true;
+          return;
+        } else if (typeof (window.AndroidNativeInterface as any).speak === 'function') {
+          (window.AndroidNativeInterface as any).speak('', text);
+          setIsLoading(false);
+          setIsPlaying(true);
+          isPlayingRef.current = true;
+          return;
+        }
+      } catch (err) {
+        console.warn('Native Android TTS error, fallback to speech generator:', err);
+      }
+    }
+
+    // 2. Web speech generator / AI Speech
     try {
       const audioUrl = await generateSpeech(text, isArabic);
       if (!audioUrl) throw new Error("Audio URL failed.");
@@ -465,35 +553,32 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         await audio.play();
       }
     } catch (e) {
-      console.error(e);
-      setCurrentTtsInfo(null);
+      // 3. Fallback Web Speech API standar browser
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = isArabic ? 'ar-SA' : 'id-ID';
+        utterance.onend = () => {
+          setIsPlaying(false);
+          isPlayingRef.current = false;
+          setCurrentTtsInfo(null);
+        };
+        window.speechSynthesis.speak(utterance);
+        setIsPlaying(true);
+        isPlayingRef.current = true;
+      } else {
+        console.error(e);
+        setCurrentTtsInfo(null);
+      }
     } finally {
       setIsLoading(false);
     }
-  }, [currentTtsInfo, stop]);
+  }, [currentTtsInfo, stop, togglePlay]);
 
   const prefetchTts = useCallback(async (text: string, isArabic: boolean) => {
     if (!text || text.length < 5) return;
     try {
       await generateSpeech(text, isArabic);
     } catch (e) {}
-  }, []);
-
-  const togglePlay = useCallback(() => {
-    if (isPlayingRef.current) {
-      window.AndroidNativeInterface?.pauseQuranAudio();
-      browserAudioRef.current?.pause();
-      if (isTranslationPlayingRef.current) {
-        stopIndonesianTranslationAudio();
-      }
-      setIsPlaying(false);
-      isPlayingRef.current = false;
-    } else {
-      window.AndroidNativeInterface?.resumeQuranAudio();
-      browserAudioRef.current?.play();
-      setIsPlaying(true);
-      isPlayingRef.current = true;
-    }
   }, []);
 
   const toggleLoop = useCallback(() => {
@@ -597,6 +682,14 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     (window as any).setNativePlaybackState = (s: boolean) => {
       setIsPlaying(s);
       isPlayingRef.current = s;
+    };
+    (window as any).setNativeAudioProgress = (currSec: number, durSec: number) => {
+      if (typeof currSec === 'number' && !isNaN(currSec)) {
+        setAudioCurrentTime(currSec);
+      }
+      if (typeof durSec === 'number' && !isNaN(durSec) && durSec > 0) {
+        setAudioDuration(durSec);
+      }
     };
 
     // Sinkronisasi tombol bilah status bar Android (Play/Pause, Next, Prev)
