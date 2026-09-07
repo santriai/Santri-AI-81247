@@ -440,6 +440,16 @@ export const PrayerProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       console.log("Pencarian lokasi sudah berjalan.");
       return;
     }
+
+    // Trigger Android Native GPS Dialog jika sedang di dalam aplikasi Android
+    if (typeof window !== 'undefined' && window.AndroidNativeInterface?.requestGpsEnable) {
+      try {
+        window.AndroidNativeInterface.requestGpsEnable();
+      } catch (e) {
+        console.warn("Error calling requestGpsEnable:", e);
+      }
+    }
+
     isRefreshingRef.current = true;
     setLoading(true);
 
