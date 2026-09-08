@@ -123,6 +123,13 @@ class MainActivity : AppCompatActivity(), PurchasesUpdatedListener {
                 NotificationHelper.ACTION_MEDIA_CLOSE -> {
                     webAppInterface?.stopQuranAudio()
                 }
+                NotificationHelper.ACTION_STOP_ADZAN -> {
+                    context?.let { AdzanAlarmReceiver.stopAdzanSound(it) }
+                    webView.evaluateJavascript(
+                        "if (typeof window.triggerStopAdzan === 'function') { window.triggerStopAdzan(); }",
+                        null
+                    )
+                }
             }
         }
     }
@@ -159,6 +166,15 @@ class MainActivity : AppCompatActivity(), PurchasesUpdatedListener {
     private fun handleIntentNavigation(intent: Intent?) {
         val targetScreen = intent?.getStringExtra("targetScreen")
         val targetUrl = intent?.getStringExtra("targetUrl")
+        val activePrayerName = intent?.getStringExtra("activePrayerName")
+
+        if (!activePrayerName.isNullOrEmpty()) {
+            val safeName = activePrayerName.replace("'", "\\'")
+            webView.evaluateJavascript(
+                "if (typeof window.triggerAdzanBanner === 'function') { window.triggerAdzanBanner('$safeName'); }",
+                null
+            )
+        }
 
         if (!targetScreen.isNullOrEmpty() || !targetUrl.isNullOrEmpty()) {
             if (isWebViewPageLoaded) {
@@ -234,6 +250,7 @@ class MainActivity : AppCompatActivity(), PurchasesUpdatedListener {
             addAction(NotificationHelper.ACTION_MEDIA_NEXT)
             addAction(NotificationHelper.ACTION_MEDIA_PREV)
             addAction(NotificationHelper.ACTION_MEDIA_CLOSE)
+            addAction(NotificationHelper.ACTION_STOP_ADZAN)
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             registerReceiver(mediaControlReceiver, filter, Context.RECEIVER_NOT_EXPORTED)

@@ -28,6 +28,7 @@ class NotificationHelper(private val context: Context) {
         const val ACTION_MEDIA_PREV = "com.kitabkuningterjemahlengkap.ACTION_PREV"
         const val ACTION_MEDIA_NEXT = "com.kitabkuningterjemahlengkap.ACTION_NEXT"
         const val ACTION_MEDIA_CLOSE = "com.kitabkuningterjemahlengkap.ACTION_CLOSE"
+        const val ACTION_STOP_ADZAN = "com.kitabkuningterjemahlengkap.ACTION_STOP_ADZAN"
     }
 
     init {
@@ -121,11 +122,12 @@ class NotificationHelper(private val context: Context) {
     // ==========================================================
     // 2. NOTIFIKASI STATUS BAR ADZAN & WAKTU SHOLAT
     // ==========================================================
-    fun showAdzanNotification(title: String, message: String) {
+    fun showAdzanNotification(title: String, message: String, prayerName: String = "Sholat") {
         val openAppIntent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            putExtra("targetScreen", "jadwal-sholat")
+            putExtra("targetScreen", "prayer-times")
             putExtra("notificationType", "adzan")
+            putExtra("activePrayerName", prayerName)
         }
         val pendingIntent = PendingIntent.getActivity(
             context,
@@ -134,17 +136,83 @@ class NotificationHelper(private val context: Context) {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
+        // Tombol Hentikan Adzan di Status Bar
+        val stopIntent = Intent(ACTION_STOP_ADZAN).apply {
+            setPackage(context.packageName)
+        }
+        val stopPending = PendingIntent.getBroadcast(
+            context,
+            99,
+            stopIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
         val notification = NotificationCompat.Builder(context, CHANNEL_ADZAN_ID)
             .setSmallIcon(android.R.drawable.ic_lock_idle_alarm)
             .setContentTitle(title)
             .setContentText(message)
             .setStyle(NotificationCompat.BigTextStyle().bigText(message))
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setAutoCancel(true)
+            .setPriority(NotificationCompat.PRIORITY_MAX)
+            .setCategory(NotificationCompat.CATEGORY_ALARM)
+            .setAutoCancel(false)
+            .setOngoing(true)
             .setContentIntent(pendingIntent)
+            .addAction(android.R.drawable.ic_media_pause, "HENTIKAN ADZAN", stopPending)
             .build()
 
         notificationManager.notify(ADZAN_NOTIF_ID, notification)
+    }
+
+    fun dismissAdzanNotification() {
+        notificationManager.cancel(ADZAN_NOTIF_ID)
+    }
+
+    fun schedulePrayerAlarm(
+        requestCode: Int,
+        triggerAtMillis: Long,
+        title: String,
+        message: String,
+        prayerName: String,
+        soundKey: String,
+        audioUrl: String?
+    ) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as? android.app.AlarmManager ?: return
+        val intent = Intent(context, AdzanAlarmReceiver::class.java).apply {
+            putExtra("TITLE", title)
+            putExtra("MESSAGE", message)
+            putExtra("PRAYER_NAME", prayerName)
+            putExtra("SOUND_KEY", soundKey)
+            putExtra("AUDIO_URL", audioUrl)
+        }
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            context,
+            requestCode,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setExactAndAllowWhileIdle(
+                    android.app.AlarmManager.RTC_WAKEUP,
+                    triggerAtMillis,
+                    pendingIntent
+                )
+            } else {
+                alarmManager.setExact(
+                    android.app.AlarmManager.RTC_WAKEUP,
+                    triggerAtMillis,
+                    pendingIntent
+                )
+            }
+        } catch (e: SecurityException) {
+            alarmManager.set(
+                android.app.AlarmManager.RTC_WAKEUP,
+                triggerAtMillis,
+                pendingIntent
+            )
+        }
     }
 
     // ==========================================================

@@ -679,6 +679,7 @@ export const PrayerProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         time: p.time,
         date: datePrefix,
         type: p.type,
+        soundKey: isPost ? `post_${p.prayerName.toLowerCase()}` : soundId,
         audioUrl: audioUrl,
         soundUrl: audioUrl,
         title: isPost ? `Pengingat Sholat ${p.prayerName}` : (isFridayZuhur ? `Sholat Jum'at (${p.key})` : p.key),
