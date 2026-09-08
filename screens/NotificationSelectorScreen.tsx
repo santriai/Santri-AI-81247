@@ -13,7 +13,7 @@ interface SoundOption {
   cover?: string; 
 }
 
-// Daftar Pilihan Audio dengan Gambar & Link CDN Tercepat
+// Daftar Pilihan Audio dengan Gambar
 const SOUND_OPTIONS: SoundOption[] = [
   { id: 'off', label: 'Matikan Notifikasi', type: 'system' },
   { id: 'default', label: 'Suara Bawaan', type: 'system' },
@@ -29,29 +29,29 @@ const SOUND_OPTIONS: SoundOption[] = [
     id: 'adzan_mekkah', 
     label: 'Adzan - Makkah', 
     type: 'audio',
-    src: 'https://cdn.aladhan.com/audio/adhans/a1.mp3',
+    src: 'https://ia601304.us.archive.org/21/items/Mp3CollectionAdzan/adzan-makkah1%20-.mp3',
     cover: 'https://i.imgur.com/8G5I4Z5.jpg' // Gambar Ka'bah
   },
   { 
     id: 'adzan_madinah', 
     label: 'Adzan - Madinah', 
     type: 'audio', 
-    src: 'https://cdn.aladhan.com/audio/adhans/a2.mp3',
-    cover: 'https://i.imgur.com/sC4x03a.png' // Gambar Masjid Nabawi
+    src: 'https://ia800502.us.archive.org/10/items/adzan_201409/Adzan%20H.%20Muammar%20ZA.mp3',
+    cover: 'https://i.imgur.com/sC4x03a.png' // Gambar Masjid Nabawi (Contoh)
   },
   { 
     id: 'adzan_aqsa', 
     label: 'Adzan - Al Aqsa', 
     type: 'audio', 
-    src: 'https://cdn.aladhan.com/audio/adhans/a3.mp3',
-    cover: 'https://i.imgur.com/sC4x03a.png' // Gambar Masjid Al Aqsa
+    src: 'https://pondokislami.com/wp-content/uploads/2024/02/download-suara-adzan-al-aqsa1.mp3',
+    cover: 'https://i.imgur.com/sC4x03a.png' // Gambar Masjid Al Aqsa (Contoh)
   },
-  { id: 'adzan_indonesia', label: 'Adzan - Indonesia', type: 'audio', src: 'https://cdn.aladhan.com/audio/adhans/a4.mp3' },
-  { id: 'adzan_subuh', label: 'Adzan Subuh', type: 'audio', src: 'https://cdn.aladhan.com/audio/adhans/a5.mp3' },
-  { id: 'adzan_subuh_madinah', label: 'Adzan Subuh (Madinah)', type: 'audio', src: 'https://cdn.aladhan.com/audio/adhans/a6.mp3' },
-  { id: 'adzan_subuh_abu_hazim', label: 'Adzan Subuh (Abu Hazim)', type: 'audio', src: 'https://cdn.aladhan.com/audio/adhans/a7.mp3' },
-  { id: 'adzan_abdul_basit', label: 'Adzan - Abdul Basit', type: 'audio', src: 'https://cdn.aladhan.com/audio/adhans/a8.mp3' },
-  { id: 'adzan_anak', label: 'Adzan - Anak (A. Saud)', type: 'audio', src: 'https://cdn.aladhan.com/audio/adhans/a1.mp3' },
+  { id: 'adzan_indonesia', label: 'Adzan - Indonesia', type: 'audio', src: 'https://pondokislami.com/wp-content/uploads/2024/02/download-suara-adzan-indonesia.mp3' },
+  { id: 'adzan_subuh', label: 'Adzan Subuh', type: 'audio', src: 'https://pondokislami.com/wp-content/uploads/2024/02/download-suara-adzan-subuh.mp3' },
+  { id: 'adzan_subuh_madinah', label: 'Adzan Subuh (Madinah)', type: 'audio', src: 'https://pondokislami.com/wp-content/uploads/2024/02/download-suara-adzan-subuh-madinah.mp3' },
+  { id: 'adzan_subuh_abu_hazim', label: 'Adzan Subuh (Abu Hazim)', type: 'audio', src: 'https://pondokislami.com/wp-content/uploads/2024/02/download-suara-adzan-subuh-abu-hazim.mp3' },
+  { id: 'adzan_abdul_basit', label: 'Adzan - Abdul Basit', type: 'audio', src: 'https://pondokislami.com/wp-content/uploads/2024/02/download-suara-adzan-abdul-basset.mp3' },
+  { id: 'adzan_anak', label: 'Adzan - Anak (A. Saud)', type: 'audio', src: 'https://pondokislami.com/wp-content/uploads/2024/02/download-suara-adzan-anak-ahmad-saud.mp3' },
 ];
 
 const NotificationSelectorScreen: React.FC = () => {
