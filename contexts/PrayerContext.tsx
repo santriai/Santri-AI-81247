@@ -105,15 +105,15 @@ export const PrayerProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
   const SOUND_AUDIO_MAP: Record<string, string> = useMemo(() => ({
     ass_santri_ai: 'https://ia601600.us.archive.org/1/items/assalamualaikumsantriai/assalamualaikum%2CsantriAI.mp3',
-    adzan_mekkah: 'https://ia601304.us.archive.org/21/items/Mp3CollectionAdzan/adzan-makkah1%20-.mp3',
-    adzan_madinah: 'https://ia800502.us.archive.org/10/items/adzan_201409/Adzan%20H.%20Muammar%20ZA.mp3',
-    adzan_aqsa: 'https://pondokislami.com/wp-content/uploads/2024/02/download-suara-adzan-al-aqsa1.mp3',
-    adzan_indonesia: 'https://pondokislami.com/wp-content/uploads/2024/02/download-suara-adzan-indonesia.mp3',
-    adzan_subuh: 'https://pondokislami.com/wp-content/uploads/2024/02/download-suara-adzan-subuh.mp3',
-    adzan_subuh_madinah: 'https://pondokislami.com/wp-content/uploads/2024/02/download-suara-adzan-subuh-madinah.mp3',
-    adzan_subuh_abu_hazim: 'https://pondokislami.com/wp-content/uploads/2024/02/download-suara-adzan-subuh-abu-hazim.mp3',
-    adzan_abdul_basit: 'https://pondokislami.com/wp-content/uploads/2024/02/download-suara-adzan-abdul-basset.mp3',
-    adzan_anak: 'https://pondokislami.com/wp-content/uploads/2024/02/download-suara-adzan-anak-ahmad-saud.mp3',
+    adzan_mekkah: 'https://cdn.aladhan.com/audio/adhans/a1.mp3',
+    adzan_madinah: 'https://cdn.aladhan.com/audio/adhans/a2.mp3',
+    adzan_aqsa: 'https://cdn.aladhan.com/audio/adhans/a3.mp3',
+    adzan_indonesia: 'https://cdn.aladhan.com/audio/adhans/a4.mp3',
+    adzan_subuh: 'https://cdn.aladhan.com/audio/adhans/a5.mp3',
+    adzan_subuh_madinah: 'https://cdn.aladhan.com/audio/adhans/a6.mp3',
+    adzan_subuh_abu_hazim: 'https://cdn.aladhan.com/audio/adhans/a7.mp3',
+    adzan_abdul_basit: 'https://cdn.aladhan.com/audio/adhans/a8.mp3',
+    adzan_anak: 'https://cdn.aladhan.com/audio/adhans/a1.mp3',
   }), []);
 
   const adzanAudioRef = useRef<HTMLAudioElement | null>(null);
@@ -218,6 +218,21 @@ export const PrayerProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     setIsAdzanPlaying(false);
     setActivePrayerName(null);
   }, []);
+
+  // Jembatan Komunikasi Notifikasi Android -> Banner Aplikasi Web
+  useEffect(() => {
+    (window as any).triggerAdzanBanner = (prayerName: string) => {
+      setActivePrayerName(prayerName || 'Sholat');
+      setIsAdzanPlaying(true);
+    };
+    (window as any).triggerStopAdzan = () => {
+      stopAdzan();
+    };
+    return () => {
+      delete (window as any).triggerAdzanBanner;
+      delete (window as any).triggerStopAdzan;
+    };
+  }, [stopAdzan]);
 
   const [hijriAdjustment, setHijriAdjustmentState] = useState<number>(() => {
     const saved = localStorage.getItem('santriai_hijri_adjustment');
