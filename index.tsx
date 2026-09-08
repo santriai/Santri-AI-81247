@@ -51,6 +51,7 @@ declare global {
 
       // NEW: Schedule Prayer Times
       schedulePrayerTimes(json: string): void;
+      updateLocationSchedule?(locationKey: string, json: string): void;
 
       // NEW: Set Adhan Audio
       setAdhanAudio(prayerName: string, url: string, coverUrl?: string): void;

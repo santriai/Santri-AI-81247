@@ -142,55 +142,21 @@ class WebAppInterface(
 
     @JavascriptInterface
     fun schedulePrayerTimes(prayerTimesJson: String) {
-        // Menerima sinkronisasi jadwal sholat dari React untuk notifikasi tepat waktu & simpan MP3 offline
+        // Menerima sinkronisasi jadwal sholat (bisa harian atau multi-hari/30 hari) dari React
         try {
-            val jsonArray = org.json.JSONArray(prayerTimesJson)
-            val now = System.currentTimeMillis()
-            val calendar = java.util.Calendar.getInstance()
             val context = activity.applicationContext
+            PrayerScheduleRepository.saveMultiDaySchedule(context, prayerTimesJson)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 
-            for (i in 0 until jsonArray.length()) {
-                val item = jsonArray.getJSONObject(i)
-                val prayerName = item.optString("name", "Sholat")
-                val timeStr = item.optString("time", "")
-                val soundKey = item.optString("soundKey", prayerName).ifBlank { prayerName }
-                val audioUrl = item.optString("audioUrl", "")
-                val title = item.optString("title", "Waktu $prayerName")
-                val message = item.optString("message", "Telah masuk waktu $prayerName")
-
-                // 1. Simpan audio MP3 secara offline di latar belakang jika URL valid
-                if (audioUrl.isNotBlank() && audioUrl.startsWith("http")) {
-                    AdzanAudioStorageManager.downloadAndSaveAudioAsync(context, soundKey, audioUrl)
-                }
-
-                // 2. Pasang alarm di AlarmManager untuk membunyikan adzan
-                if (timeStr.contains(":")) {
-                    val parts = timeStr.split(":")
-                    val hour = parts[0].trim().toIntOrNull() ?: continue
-                    val minute = parts[1].trim().toIntOrNull() ?: continue
-
-                    calendar.timeInMillis = now
-                    calendar.set(java.util.Calendar.HOUR_OF_DAY, hour)
-                    calendar.set(java.util.Calendar.MINUTE, minute)
-                    calendar.set(java.util.Calendar.SECOND, 0)
-                    calendar.set(java.util.Calendar.MILLISECOND, 0)
-
-                    // Jika jam sholat sudah lewat untuk hari ini, jadwalkan untuk besok
-                    if (calendar.timeInMillis <= now) {
-                        calendar.add(java.util.Calendar.DAY_OF_YEAR, 1)
-                    }
-
-                    notificationHelper.schedulePrayerAlarm(
-                        requestCode = 3000 + i,
-                        triggerAtMillis = calendar.timeInMillis,
-                        title = title,
-                        message = message,
-                        prayerName = prayerName,
-                        soundKey = soundKey,
-                        audioUrl = audioUrl
-                    )
-                }
-            }
+    @JavascriptInterface
+    fun updateLocationSchedule(locationKey: String, prayerTimesJson: String) {
+        // Khusus dipanggil saat pengguna mengganti lokasi kota / GPS
+        try {
+            val context = activity.applicationContext
+            PrayerScheduleRepository.saveMultiDaySchedule(context, prayerTimesJson, locationKey)
         } catch (e: Exception) {
             e.printStackTrace()
         }

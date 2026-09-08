@@ -695,7 +695,16 @@ export const PrayerProvider: React.FC<{ children: React.ReactNode }> = ({ childr
                 window.AndroidNativeInterface.requestBatteryOptimizationExemption();
             } catch (e) {}
         }
-        window.AndroidNativeInterface.schedulePrayerTimes(JSON.stringify(prayerListForAndroid));
+
+        const scheduleJson = JSON.stringify(prayerListForAndroid);
+        const locKey = locationName || 'current_location';
+
+        // Jika ada method updateLocationSchedule, gunakan untuk mendeteksi perubahan lokasi
+        if (typeof window.AndroidNativeInterface.updateLocationSchedule === 'function') {
+            window.AndroidNativeInterface.updateLocationSchedule(locKey, scheduleJson);
+        } else {
+            window.AndroidNativeInterface.schedulePrayerTimes(scheduleJson);
+        }
 
     // Sinkronkan audio adzan & pasca adzan ke native interface HANYA jika URL audio mengalami perubahan
     // agar tidak mendownload ulang setiap kali membuka aplikasi

@@ -34,6 +34,13 @@ class AdzanAlarmReceiver : BroadcastReceiver() {
     }
 
     override fun onReceive(context: Context, intent: Intent) {
+        val action = intent.action
+        if (action == Intent.ACTION_BOOT_COMPLETED || action == "android.intent.action.QUICKBOOT_POWERON") {
+            Log.d(TAG, "HP selesai restart (BOOT_COMPLETED), menjadwalkan ulang seluruh alarm sholat...")
+            PrayerScheduleRepository.rescheduleUpcomingAlarms(context)
+            return
+        }
+
         val title = intent.getStringExtra("TITLE") ?: "Waktu Sholat"
         val message = intent.getStringExtra("MESSAGE") ?: "Telah masuk waktu sholat"
         val prayerName = intent.getStringExtra("PRAYER_NAME") ?: "Sholat"
@@ -48,6 +55,9 @@ class AdzanAlarmReceiver : BroadcastReceiver() {
 
         // 2. Putar Suara Adzan secara OFFLINE dari penyimpanan internal
         playOfflineAdzan(context, soundKey, prayerName, audioUrl)
+
+        // 3. Pasang alarm berikutnya secara mandiri agar pengguna tidak perlu membuka aplikasi
+        PrayerScheduleRepository.rescheduleUpcomingAlarms(context)
     }
 
     private fun playOfflineAdzan(
